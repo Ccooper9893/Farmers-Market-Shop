@@ -1,12 +1,9 @@
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 
 function Sample() {
   return (
     <>
-      <Header />
       <Hero />
       <div className="App">
         <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
@@ -23,7 +20,6 @@ function Sample() {
         <div>under card</div>
       </div>
       <div>
-        <Footer />
       </div>
     </>
   );
