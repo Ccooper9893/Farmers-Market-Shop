@@ -1,4 +1,5 @@
 import React from "react";
+
 import Hero from "../components/Hero";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar, A11y, Autoplay} from 'swiper';
@@ -8,17 +9,14 @@ import Merchants from "../Images/Merchant1.png";
 import 'swiper/css';
 import 'swiper/css/autoplay'
 import { Link } from 'react-router-dom';
-import SlideMenu from "..//components/slideMenu";
 
-function Home() {
+
+
+function SlideMenu() {
   return (
     <>
-       <Hero />
-       <div className="p-6">
-       <SlideMenu />
-       </div>
-      
-       {/* <Swiper
+     
+     <Swiper
       // install Swiper modules
       modules={[Navigation, Scrollbar, A11y, Autoplay]}
       spaceBetween={80}
@@ -38,11 +36,20 @@ function Home() {
           backgroundImage: `url(${Products})` ,
         }}
       > 
-      <div className= "hero-overlay bg-opacity-60 text-center" >
-         <p>Shop</p>
+      <div className= "hero-overlay bg-opacity-60 text-center  p-14 hover:bg-opacity-80" >
+      <Link 
+              className="text-slate-300 font-semibold text-lg"
+              to={`/shop}`}
+      >
+      Click here to start shopping
+      </Link>
+        
          </div>
       </div>
       </SwiperSlide>
+
+
+
       <SwiperSlide>
       <div
         className="hero h-40 w-full bg-opacity-60 rounded-lg"
@@ -50,17 +57,20 @@ function Home() {
           backgroundImage: `url(${Merchants})`,
         }}
       > 
-      <div className= "hero-overlay bg-opacity-60 text-center items-center p-6" >
+      <div className= "hero-overlay bg-opacity-60 text-center  p-14 hover:bg-opacity-80" >
       <Link 
-                    className="text-white  "
+              className="text-slate-300 font-semibold text-lg"
               to={`/merchants}`}
       >
-      Merchants
+      Our Merchants 
       </Link>
         
          </div>
       </div>
       </SwiperSlide>
+
+
+
       <SwiperSlide>
       <div
         className="hero h-40 w-full bg-opacity-60 rounded-lg"
@@ -68,8 +78,14 @@ function Home() {
           backgroundImage: `url(${AboutUs})`,
         }}
       > 
-      <div className= "hero-overlay bg-opacity-60 text-center color-white" >
-         <p>Shop</p>
+        <div className= "hero-overlay bg-opacity-60 text-center  p-14 hover:bg-opacity-80" >
+      <Link 
+              className="text-slate-300 font-semibold text-lg"
+              to={`/}`}
+      >
+      About us
+      </Link>
+        
          </div>
       </div>
       </SwiperSlide>
@@ -80,16 +96,24 @@ function Home() {
           backgroundImage: `url(${Products})` ,
         }}
       > 
-      <div className= "hero-overlay bg-opacity-60 text-center color-white" >
-         <p>Shop</p>
+      <div className= "hero-overlay bg-opacity-60 text-center  p-14 hover:bg-opacity-80" >
+      <Link 
+              className="text-slate-300 font-semibold text-lg"
+              to={`/merchants}`}
+      >
+      Merchants
+      </Link>
+        
          </div>
       </div>
       </SwiperSlide>
    
-    </Swiper> */}
+    </Swiper>
+
+
 
     </>
   );
 }
 
-export default Home;
+export default SlideMenu;
