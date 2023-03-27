@@ -2,7 +2,6 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 
-const { typeDefs, resolvers } = require('./schemas');
 
 const multer = require('multer');
 const uploadFile = require('./utils/gc-upload');
@@ -40,7 +39,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     const imageUrl = await uploadFile(req.file);
     res.json({ imageUrl });
   } catch (error) {
-    res.json({error});
+    res.json({message: 'Error in uploading image.'});
   };
 });
 

@@ -28,7 +28,7 @@ function uploadFile(file) {
       });
         //If error reject
       blobStream.on('error', (err) => {
-        reject(err);
+        reject('Image upload failed.');
       });
         //Once stream if done, clear node file buffer memory and disconnect stream
       blobStream.end(file.buffer);
