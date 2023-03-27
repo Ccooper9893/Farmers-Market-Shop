@@ -19,8 +19,10 @@ const purchasesSchema = new Schema({
     category: [{
         type: String,
         required: true,
-        // enum: ['Fruit', 'Vegetable', 'Meat', 'Dairy', 'Art', 'Beer/Wine', 'Other']
         // enum - restrict to a specific set of options
+        // create category dropdown menu in front end?
+        enum: ['Fruit', 'Vegetable', 'Meat', 'Dairy', 'Art', 'Beer/Wine', 'Other']
+        
     }],
     image: {
         type: String,
