@@ -2,6 +2,15 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 
+const { typeDefs, resolvers } = require('./schemas');
+
+const multer = require('multer');
+const uploadFile = require('./utils/gc-upload');
+
+//Configuring multer
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 const AuthMiddleware = require('./utils/jwt-auth');
 
 const { typeDefs, resolvers } = require('./schemas');
@@ -24,6 +33,16 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
   }
+
+//Upload images using this route before calling query to create product, use fetch()
+app.post('/upload', upload.single('file'), async (req, res) => {
+  try {
+    const imageUrl = await uploadFile(req.file);
+    res.json({ imageUrl });
+  } catch (error) {
+    res.json({error});
+  };
+});
 
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
