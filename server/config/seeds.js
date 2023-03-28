@@ -163,13 +163,17 @@ db.once('open', async () => {
             date: Date.now(),
             products: [products[3]._id, products[6]._id],
         },
+        {
+            date: Date.now(),
+            products: [products[5]._id, products[1]._id],
+        },
     ]);
 
     const productIds = products.map(product => product._id);
 
     await User.deleteMany();
 
-    const users = await User.create([
+    const merchant = await User.create(
         {
             username: 'marketfresh',
             password: 'password123',
@@ -183,21 +187,25 @@ db.once('open', async () => {
             phone_number: '75609091112',
             address: '45 Farmview Ln, State, Country, zip',
         },
-        {
-            username: 'testuser',
-            password: 'password123',
-            email: 'test@email.com',
-            purchases: [purchases[0]._id],
-        },
-    ]);
+    );
 
-    console.log('Users seeded!');
-
-    const user = await User.findOne({ username: 'daleberryfarms' });
-
-    await Product.updateMany({}, { merchant: user._id });
+    await Product.updateMany({}, { merchant: merchant._id });
 
     console.log('Merchant updated for all products');
+
+    const purchaseIds = purchases.map(purchase => purchase._id);
+
+    const customer = await User.create(
+        {
+            username: 'customer',
+            password: 'password123',
+            email: 'customer@email.com',
+            purchases: purchaseIds,
+        },
+    );
+
+    console.log('Customer seeded!');
+
     console.log('Purchases created for test user.');
 
     process.exit();
