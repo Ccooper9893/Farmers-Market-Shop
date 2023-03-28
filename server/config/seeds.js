@@ -129,7 +129,6 @@ db.once('open', async () => {
             password: 'password123',
             email: 'dale@email.com',
             purchases: [],
-            admin: true,
             merchant: true,
             business_name: 'Dales Farm',
             business_description: 'Dales Farm is a diverse farm that specializes in producing a variety of fresh and high-quality products, including vegetables, meat, fruits, and baked goods. Our farm is dedicated to sustainable and organic farming practices, ensuring that our customers receive the healthiest and tastiest products possible. We take great pride in the care and attention we give to our crops and animals, and are committed to providing our customers with locally sourced and delicious products.',

@@ -17,6 +17,11 @@ const resolvers = {
         merchants: async (parent, args) => {
             return await User.find({merchant: true}).populate('products');
         },
+
+        getProducts: async (parent, args) => {
+            const products = await Product.find().populate({ path: 'merchant', select: '-__v' });
+            return products;
+        }
     },
 
     Mutation: {
@@ -42,7 +47,6 @@ const resolvers = {
             return { token, user }; 
         },
         addProduct: async (parent, args, context) => {
-            //console.log(context)
 
             //Once we build auth front-end and use query_me uncomment this code
             //-------------------------------
@@ -59,7 +63,7 @@ const resolvers = {
             //-------------------------------
 
             const newProduct = await Product.create(args)
-            await User.findOneAndUpdate({ username: 'john' }, { $addToSet: { products: newProduct }  });
+            await User.findOneAndUpdate({ username: 'daleberryfarms' }, { $addToSet: { products: newProduct }  });
 
             return newProduct;
         },

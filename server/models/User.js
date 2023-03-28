@@ -22,10 +22,6 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Purchase',
     }],
-    admin: {
-        type: Boolean,
-        default: false,
-    },
     merchant: {
         type: Boolean, 
         default: false,
