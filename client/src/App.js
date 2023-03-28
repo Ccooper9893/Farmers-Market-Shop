@@ -9,7 +9,7 @@ import Shop from "./pages/shop";
 import Merchants from "./pages/merchants";
 import LoginRegister from "./pages/login-register";
 import Footer from "./components/Footer";
-import Nav from "./components/Nav/Nav"
+import Nav from "./components/Nav"
 
 
 function App() {
