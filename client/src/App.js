@@ -8,16 +8,15 @@ import Sample from "./pages/sample";
 import Shop from "./pages/shop";
 import Merchants from "./pages/merchants";
 import LoginRegister from "./pages/login-register";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
-
+import Nav from "./components/Nav/Nav"
 
 
 function App() {
   return (
     <>
-      <div>
-      <Header />
+      <div className="bg-teal-900 min-h-screen">
+      <Nav />
         <BrowserRouter>
           <Routes>
             <Route path="/sample" element={<Sample />} />
