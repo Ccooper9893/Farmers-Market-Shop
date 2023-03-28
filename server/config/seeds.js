@@ -104,18 +104,64 @@ db.once('open', async () => {
             stock: 25,
             price: 4.50
         },
-
-
-    ])
+        {
+            name: 'Homemade ice cream',
+            product_description: 'We make vanilla, chocolate, strawberry, and pecan! These products are provided by Daisy, our dairy cow.',
+            category: 'Dairy',
+            stock: 40,
+            price: 9.95
+        },
+        {
+            name: 'Milk',
+            product_description: 'Old fashioned bottled milk. sold in 6 packs. Bring back the bottle for a discount!',
+            category: 'Dairy',
+            stock: 20,
+            price: 6.46
+        },
+        {
+            name: 'Chickens',
+            product_description: 'Yes, we have our own chickens and we sell them too! We only have hens for sale.',
+            category: 'Livestock',
+            stock: 20,
+            price: 22.93
+        },
+        {
+            name: 'Goats',
+            product_description: 'We are proud to offer our handsome and healthy billy goats for sale. Our goats are well-bred and well-cared-for, and have been raised on a diet of high-quality hay and grains.',
+            category: 'Livestock',
+            stock: 8,
+            price: 380.35
+        },
+        {
+            name: 'Paintings',
+            product_description: 'Variety of landscape paintings that feature the beauties of our town.',
+            category: 'Art',
+            stock: 12,
+            price: 150.99
+        },
+        {
+            name: 'Carved Spoons',
+            product_description: 'Beautiful hand carved wood spoons made with mahogany',
+            category: 'Art',
+            stock: 30,
+            price: 25.99
+        },
+        {
+            name: 'Candles',
+            product_description: 'Beautiful natural light. We have many aromas to choose from!',
+            category: 'Art',
+            stock: 45,
+            price: 13.99
+        },
+    ]);
 
     console.log('Products seeded!');
-
 
     await Purchase.deleteMany();
     const purchases = await Purchase.create([
         {
             date: Date.now(),
-            products:[products[3]._id, products[6]._id],
+            products: [products[3]._id, products[6]._id],
         },
     ]);
 
@@ -125,13 +171,13 @@ db.once('open', async () => {
 
     const users = await User.create([
         {
-            username: 'daleberryfarms',
+            username: 'marketfresh',
             password: 'password123',
-            email: 'dale@email.com',
+            email: 'marketfresh@email.com',
             purchases: [],
             merchant: true,
-            business_name: 'Dales Farm',
-            business_description: 'Dales Farm is a diverse farm that specializes in producing a variety of fresh and high-quality products, including vegetables, meat, fruits, and baked goods. Our farm is dedicated to sustainable and organic farming practices, ensuring that our customers receive the healthiest and tastiest products possible. We take great pride in the care and attention we give to our crops and animals, and are committed to providing our customers with locally sourced and delicious products.',
+            business_name: 'Market fresh',
+            business_description: 'Fresh Market is a vibrant farm market that offers a wide variety of fresh, locally-grown produce and artisanal products. Our market showcases the best of what local farmers have to offer, including a colorful selection of seasonal fruits and vegetables, as well as honey, eggs, dairy products, and other locally-made goods. We prioritize sustainability and ethical farming practices, and are proud to support small-scale agriculture. Our friendly and knowledgeable staff are always on hand to provide expert advice and assistance, and we strive to create a warm and welcoming atmosphere for all of our customers. Whether you\'re a home cook, a foodie, or just someone who loves fresh, healthy food, Fresh Market is the perfect place to discover the best of local agriculture.',
             products: productIds,
             image: 'https://media.istockphoto.com/id/1083286598/photo/keeping-a-close-watch-on-his-crops.jpg?s=612x612&w=0&k=20&c=V6RjPh6icgkxduEig163IMtevL39SxDJJdvJkGmR2NE=',
             phone_number: '75609091112',
@@ -152,7 +198,7 @@ db.once('open', async () => {
     await Product.updateMany({}, { merchant: user._id });
 
     console.log('Merchant updated for all products');
-    console.log('Purchases created for test user.');    
+    console.log('Purchases created for test user.');
 
     process.exit();
 });

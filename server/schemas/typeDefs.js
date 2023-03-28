@@ -42,6 +42,8 @@ const typeDefs = gql`
         getProducts: [Product]
         ## Get all merchants and their products 
         merchants: [User]
+        ## Get all products in category
+        getCategory(category: String!): [Product]
     }
 
     type Mutation {

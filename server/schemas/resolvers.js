@@ -19,8 +19,12 @@ const resolvers = {
         },
 
         getProducts: async (parent, args) => {
-            const products = await Product.find().populate({ path: 'merchant', select: '-__v' });
-            return products;
+            return await Product.find().populate({ path: 'merchant', select: '-__v' });
+        },
+        
+        getCategory: async (parent, { category }) => {
+            //Make sure category being passed is either "Vegetable", "Fruit", "Meat", "Bread", "Art", or "Livestock",
+            return await Product.find({category: category}).populate({ path: 'merchant', select: '-__v' });
         }
     },
 
