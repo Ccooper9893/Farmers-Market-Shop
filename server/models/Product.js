@@ -22,12 +22,11 @@ const productSchema = new Schema({
         required: true,
     },
     // who is selling the product
-    //merchant: {
-        //type: Schema.Types.ObjectId,
-        //ref: 'User',
-        //required: true,
+    merchant: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     },
-);
+});
 
 const Product = model('Product', productSchema);
 

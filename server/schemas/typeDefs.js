@@ -2,10 +2,9 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
     type User {
-        _id: ID!
-        username: String!
-        email: String!
-        admin: Boolean
+        _id: ID
+        username: String
+        email: String
         merchant: Boolean
         business_name: String
         business_description: String
@@ -17,19 +16,18 @@ const typeDefs = gql`
 
     type Product {
         _id: ID!
-        name: String!
-        product_description: String!
-        category: String!
-        stock: Int!
-        price: Int!
-        ##merchant: User!
+        name: String
+        product_description: String
+        category: String
+        stock: Int
+        price: Float
+        merchant: User
     }
 
     type Purchase {
         _id: ID!
-        products: [Product]!
-        price: Int!
-        date: String!
+        products: [Product]
+        date: String
     }
 
     type Auth {
@@ -38,22 +36,17 @@ const typeDefs = gql`
     }
 
     type Query {
-        ## Get current authenticated user and their purchases
         me: User! 
-        ## TODO: Get all products
         getProducts: [Product]
-        ## Get all merchants and their products 
-        merchants: [User]
+        getCategory(category: String!): [Product]
+        getMerchants: [User]
+
     }
 
     type Mutation {
-        ## Create new user and sign a token
-        ## Check if user is merchant
-        addUser(username: String!, email: String!, password: String!, merchant: Boolean, business_name: String, business_description: String, phone_number: String,image: String, address: String): Auth
-        ## Login
+        addUser(username: String!, email: String!, password: String!, merchant: Boolean, business_name: String, business_description: String, phone_number: String, image: String, address: String): Auth
         loginUser(email: String!, password: String!): Auth
-        ## Add Product
-        addProduct(name: String, product_description: String, category: String, stock: Int, price: Int): Product
+        addProduct(name: String, product_description: String, category: String, stock: Int, price: Float): Product
     }
 `;
 
