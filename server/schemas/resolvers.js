@@ -7,24 +7,24 @@ const resolvers = {
     Query: {
         //Get current user account and purchases
         me: async (parent, args, context) => {
-            if(context.user) {
-                return await User.findOne({email: context.user.email}).populate('purchases').populate('products');
+            if (context.user) {
+                return await User.findOne({ email: context.user.email }).populate('purchases').populate('products');
             };
 
             throw new AuthenticationError('You must be logged in to view content!');
         },
         //Get all merchant accounts and their products
-        merchants: async (parent, args) => {
-            return await User.find({merchant: true}).populate('products');
+        getMerchants: async (parent, args) => {
+            return await User.find({ merchant: true }).populate('products');
         },
 
         getProducts: async (parent, args) => {
             return await Product.find().populate({ path: 'merchant', select: '-__v' });
         },
-        
+
         getCategory: async (parent, { category }) => {
             //Make sure category being passed is either "Vegetable", "Fruit", "Meat", "Bread", "Art", or "Livestock",
-            return await Product.find({category: category}).populate({ path: 'merchant', select: '-__v' });
+            return await Product.find({ category: category }).populate({ path: 'merchant', select: '-__v' });
         }
     },
 
@@ -40,7 +40,7 @@ const resolvers = {
             const user = await User.findOne({ email });
             if (!user) {
                 throw new AuthenticationError('Incorrect credentials. Please enter a valid username and password');
-            } 
+            }
             const validatePW = await User.isCorrectPassword(password);
             if (!validatePW) {
                 throw new AuthenticationError('Incorrect credentials. Please enter a valid username and password');
@@ -48,7 +48,7 @@ const resolvers = {
 
             const token = signToken(user);
 
-            return { token, user }; 
+            return { token, user };
         },
         addProduct: async (parent, args, context) => {
 
@@ -67,7 +67,7 @@ const resolvers = {
             //-------------------------------
 
             const newProduct = await Product.create(args)
-            await User.findOneAndUpdate({ username: 'daleberryfarms' }, { $addToSet: { products: newProduct }  });
+            await User.findOneAndUpdate({ username: 'daleberryfarms' }, { $addToSet: { products: newProduct } });
 
             return newProduct;
         },
