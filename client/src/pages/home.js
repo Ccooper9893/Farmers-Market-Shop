@@ -13,13 +13,13 @@ function Home() {
   return (
     <>
       <Hero />
-      <div className=" p-6">
+      <div className="p-24">
         <Swiper
           // install Swiper modules
           modules={[Navigation, Scrollbar, A11y, Autoplay]}
           spaceBetween={80}
           slidesPerView={3}
-          autoplay={{ delay: 5000 }}
+         autoplay={{ delay: 5000 }}
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}

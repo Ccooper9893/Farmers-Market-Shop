@@ -20,7 +20,7 @@ function SlideMenu({ backgroundImg, toLink, text }) {
         <SwiperSlide> */}
         <div>
           <div
-            className="hero h-40 w-45 bg-opacity-60 rounded-lg"
+            className="hero h-50 w-45 bg-opacity-60 rounded-lg "
             style={{
               backgroundImage: backgroundImg,
             }}

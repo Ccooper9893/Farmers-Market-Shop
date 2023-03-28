@@ -16,7 +16,7 @@ import Nav from "./components/Nav/Nav"
 function App() {
   return (
     <>
-      <div className="bg-teal-900 max-h-full">
+      <div className="bg-teal-900 min-h-screen">
       {/* <Header /> */}
       <Nav />
         <BrowserRouter>
