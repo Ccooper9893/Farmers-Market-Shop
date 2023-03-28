@@ -9,10 +9,10 @@ const productSchema = new Schema({
         type: String,
         required: true,
     },
-    category: [{
+    category: {
         type: String, 
         required: true,
-    }],
+    },
     stock: {
         type: Number,
         required: true,
@@ -25,7 +25,6 @@ const productSchema = new Schema({
     merchant: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
     },
 });
 
