@@ -21,7 +21,7 @@ const typeDefs = gql`
         product_description: String!
         category: String!
         stock: Int!
-        price: Int!
+        price: Float
         ##merchant: User!
     }
 
@@ -49,11 +49,11 @@ const typeDefs = gql`
     type Mutation {
         ## Create new user and sign a token
         ## Check if user is merchant
-        addUser(username: String!, email: String!, password: String!, merchant: Boolean, business_name: String, business_description: String, phone_number: String,image: String, address: String): Auth
+        addUser(username: String!, email: String!, password: String!, merchant: Boolean, business_name: String, business_description: String, phone_number: String, image: String, address: String): Auth
         ## Login
         loginUser(email: String!, password: String!): Auth
         ## Add Product
-        addProduct(name: String, product_description: String, category: String, stock: Int, price: Int): Product
+        addProduct(name: String, product_description: String, category: String, stock: Int, price: Float): Product
     }
 `;
 
