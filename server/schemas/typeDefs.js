@@ -40,12 +40,13 @@ const typeDefs = gql`
         me: User!
 
         ## Get all merchants and their products 
-        merchants: [User]!
+        merchants: [User]
     }
 
     type Mutation {
         ## Create new user and sign a token
-        addUser(username: String!, email: String!, password: String!): Auth!
+        addUser(username: String!, email: String!, password: String!): Auth
+        loginUser(email: String!, password: String!): Auth
     }
 `;
 

@@ -22,11 +22,25 @@ const resolvers = {
     Mutation: {
         //Create user and sign token
         addUser: async (parent, args) => {
-            const newUser = await User.create(...args);
+            const newUser = await User.create(args);
             const token = signToken(newUser);
 
             return { newUser, token };
         },
-    },
-};
+        loginUser: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+            if (!user) {
+                throw new AuthenticationError('Incorrect credentials. Please enter a valid username and password');
+            } 
+            const validatePW = await user.isCorrectPassword(password);
+            if (!validatePW) {
+                throw new AuthenticationError('Incorrect credentials. Please enter a valid username and password');
+            }
 
+            const token = signToken(user);
+
+            return {user, token }; 
+    },
+}};
+
+module.exports = resolvers;
