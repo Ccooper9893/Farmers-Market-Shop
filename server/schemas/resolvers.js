@@ -19,7 +19,7 @@ const resolvers = {
         },
 
         getProducts: async (parent, args) => {
-            return await Product.find().populate({ path: 'merchant', select: '-__v' });
+            const product = await Product.find().populate({ path: 'merchant', select: '-__v' });
         },
 
         getCategory: async (parent, { category }) => {
@@ -71,6 +71,18 @@ const resolvers = {
 
             return newProduct;
         },
+        addPurchase: async (parent, { products }, context) => {
+
+            if (context.user) {
+              const purchase = new Purchase({ products });
+      
+              await User.findByIdAndUpdate(context.user._id, { $push: { ppurchases: purchase } });
+      
+              return purchase;
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        }
 
     }
 };
