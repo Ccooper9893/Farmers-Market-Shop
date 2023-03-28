@@ -1,7 +1,27 @@
-import React from "react";
 import ProductCard from "../components/productCard";
+import { useQuery } from '@apollo/client';
+// Import useEffect from React.
+import React, { useState, useEffect } from 'react';
+
+//TO DO: update auth file
+import Auth from '../utils/auth'
+
+//TO DO: UPDATE TO AN ACTUAL QUERY
+import { QUERY_PRODUCTS } from '../utils/queries';
 
 function Shop() {
+
+  // We declare a state variable that is an array called `issues` and a function to update it.
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    
+  }, []);
+
+  const { loading, data } = useQuery(QUERY_PRODUCTS);
+  const products = data?.products || [];
+
+
   return (
     <>
 
@@ -10,7 +30,9 @@ function Shop() {
        <div class="flex flex-col items-center justify-center drawer-content">
         <label for="my-drawer-2" class="mb-4 btn btn-primary drawer-button lg:hidden">open menu</label> 
          <div class="hidden text-xs text-center lg:block">
-         <ProductCard/>
+         <ProductCard 
+          product={products}
+         />
          </div> 
          <div class="text-xs text-center lg:hidden">
 
@@ -18,7 +40,15 @@ function Shop() {
    </div> 
    <div class="drawer-side p-2.5 ">
     <label for="my-drawer-2" class="drawer-overlay"></label> 
-    <ul class="menu p-8  overflow-y-auto w-60 h-80 rounded-lg text-slate-300 font-bold tracking-wide">
+        {/* TO DO: map through all categories */}
+        {/* categories.map((category => (
+            <ul  className="menu p-8  overflow-y-auto w-60 h-80 rounded-lg text-slate-300 font-bold tracking-wide">
+            <li key={category._id}>
+              <p>Dairy{category.name}</p>
+            </li>  */}
+
+
+    <ul className="menu p-8  overflow-y-auto w-60 h-80 rounded-lg text-slate-300 font-bold tracking-wide">
       <li>
         <p>Dairy</p>
       </li> 
