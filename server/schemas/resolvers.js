@@ -32,7 +32,7 @@ const resolvers = {
             if (!user) {
                 throw new AuthenticationError('Incorrect credentials. Please enter a valid username and password');
             } 
-            const validatePW = await user.isCorrectPassword(password);
+            const validatePW = await User.isCorrectPassword(password);
             if (!validatePW) {
                 throw new AuthenticationError('Incorrect credentials. Please enter a valid username and password');
             }
@@ -40,6 +40,19 @@ const resolvers = {
             const token = signToken(user);
 
             return {user, token }; 
+    },
+    addProduct: async (parent, args, context) => {
+        //console.log(context)
+        //if (!context.user) {
+        //throw new AuthenticationError('You must be logged in to use this feature');
+        //}
+        const newProduct = await Product.create(args)
+        await User.findOneAndUpdate({ username: 'john' }, { $addToSet: { products: newProduct }  });
+        //await User.findByIdAndUpdate(context.user._id,
+        //{$push: {products: newProduct}}
+        //}});
+
+        return newProduct;
     },
 }};
 
