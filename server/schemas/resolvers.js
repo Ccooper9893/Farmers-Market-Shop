@@ -21,20 +21,11 @@ const resolvers = {
     Mutation: {
         //Create user and sign token
         addUser: async (parent, args) => {
-            //Save profile pic here?
-            const newUser = await User.create(...args);
+            const newUser = await User.create(args);
             const token = signToken(newUser);
             return { newUser, token };
-        },
-        loginUser: async (parent, { email, password }) => {
-            const user = await User.findOne({ email });
-            if (!user) return new AuthenticationError('Incorrect credentials!');
-            //Password validation here
-
-            return user;
         },
     },
 };
 
 module.exports = resolvers;
-
