@@ -4,27 +4,26 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 /// pages to include ///
 import Home from "./pages/home";
-import Sample from "./pages/sample";
 import Shop from "./pages/shop";
 import Merchants from "./pages/merchants";
-import LoginRegister from "./pages/login-register";
-import Header from "./components/Header";
+import LoginRegister from "./pages/login";
+import Register from "./pages/register";
 import Footer from "./components/Footer";
-
+import Nav from "./components/Nav"; 
 
 
 function App() {
   return (
     <>
-      <div>
-      <Header />
+      <div className="bg-teal-900 min-h-screen">
+      <Nav />
         <BrowserRouter>
           <Routes>
-            <Route path="/sample" element={<Sample />} />
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/merchants" element={<Merchants />} />
-            <Route path="/login-register" element={<LoginRegister />} />
+            <Route path="/login" element={<LoginRegister />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </BrowserRouter>
       <Footer />
