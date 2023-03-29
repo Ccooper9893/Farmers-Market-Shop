@@ -1,67 +1,101 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
+import Auth from '../utils/auth';
 
+const Register = () => {
+  const [formState, setFormState] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [addProfile, { error, data }] = useMutation(ADD_USER);
 
+  // update state based on form input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
-export default function Register() {
-  const navigate = useNavigate(); 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = {
-      name: name, 
-      email: email,
-      password: password,
-    };
     try {
-      axios    /// this is the api route to the req //// 
-      .post("http://localhost:3000/api/user/signin", data)
-      .then((res) => {
-        console.log(res); 
-        localStorage.clear(); 
-        localStorage.setItem('token', JSON.stringify(res.data.user.token)); 
-        navigate('/shop'); 
+      const { data } = await addProfile({
+        variables: { ...formState },
+
       });
-    } catch (error){
-      console.log(error); 
+      Auth.login(data.addUser.token);
+      
+    } catch (e) {
+      console.error(e);
     }
-    
   };
 
   return (
-    <div className="max-w-screen-sm m-auto pt-40 ">
-      <h1 className="text-center text-4xl text-white mb-3">Register</h1>
-      <div className="w-screen flex justify-center items-center">
-        <form onSubmit={handleSubmit} className="flex flex-col w-[70%] space-y-2">
-        <input
-            type="text"
-            placeholder="name"
-            onChange={(e) => setName(e.target.value)}
-            className="input input-bordered input-accent w-full max-w-xs "
-          />
-          <input
-            type="text"
-            placeholder="email"
-            onChange={(e) => setEmail(e.target.value)}
-            className="input input-bordered input-accent w-full max-w-xs "
-          />
-          <input
-            type="text"
-            placeholder="password"
-            onChange={(e) => setPassword(e.target.value)}
-            className="input input-bordered input-accent w-full max-w-xs "
-          />
-          <button class="btn btn-wide w-full max-w-xs  ">Submit</button>
-        </form>
+    <main className="flex-row justify-center mb-4">
+      <div className="col-12 col-lg-10">
+        <div className="card">
+          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
+          <div className="card-body">
+            {data ? (
+              <p>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
+              </p>
+            ) : (
+              <form onSubmit={handleFormSubmit}>
+                <input
+                  className="form-input"
+                  placeholder="Your username"
+                  name="username"
+                  type="text"
+                  value={formState.username}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="Your email"
+                  name="email"
+                  type="email"
+                  value={formState.email}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="******"
+                  name="password"
+                  type="password"
+                  value={formState.password}
+                  onChange={handleChange}
+                />
+                <button
+                  className="btn btn-block btn-info"
+                  style={{ cursor: 'pointer' }}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            )}
+
+            {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </main>
   );
+};
 
-
-}
+export default Register;
