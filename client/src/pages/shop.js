@@ -2,12 +2,13 @@ import ProductCard from "../components/productCard";
 import { useQuery } from '@apollo/client';
 // Import useEffect from React.
 import React, { useState, useEffect } from 'react';
-
+// import { useStoreContext } from '../../utils/GlobalState';
 //TO DO: update auth file
-import Auth from '../utils/auth'
+// import Auth from '../utils/auth'
+
 
 //TO DO: UPDATE TO AN ACTUAL QUERY
-import {QUERY_ALL_PRODUCTS } from '../utils/queries';
+import {GET_PRODUCTS } from '../utils/queries';
 
 function Shop() {
 
@@ -18,18 +19,19 @@ function Shop() {
     
   // }, []);
 
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+  const { loading, data } = useQuery(GET_PRODUCTS );
+  console.log({data})
   const products = data?.products || [];
 
 
   return (
     <>
 
-    <div class="bg-emerald-900 bg-opacity-20 rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
-     <input id="my-drawer-2" type="checkbox" class="drawer-toggle"></input>
-       <div class="flex flex-col items-center justify-center drawer-content">
-        <label for="my-drawer-2" class="mb-4 btn btn-primary drawer-button lg:hidden">open menu</label> 
-         <div class="hidden text-xs text-center lg:block">
+    <div className="bg-emerald-900 bg-opacity-20 rounded-lg shadow bg-base-200 drawer drawer-mobile h-screen">
+     <input id="my-drawer-2" type="checkbox" className="drawer-toggle"></input>
+       <div className="flex flex-col items-center justify-center drawer-content">
+        <label for="my-drawer-2" className="mb-4 btn btn-primary drawer-button lg:hidden">open menu</label> 
+         <div className="hidden text-xs text-center lg:block">
          <ProductCard 
           product={products}
          />
