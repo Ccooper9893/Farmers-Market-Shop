@@ -25,7 +25,7 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_PRODUCT = gql`
-    String, $category: String, $stock: Int, $price: Float) {
+    mutation Mutation ( $name: String, $productDescription: String, $category: String, $stock: Int, $price: Float) {
         addProduct(name: $name, product_description: $productDescription, category: $category, stock: $stock, price: $price) {
             category
             _id
