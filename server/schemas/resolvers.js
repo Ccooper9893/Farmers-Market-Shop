@@ -20,7 +20,8 @@ const resolvers = {
         },
 
         getProducts: async (_, __) => {
-            const product = await Product.find().populate({ path: 'merchant', select: '-__v' });
+            return await Product.find().populate({ path: 'merchant', select: '-__v' });
+
         },
 
         getCategory: async (_, { category }) => {
