@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import Auth from '../utils/auth'
 
 //TO DO: UPDATE TO AN ACTUAL QUERY
-import {QUERY_ALL_PRODUCTS } from '../utils/queries';
+import {GET_PRODUCTS} from '../utils/queries';
 
 function Shop() {
 
@@ -18,7 +18,7 @@ function Shop() {
     
   // }, []);
 
-  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+  const { loading, data } = useQuery(GET_PRODUCTS);
   const products = data?.products || [];
 
 
