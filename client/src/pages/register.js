@@ -15,13 +15,8 @@ function Register() {
   return (
     <>
       <div>
-
-
-        Register
-        <RegisterForm />
-
-
-        </div>
+       <RegisterForm />
+      </div>
 
     </>
   );

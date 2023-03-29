@@ -15,7 +15,8 @@ const logout = event => {
   Auth.logout(); 
 }; 
 
-
+/// checks JWT Auth state for if the user is logged in // 
+const loggedIn = Auth.loggedIn(); 
 
 
 
@@ -40,7 +41,7 @@ const logout = event => {
                 <a className="block py-2 text-sm" href="/">Home</a>
                 <a className="block py-2 text-sm" href="/shop">Shop</a>
                 <a className="block py-2 text-sm" href="/merchants">Meet our Merchants</a>
-                <a className="block py-2 text-sm" href="/login">Login/Register</a>
+                <a className={loggedIn ? 'hidden' : ' block py-2 text-sm'} href="/login">Login/Register</a>
               </ul>
               </div>
             </div>
@@ -49,7 +50,7 @@ const logout = event => {
                   <a href="/">Home</a>
                   <a href="/shop">Shop</a>
                   <a href="/merchants">Meet our Merchants</a>
-                  <a href="/login">Login/Register</a>
+                  <a className={loggedIn ? 'hidden' : ''} href="/login">Login/Register</a>
               </ul>
             </div>
             <div className="flex-none">
@@ -63,13 +64,13 @@ const logout = event => {
               <span className="badge badge-sm indicator-item">9</span>
             </div>
           </label>
-          <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow" >
+          <div tabIndex={0} className="card card-compact dropdown-content w-52 bg-base-100 shadow" >
 {/* shopping cart card and details */}
-            <div className="card-body">
-              <span className="font-bold text-lg bg-green-400">8 Items</span>
-              <span className="text-info bg-blue-200 ">Subtotal: $999</span>
+            <div className="card-body ">
+              <span className="font-bold text-white text-center rounded-md bg-green-800">9 Items</span>
+              <span className="font-bold text-white text-center rounded-md bg-green-800" >Subtotal: $9,254.00</span>
               <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
+                <button className="btn btn-accent text-white text-center btn-block bg-green-800">View cart</button>
               </div>
             </div>
           </div>
@@ -81,10 +82,12 @@ const logout = event => {
               <img src="/images/SampleProfile.PNG" alt="sample" />
             </div>
           </label>
-          <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52" >
-            <li className="justify-between bg-green-800"> <a href="/profile"> Profile <span className="badge">New</span></a></li>
-            <li className="bg-green-500"> <a href="/">Login</a> </li>
-            <li onClick={logout} className="bg-red-400"> <a href="/">Logout</a> </li>
+          <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 bg-base-100 rounded-box w-52" >
+            <li className="justify-between bg-green-800 text-white"> <a href="/"> Profile 
+            {/* <span className="badge">New</span> */}
+            </a></li>
+            <li className= {loggedIn ? 'hidden' : 'bg-green-800 text-white rounded-b-2xl'}> <a href="/login"> Login </a></li>
+            <li onClick={logout} className= {loggedIn ? 'bg-green-800 text-white rounded-b-2xl' : 'hidden'}> <a href="/login"> Logout </a></li>
           </ul>
         </div>
       </div>
