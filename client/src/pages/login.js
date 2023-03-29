@@ -19,7 +19,7 @@ function Login() {
         Login/Register
         <LoginForm />
       <div className="text-white text-center">
-      <a href="/register">would you like to register? </a>
+      <a href="/register">Would you like to register? </a>
          
       </div>
         

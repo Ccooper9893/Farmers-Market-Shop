@@ -1,5 +1,6 @@
 import React from "react";
 import {useState} from 'react';
+import Auth from "../utils/jwt-auth"; 
 
 
 export default function Nav() {
@@ -10,7 +11,9 @@ export default function Nav() {
       setIsNavActive(current => !current);
   };
 
-
+const logout = event => {
+  Auth.logout(); 
+}; 
 
 
 
@@ -80,8 +83,8 @@ export default function Nav() {
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52" >
             <li className="justify-between bg-green-800"> <a href="/"> Profile <span className="badge">New</span></a></li>
-            <li className="bg-green-500"> <a href="/">Settings</a> </li>
-            <li className="bg-red-400"> <a href="/">Logout</a> </li>
+            <li className="bg-green-500"> <a href="/">Login</a> </li>
+            <li onClick={logout} className="bg-red-400"> <a href="/">Logout</a> </li>
           </ul>
         </div>
       </div>
