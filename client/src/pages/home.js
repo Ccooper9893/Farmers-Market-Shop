@@ -1,40 +1,71 @@
 import React from "react";
+import Hero from "../components/Hero";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Scrollbar, A11y, Autoplay } from "swiper";
+import AboutUs from "../Images/aboutUs.png";
+import Products from "../Images/VegetableImage1.png";
+import Merchants from "../Images/Merchant1.png";
+import "swiper/css";
+import "swiper/css/autoplay";
+import SlideMenu from "..//components/slideMenu";
 
 function Home() {
   return (
     <>
-      <div className="App">
-        <header className="App-header">
-          <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
-            <div class="shrink-0"></div>
+      <Hero />
+      <div className="p-24">
+        <Swiper
+          // install Swiper modules
+          modules={[Navigation, Scrollbar, A11y, Autoplay]}
+          spaceBetween={80}
+          slidesPerView={3}
+         autoplay={{ delay: 5000 }}
+          navigation
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log("slide change")}
+        >
+          <SwiperSlide>
             <div>
-              <div class="text-xl font-medium text-black">Hello!</div>
-              <p class="text-slate-500">I'm Tailwind!</p>
+              <SlideMenu
+                backgroundImg={`url(${AboutUs})`}
+                toLink={"/"}
+                text={" About us"}
+              />
             </div>
+          </SwiperSlide>
+
+          <SwiperSlide>
             <div>
-              <a href="/sample">
-                <button className="btn">And I'm daisyUI! And this is a link to the sample page</button>
-              </a>
+              <SlideMenu
+                backgroundImg={`url(${Products})`}
+                toLink={"/shop"}
+                text={"Click here to start shopping"}
+              />
             </div>
-          </div>
-          <p class="text-white-500">Now you can use both of us! </p>
-          <div>
-            <button class="btn btn-primary">One</button>
-            <button class="btn btn-secondary">Two</button>
-            <button class="btn btn-accent btn-outline">Three</button>
-          </div>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <div>
+              <SlideMenu
+                backgroundImg={`url(${Merchants})`}
+                toLink={"/merchants"}
+                text={"Merchants"}
+              />
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <div>
+              <SlideMenu
+                backgroundImg={`url(${Products})`}
+                toLink={"/merchants"}
+                text={"Something else"}
+              />
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
     </>
   );
