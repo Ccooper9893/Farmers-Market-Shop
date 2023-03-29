@@ -7,7 +7,6 @@ const resolvers = {
     Query: {
         //Get current user account and purchases
         me: async (_, __, context) => {
-            console.log(context.user);
             if (context.user) {
                 return await User.findOne({ email: context.user.email }).populate({ path: 'products', select: '-__v' })
             };
@@ -67,6 +66,7 @@ const resolvers = {
             if (!context.user) {
                 throw new AuthenticationError('You must be logged in to use this feature');
             }
+            console.log('Its to resolvers');
             const newProduct = await Product.create(args)
             await User.findOneAndUpdate(
                 { _id: context.user._id },

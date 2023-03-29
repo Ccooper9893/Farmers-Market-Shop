@@ -25,18 +25,18 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_PRODUCT = gql`
-    mutation Mutation ( $name: String, $productDescription: String, $category: String, $stock: Int, $price: Float) {
-        addProduct(name: $name, product_description: $productDescription, category: $category, stock: $stock, price: $price) {
-            category
-            _id
-            merchant {
-                _id
-                business_name
-            }
-            name
-            price
-            product_description
-            stock
+    mutation Mutation($name: String, $productDescription: String, $category: String, $stock: Int, $price: Float, $image: String) {
+        addProduct(name: $name, product_description: $productDescription, category: $category, stock: $stock, price: $price, image: $image) {
+        _id
+        name
+        price
+        product_description
+        stock
+        merchant {
+            business_name
+        }
+        category
+        image
         }
     }
 `;

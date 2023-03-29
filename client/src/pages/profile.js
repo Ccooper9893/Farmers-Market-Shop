@@ -1,20 +1,11 @@
-import React from "react";
-import { useQuery } from "@apollo/client";
-import Auth from "../utils/jwt-auth";
-import { GET_ME } from "../utils/queries";
+import React, { useState } from "react";
+import NewProduct from "../components/Profile/NewProduct";
 
 function Profile() {
-
-    const { data } = useQuery(GET_ME);
-    let user;
-
-    if (data) {
-        user = data.user;
-    }
-    
+  
     return (
-        <h1>Profile page</h1>
-    )
-};
+        <NewProduct />
+    );
+  }
 
 export default Profile;
