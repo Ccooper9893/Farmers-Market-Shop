@@ -8,7 +8,7 @@ import React, { useState, useEffect } from 'react';
 
 
 //TO DO: UPDATE TO AN ACTUAL QUERY
-import {GET_PRODUCTS } from '../utils/queries';
+import {GET_PRODUCTS} from '../utils/queries';
 
 function Shop() {
 
@@ -19,8 +19,7 @@ function Shop() {
     
   // }, []);
 
-  const { loading, data } = useQuery(GET_PRODUCTS );
-  console.log({data})
+  const { loading, data } = useQuery(GET_PRODUCTS);
   const products = data?.products || [];
 
 
