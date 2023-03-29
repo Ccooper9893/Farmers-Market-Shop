@@ -1,12 +1,19 @@
 import React from "react";
+import {useState} from 'react';
 
-function Nav() {
 
-// const mobilebtn = document.querySelector('button.mobile-menu-button'); 
+export default function Nav() {
 
-// mobilebtn.addEventListener('click', () => {
-//   console.log('hi'); 
-// }) 
+  const [navActive, setIsNavActive] = useState(false);
+
+  const handleClick = event => {
+      setIsNavActive(current => !current);
+  };
+
+
+
+
+
 
 
   return (
@@ -18,30 +25,28 @@ function Nav() {
 {/* flex box container */}
         <div className=' flex space-x-10 bg-emerald-700 items-center' >
 {/* mobile menu */}
-            <div className="md:hidden"> 
+            <div className="md:hidden" onClick={handleClick}> 
             <button className="mobile-menu-button ">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
             </svg>
      
             </button>
-            <div className="mobile-menu text-white ">
+            <div className={navActive ? 'text-white' : 'text-white hidden'}>
               <ul className="md:hidden">
                 <a className="block py-2 text-sm" href="/">Home</a>
-                <a className="block py-2 text-sm" href="/sample">Nick's Sample Page</a>
                 <a className="block py-2 text-sm" href="/shop">Shop</a>
                 <a className="block py-2 text-sm" href="/merchants">Meet our Merchants</a>
-                <a className="block py-2 text-sm" href="/login-register">Login/Register</a>
+                <a className="block py-2 text-sm" href="/login">Login/Register</a>
               </ul>
               </div>
             </div>
             <div className="regular-menu  text-white grow flex">
                 <ul className=" items-center space-x-10 hidden md:flex ">
                   <a href="/">Home</a>
-                  <a href="/sample">Nick's Sample Page</a>
                   <a href="/shop">Shop</a>
                   <a href="/merchants">Meet our Merchants</a>
-                  <a href="/login-register">Login/Register</a>
+                  <a href="/login">Login/Register</a>
               </ul>
             </div>
             <div className="flex-none">
@@ -52,7 +57,7 @@ function Nav() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
               </svg>
 {/* shopping cart items number */}
-              <span className="badge badge-sm indicator-item">18</span>
+              <span className="badge badge-sm indicator-item">9</span>
             </div>
           </label>
           <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow" >
@@ -88,4 +93,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+// export default Nav;
