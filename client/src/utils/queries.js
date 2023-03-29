@@ -63,6 +63,7 @@ export const GET_PRODUCTS = gql`
             product_description
             price
             stock
+            image
             merchant {
                 _id
                 business_name
@@ -80,6 +81,7 @@ export const GET_CATEGORY = gql`
             price
             product_description
             stock
+            image
         }
     }
 `;

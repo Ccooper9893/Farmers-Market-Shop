@@ -21,6 +21,10 @@ const productSchema = new Schema({
         type: Number,
         required: true,
     },
+    image: {
+        type: String,
+        default: 'https://static.thenounproject.com/png/3674270-200.png',
+    },
     // who is selling the product
     merchant: {
         type: Schema.Types.ObjectId,
