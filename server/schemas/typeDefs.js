@@ -37,7 +37,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        me: User! 
+        me: User 
         getPurchases: [Purchase]
         getProducts: [Product]
         getCategory(category: String!): [Product]

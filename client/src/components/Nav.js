@@ -82,7 +82,7 @@ const logout = event => {
             </div>
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52" >
-            <li className="justify-between bg-green-800"> <a href="/"> Profile <span className="badge">New</span></a></li>
+            <li className="justify-between bg-green-800"> <a href="/profile"> Profile <span className="badge">New</span></a></li>
             <li className="bg-green-500"> <a href="/">Login</a> </li>
             <li onClick={logout} className="bg-red-400"> <a href="/">Logout</a> </li>
           </ul>

@@ -10,7 +10,7 @@ const uploadFile = require('./utils/gc-upload');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-const AuthMiddleware = require('./utils/jwt-auth');
+const {authMiddleware} = require('./utils/jwt-auth');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -21,7 +21,7 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: AuthMiddleware
+  context: authMiddleware
 });
 
 //Allow front-end to pass nested objects/arrays in requests
