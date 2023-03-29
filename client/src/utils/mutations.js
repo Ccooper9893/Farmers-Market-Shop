@@ -56,3 +56,13 @@ export const ADD_PURCHASE = gql`
         }
     }
 `;
+
+export const UPDATE_STOCK = gql`
+    mutation Mutation($updateStockId: ID!, $stock: Int) {
+        updateStock(id: $updateStockId, stock: $stock) {
+        category
+        stock
+        name
+        }
+    }
+`

@@ -80,7 +80,7 @@ const resolvers = {
         addPurchase: async (_, { products }, context) => {
 
             if (context.user) {
-                const purchase = new Purchase({ products });
+                const purchase = await Purchase.create(products);
 
                 await User.findByIdAndUpdate(context.user._id, { $push: { purchases: purchase } });
 
@@ -88,7 +88,14 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
-        }
+        },
+        updateStock: async (_, { stock, id }, context) => {
+            if(context.user) {
+                return await Product.findByIdAndUpdate(id, {stock: stock}, { new: true, runValidators: true });
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
 
     }
 };
