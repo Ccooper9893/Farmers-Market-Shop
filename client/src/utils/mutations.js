@@ -66,3 +66,17 @@ export const UPDATE_STOCK = gql`
         }
     }
 `
+
+export const UPDATE_PRODUCT = gql`
+    mutation Mutation($updateProductId: ID!, $stock: Int, $price: Float) {
+        updateProduct(id: $updateProductId, stock: $stock, price: $price) {
+        _id
+        category
+        image
+        name
+        price
+        product_description
+        stock
+        }
+    }
+`;
