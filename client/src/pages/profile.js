@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import NewProduct from "../components/Profile/NewProduct";
 
 function Profile() {
