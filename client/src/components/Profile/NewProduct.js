@@ -57,7 +57,7 @@ function NewProduct() {
           };
         try {
             const { data } = await addProduct({ variables: productData });
-            
+            window.location.reload();
         } catch (error) {
             console.log(error);
         };
@@ -73,7 +73,7 @@ function NewProduct() {
     return (
         <>
             {/* The button to open modal */}
-            <label htmlFor="my-modal-4" className="btn">
+            <label htmlFor="my-modal-4" className="btn w-3/5 mx-auto">
                 New Product
             </label>
 

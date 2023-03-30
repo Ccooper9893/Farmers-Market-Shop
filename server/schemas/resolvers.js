@@ -9,7 +9,7 @@ const resolvers = {
         me: async (_, __, context) => {
 
             if (context.user) {
-                return await User.findById(context.user._id).populate({ path: 'products', select: '-__v' });
+                return await User.findById(context.user._id).populate({ path: 'products', select: '-__v' }).populate({ path: 'purchases', select: '-__v' });
             };
 
             throw new AuthenticationError('You must be logged in to view content!');
@@ -98,6 +98,16 @@ const resolvers = {
 
             throw new AuthenticationError('Not logged in');
         },
+        updateProduct: async (_, {price, stock, id}, context) => {
+            console.log(price, stock, id);
+            console.log(typeof price);
+            if(context.user) {
+               const newProduct = await Product.findByIdAndUpdate(id, {price: price, stock: stock}, { new: true, runValidators: true});
+               return newProduct;
+            }
+
+            throw new AuthenticationError('You must be logged in to update products.');
+        }
 
     }
 };

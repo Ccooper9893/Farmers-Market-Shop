@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const purchasesSchema = new Schema({
+const purchaseSchema = new Schema({
     date: {
         type: Date,
         required: true,
@@ -15,6 +15,6 @@ const purchasesSchema = new Schema({
     ],
 });
 
-const Purchases = model('Purchases', purchasesSchema);
+const Purchase = model('Purchase', purchaseSchema);
 
-module.exports = Purchases; 
+module.exports = Purchase; 
