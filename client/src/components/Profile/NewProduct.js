@@ -5,14 +5,15 @@ import { ADD_PRODUCT } from "../../utils/mutations";
 function NewProduct() {
 
     const [addProduct, { error }] = useMutation(ADD_PRODUCT);
-
+    if(error) {
+        console.log(error);
+    };
     const [formState, setFormState] = useState({
         name: "",
         productDescription: "",
         price: "",
         stock: "",
         category: "Meat",
-        image: ""
     })
 
     const handleInputChange = (event) => {
@@ -20,17 +21,17 @@ function NewProduct() {
         const { name, value } = event.target;
         if (name === "image") {
             console.log("image has been changed");
+            return;
         } else {
             console.log(value);
             setFormState({ ...formState, [name]: value });
+            return;
         }
     };
 
     async function uploadImage(event) {
         const formData = new FormData();
         formData.append("image", event.target.image.files[0]);
-        console.log(event.target);
-        console.log(formData);
         if (formData) {
             try {
                 const response = await fetch("/upload", {
@@ -39,7 +40,7 @@ function NewProduct() {
                 });
                 return await response.json();
             } catch (error) {
-                console.error(error);
+                console.log(error)
             }
         }
     }
@@ -56,7 +57,7 @@ function NewProduct() {
           };
         try {
             const { data } = await addProduct({ variables: productData });
-              console.log(data);
+            
         } catch (error) {
             console.log(error);
         };
@@ -65,7 +66,7 @@ function NewProduct() {
             productDescription: "",
             price: "",
             stock: "",
-            category: "",
+            category: "Meat"
         })
     };
 
