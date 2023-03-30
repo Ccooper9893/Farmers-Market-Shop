@@ -46,16 +46,27 @@ function NewProduct() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(formState);
         const data = await uploadImage(event);
-        setFormState({...formState, image: data.imageUrl, price: parseFloat(formState.price), stock: parseInt(formState.stock)});
+        const productData = {
+            ...formState,
+            image: data.imageUrl,
+            price: parseFloat(formState.price),
+            stock: parseInt(formState.stock)
+          };
         try {
-            const { data } = await addProduct({
-                variables: { ...formState },
-              });
-              
+            const { data } = await addProduct({ variables: productData });
+              console.log(data);
         } catch (error) {
             console.log(error);
         };
+        setFormState({
+            name: "",
+            productDescription: "",
+            price: "",
+            stock: "",
+            category: "",
+        })
     };
 
     return (
