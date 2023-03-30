@@ -61,20 +61,21 @@ const resolvers = {
         },
         addProduct: async (_, args, context) => {
 
-            //Once we build auth front-end and use query_me uncomment this code
-
             if (!context.user) {
                 throw new AuthenticationError('You must be logged in to use this feature');
             }
-            console.log('Its to resolvers');
-            const newProduct = await Product.create(args)
+
+            args.merchant = context.user._id;
+
+            const newProduct = await Product.create(args);
+
             await User.findOneAndUpdate(
                 { _id: context.user._id },
                 { $addToSet: { products: newProduct } },
                 { new: true },
             ).populate('products');
+            
             return newProduct;
-
 
         },
         addPurchase: async (_, { products }, context) => {

@@ -24,6 +24,7 @@ const productSchema = new Schema({
     },
     image: {
         type: String,
+        required: true,
         default: 'https://static.thenounproject.com/png/3674270-200.png',
     },
     // who is selling the product
