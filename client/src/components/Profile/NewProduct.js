@@ -3,42 +3,29 @@ import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT } from "../../utils/mutations";
 
 function NewProduct() {
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [stock, setStock] = useState("");
-    const [category, setCategory] = useState("");
-    const [productDescription, setProductDescription] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
-    let image;
 
     const [addProduct, { error }] = useMutation(ADD_PRODUCT);
+    if(error) {
+        console.log(error);
+    };
+    const [formState, setFormState] = useState({
+        name: "",
+        productDescription: "",
+        price: "",
+        stock: "",
+        category: "Meat",
+    })
 
     const handleInputChange = (event) => {
-        const inputType = event.target.name;
-        const inputValue = event.target.value;
-        console.log(inputValue);
-        switch (inputType) {
-            case "name":
-                setName(inputValue);
-                break;
-            case "price":
-                setPrice(inputValue);
-                break;
-            case "stock":
-                setStock(inputValue);
-                break;
-            case "category":
-                setCategory(inputValue);
-                break;
-            case "description":
-                setProductDescription(inputValue);
-                break;
-            case "image":
-                uploadImage(event);
-                break;
-            default:
-                break;
+        event.preventDefault();
+        const { name, value } = event.target;
+        if (name === "image") {
+            console.log("image has been changed");
+            return;
+        } else {
+            console.log(value);
+            setFormState({ ...formState, [name]: value });
+            return;
         }
     };
 
@@ -51,40 +38,36 @@ function NewProduct() {
                     method: "POST",
                     body: formData,
                 });
-
-                image = await response.json();
+                return await response.json();
             } catch (error) {
-                console.error(error);
+                console.log(error)
             }
         }
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(formState);
+        const data = await uploadImage(event);
+        const productData = {
+            ...formState,
+            image: data.imageUrl,
+            price: parseFloat(formState.price),
+            stock: parseInt(formState.stock)
+          };
         try {
-            const { data } = await addProduct({
-                variables: {
-                    name,
-                    image,
-                    price: parseFloat(price),
-                    stock: parseInt(stock),
-                    productDescription,
-                    category,
-                },
-            });
-            console.log(data);
-
-            setSuccessMessage("Product created successfully!");
-            setName("");
-            setPrice("");
-            setStock("");
-            setCategory("");
-            setProductDescription("");
-            setErrorMessage("");
+            const { data } = await addProduct({ variables: productData });
+            
         } catch (error) {
-            setErrorMessage(error.message);
             console.log(error);
-        }
+        };
+        setFormState({
+            name: "",
+            productDescription: "",
+            price: "",
+            stock: "",
+            category: "Meat"
+        })
     };
 
     return (
@@ -112,7 +95,7 @@ function NewProduct() {
                             name="name"
                             placeholder="Carrots"
                             className="input input-bordered"
-                            value={name}
+                            value={formState.name}
                             onChange={handleInputChange}
                         />
                         <label className="label">
@@ -120,22 +103,42 @@ function NewProduct() {
                         </label>
                         <input
                             type="text"
-                            name="description"
-                            placeholder="Freshly harvested carrots"
+                            name="productDescription"
+                            placeholder="Product description"
                             className="input input-bordered"
-                            value={productDescription}
+                            value={formState.productDescription}
                             onChange={handleInputChange}
                         />
                         <label className="label">
                             <span className="label-text font-bold">Price</span>
                         </label>
                         <label className="label">
-                            <input type="text" name="price" placeholder="10" className="input input-bordered" onChange={handleInputChange} />
+                            <input
+                                className="input input-bordered"
+                                type="text"
+                                name="price"
+                                placeholder="$4.58"
+                                value={formState.price}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        <label className="label">
+                            <span className="label-text font-bold">Stock</span>
+                        </label>
+                        <label className="label">
+                            <input 
+                            className="input input-bordered" 
+                            type="text" 
+                            name="stock" 
+                            placeholder="20" 
+                            value={formState.stock}
+                            onChange={handleInputChange} />
                         </label>
                         <label className="label">
                             <span className="label-text font-bold">Category:</span>
                         </label>
-                        <select className="select w-full max-w-xs" name="category" defaultValue="Option 1" value={category} onChange={handleInputChange}>
+                        <select className="select w-full max-w-xs" name="category" value={formState.category} onChange={handleInputChange}>
+                            <option disabled selected>Choose a category</option>
                             <option value="Meat">Meat</option>
                             <option value="Vegetable">Vegetable</option>
                             <option value="Fruit">Fruit</option>
@@ -146,9 +149,7 @@ function NewProduct() {
                         <label className="label">
                             <span className="label-text font-bold">Upload Picture</span>
                         </label>
-                        <input type="file" name="image" className="file-input input-bordered w-full max-w-xs" />
-
-
+                        <input type="file" name="image" className="file-input input-bordered w-full max-w-xs" onChange={handleInputChange} />
                         <button className="btn btn-wide bg-slate-600 mt-8" type="submit">Create</button>
                     </form>
                 </label>
