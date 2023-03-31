@@ -27,7 +27,7 @@ function SlideMenu({ backgroundImg, toLink, text }) {
           >
             <div className="hero-overlay bg-opacity-60 text-center  p-14 hover:bg-opacity-80">
               <Link
-                className="text-slate-300 font-semibold text-3xl"
+                className="text-slate-300 font-semibold text-l lg:text-2xl"
                 to={toLink}
               >
                 {text}

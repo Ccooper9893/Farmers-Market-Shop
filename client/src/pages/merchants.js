@@ -14,6 +14,9 @@ function MerchantPage() {
     <>
   <Hero />
  
+
+
+
     </>
   );
 }
