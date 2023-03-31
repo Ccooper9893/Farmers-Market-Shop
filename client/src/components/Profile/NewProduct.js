@@ -20,6 +20,7 @@ function NewProduct() {
 
     const handleInputChange = (event) => {
         event.preventDefault();
+        setMessage('');
         const { name, value } = event.target;
         if (name === "image") {
             console.log("image has been changed");
@@ -49,14 +50,18 @@ function NewProduct() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        if(!formState) {
-            setMessage('Please provide the required information!')
+        
+        //Form validation
+        const { name, price, stock, productDescription, category } = formState;
+        if(!name || !price || !stock || !productDescription || !category) {
+            setMessage('Please provide the required information!');
+            return;
         } else {
-            setMessage('Uploading...')
+            setMessage('Uploading...');
         };
 
         const data = await uploadImage(event);
+        
         const productData = {
             ...formState,
             image: data.imageUrl,

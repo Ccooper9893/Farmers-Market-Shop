@@ -24,12 +24,10 @@ function uploadFile(file) {
         //Listen for write stream finish and resolve
       blobStream.on('finish', () => {
         const imageUrl = `https://storage.googleapis.com/${filesBucket.name}/${blob.name}`;
-        console.log(imageUrl);
         resolve(imageUrl);
       });
         //If error reject
       blobStream.on('error', (err) => {
-        console.log(err);
         reject('Image upload failed.');
       });
         //Once stream if done, clear node file buffer memory and disconnect stream

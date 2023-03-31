@@ -3,8 +3,12 @@ import NewProduct from "../components/Profile/NewProduct";
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import ProductList from "../components/Profile/ProductList";
+import Auth from "../utils/jwt-auth";
 
 function Profile() {
+  if(!Auth.loggedIn()) {
+    window.location.replace('/login');
+  };
   const { loading, data } = useQuery(GET_ME);
   return (
     <div>
