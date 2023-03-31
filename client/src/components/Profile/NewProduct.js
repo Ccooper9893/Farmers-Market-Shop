@@ -18,52 +18,51 @@ function NewProduct() {
         event.preventDefault();
         setMessage('');
         const { name, value } = event.target;
-        if (name === "image") {
-            console.log("image has been changed");
-            return;
-        } else {
-            console.log(value);
+        if (name !== "image") {
             setFormState({ ...formState, [name]: value });
-            return;
-        }
+        };
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         //Form validation
         const { name, price, stock, productDescription, category } = formState;
-        if(!name || !price || !stock || !productDescription || !category) {
+        if (!name || !price || !stock || !productDescription || !category) {
             setMessage('Please provide the required information!');
             return;
         } else {
             setMessage('Uploading...');
         };
 
+        //Grabbing imageUrl
         const data = await uploadImage(event);
-        
+
         const productData = {
             ...formState,
             image: data.imageUrl,
             price: parseFloat(formState.price),
             stock: parseInt(formState.stock)
-          };
+        };
+
+        //Adding product to database
         try {
             const { data } = await addProduct({ variables: productData });
-            if(data) {
+            if (data) {
                 setMessage('');
                 window.location.reload();
             }
         } catch (error) {
-            console.log(error);
+            setMessage('Error in adding your product.')
         };
+
         setFormState({
             name: "",
             productDescription: "",
             price: "",
             stock: "",
             category: "Meat"
-        })
+        });
     };
 
     async function uploadImage(event) {
@@ -138,13 +137,13 @@ function NewProduct() {
                             <span className="label-text font-bold">Stock</span>
                         </label>
                         <label className="label">
-                            <input 
-                            className="input input-bordered" 
-                            type="text" 
-                            name="stock" 
-                            placeholder="20" 
-                            value={formState.stock}
-                            onChange={handleInputChange} />
+                            <input
+                                className="input input-bordered"
+                                type="text"
+                                name="stock"
+                                placeholder="20"
+                                value={formState.stock}
+                                onChange={handleInputChange} />
                         </label>
                         <label className="label">
                             <span className="label-text font-bold">Category:</span>

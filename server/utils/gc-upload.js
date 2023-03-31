@@ -13,7 +13,10 @@ function uploadFile(file) {
   
       //Create a promise for error handling
     return new Promise((resolve, reject) => {
-      console.log(file);
+
+      if(!file.mimetype.startsWith("image")) {
+        reject('File is not an image type')
+      };
         //Unique filename
       const fileName = Date.now() + '-' + file.originalname;
         //References the bucket
