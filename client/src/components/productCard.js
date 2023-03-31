@@ -17,7 +17,7 @@ function ProductCard(products) {
     <p className="card-title text-base justify-center ">{product.name}</p>
     <p>Price: $  {product.price}</p>
     <div className="card-actions justify-center">
-      {/* <button className="sm-btn btn-grey" onClick={addToCart}>Add to cart</button> */}
+      <button className="sm-btn btn-grey" onClick={addToCart}>Add to cart</button>
     </div>
   </div>
 </div>
