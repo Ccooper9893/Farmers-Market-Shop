@@ -5,6 +5,7 @@ import { GET_ME } from '../utils/queries';
 import Product from "../components/Profile/Product";
 import Auth from "../utils/jwt-auth";
 import fabricBg from "../Images/fabricbackground.jpg";
+import woodBg from "../Images/darkwood.png";
 
 function Profile() {
   const [userData, setUserData] = useState(null);
@@ -33,10 +34,15 @@ function Profile() {
       ) : (
         <div className="grid grid-cols-8 text-center">
           <div className="col-span-8 lg:col-span-2 bg-stone-800">
-            <div className="flex flex-col p-8 mx-6 text-white py-4 rounded-lg">
+            <div className="flex flex-col p-3 mx-3 text-white py-4 rounded-lg">
               <div className="flex flex-col">
-              <h2 className="text-5xl font-iight text-white my-3 border-b pb-2" >ACCOUNT</h2>
-                <img className="rounded-full w-28 m-auto" src="https://storage.googleapis.com/farmers-market-images/1680277238037-farmlogo.webp"></img>
+                <h2 className="text-4xl font-iight text-white my-3 border-b pb-2" >ACCOUNT</h2>
+                <img
+                  className="rounded-full w-28 m-auto"
+                  src="https://storage.googleapis.com/farmers-market-images/1680277238037-farmlogo.webp"
+                  alt="farm logo"
+                >
+                </img>
                 <ul className="m-auto">
                   <li>Username: {userData.username}</li>
                   <li>email: {userData.email}</li>
@@ -46,8 +52,7 @@ function Profile() {
                 <ul className="mt-8">
                   <li className="text-4xl font-iight text-white my-3 border-b pb-2" >{userData.business_name}</li>
                   <li><img className="m-auto" src={userData.image} alt={userData.business_name}></img></li>
-                  <li >WHO ARE WE?</li>
-                  <li>{userData.business_description}</li>
+                  <li><p className="my-5">{userData.business_description}</p></li>
                   <li className="text-sm font-bold">CONTACT: {userData.phone_number}</li>
 
                 </ul>
@@ -59,12 +64,21 @@ function Profile() {
 
           </div>
           <div className="col-span-8 lg:col-span-6 mx-auto"
-          style = {{ backgroundImage: `url(${fabricBg})`,
+            style={{
+              backgroundImage: `url(${fabricBg})`,
+              backgroundSize: '28rem',
+              backgroundRepeat: 'repeat',
+            }}>
+
+            <h2 className="text-4xl text-orange-100 shadow-lg shadow-black font-light py-3"
+              style={{
+                backgroundImage: `url(${woodBg})`,
                 backgroundSize: '28rem',
                 backgroundRepeat: 'repeat',
-              }}>
-              
-            <h2 className="text-5xl font-iight my-3" >INVENTORY</h2>
+              }}
+            >
+              INVENTORY
+            </h2>
             {!userData.merchant ? null : (
               <div className="flex flex-col justify-center py-4 rounded-2xl">
 

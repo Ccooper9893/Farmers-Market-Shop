@@ -6,11 +6,8 @@ import Cart from "./Cart/index";
 
 /// function to add/remove mobile nave when hamburger menu is clicked // 
 export default function Nav() {
-<<<<<<< HEAD
-=======
   const [state, dispatch] = useCartContext();
 
->>>>>>> e1cf51d32a586d261cec84c2aaf5709ada47de4c
   const [navActive, setIsNavActive] = useState(false);
   const handleClick = event => {
       setIsNavActive(current => !current);

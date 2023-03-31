@@ -40,7 +40,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
     const imageUrl = await uploadFile(req.file);
     res.status(200).json({ imageUrl });
   } catch (error) {
-    res.status(400).json({message: 'Error in uploading image.'});
+    res.status(400).json(error);
   };
 });
 

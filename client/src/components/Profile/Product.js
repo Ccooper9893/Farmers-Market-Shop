@@ -52,41 +52,40 @@ function Product({ product, onDeleteProduct }) {
             backgroundRepeat: 'repeat',
         }}>
             <h2 className="text-3xl font-bold border-b-black border">{product.name}</h2>
-                <div className="m-3">
-                    <img class="m-auto w-24 rounded-full mt-5" src={product.image} alt={product.name} />
-                    <p className="text-xl">{product.product_description}</p>
-                    <div className="my-2">
-                        <p>Price $</p>
-                        <input
-                            className="input p-0 w-32 m-auto text-center border border-black"
-                            type="number"
-                            name="price"
-                            value={price}
-                            onChange={handleChange}
-                        >
-                        </input>
-                    </div>
-                    <div>
-                        <p>Stock</p>
-                        <input
-                            className="input p-0 w-32 m-auto text-center border border-black"
-                            type="number"
-                            name="stock"
-                            value={stock}
-                            onChange={handleChange}
-                        >
-                        </input>
-                    </div>
-                    
+            <div className="m-3">
+                <img class="m-auto w-24 rounded-full mt-5" src={product.image} alt={product.name} />
+                <p className="text-xl">{product.product_description}</p>
+                <div className="my-2">
+                    <p>Price $</p>
+                    <input
+                        className="input p-0 w-32 m-auto text-center border border-black"
+                        type="number"
+                        name="price"
+                        value={price}
+                        onChange={handleChange}
+                    >
+                    </input>
                 </div>
-                <div className="relative self-end">
-                    {message ? (<p>{message}</p>) : (<p></p>)}
-                        <button className="btn m-3 shadow-lg  bg-slate-700 " type="submit">Update</button>
-                        {warning
-                            ? (<button className="btn my-3 bg-red-500 shadow-lg hover:bg-red-700 mx-3" type="button" onClick={() => handleDelete(product._id)}>Are you sure?</button>)
-                            : <button className="btn my-3 bg-red-500 shadow-lg hover:bg-red-700 mx-3" onClick={() => setWarning(true)}>Delete</button>
-                        }
-                    </div>
+                <div>
+                    <p>Stock</p>
+                    <input
+                        className="input p-0 w-32 m-auto text-center border border-black"
+                        type="number"
+                        name="stock"
+                        value={stock}
+                        onChange={handleChange}
+                    >
+                    </input>
+                </div>
+            </div>
+            <div className="flex flex-col">
+                {message ? (<p>{message}</p>) : (<p></p>)}
+                <button className="btn m-3 shadow-lg  bg-slate-700 " type="submit">Update</button>
+                {warning
+                    ? (<button className="btn my-3 bg-red-500 shadow-lg hover:bg-red-700 mx-3" type="button" onClick={() => handleDelete(product._id)}>Are you sure?</button>)
+                    : <button className="btn my-3 bg-red-500 shadow-lg hover:bg-red-700 mx-3" onClick={() => setWarning(true)}>Delete</button>
+                }
+            </div>
         </form>
     )
 };

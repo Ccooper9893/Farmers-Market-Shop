@@ -10,7 +10,7 @@ const gc = new Storage({
 const filesBucket = gc.bucket('farmers-market-images');
 
 function uploadFile(file) {
-  
+
       //Create a promise for error handling
     return new Promise((resolve, reject) => {
 
@@ -33,7 +33,7 @@ function uploadFile(file) {
       });
         //If error reject
       blobStream.on('error', (err) => {
-        reject('Image upload failed.');
+        reject(err);
       });
         //Once stream if done, clear node file buffer memory and disconnect stream
       blobStream.end(file.buffer);
