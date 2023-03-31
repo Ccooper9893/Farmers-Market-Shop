@@ -1,20 +1,31 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UPDATE_PRODUCT } from '../../utils/mutations';
+import { UPDATE_PRODUCT, DELETE_PRODUCT } from '../../utils/mutations';
 
-function ProductList({props}) {
+function ProductList({ props }) {
     const [price, setPrice] = useState(props.price);
     const [stock, setStock] = useState(props.stock);
 
-    const [updateProduct, { error }] = useMutation(UPDATE_PRODUCT);
+    const [updateProduct, { updateError }] = useMutation(UPDATE_PRODUCT);
+    const [deleteProduct, { deleteError }] = useMutation(DELETE_PRODUCT);
 
     const handleUpdate = async (event) => {
         event.preventDefault();
         try {
             const priceFloat = parseFloat(price);
             const stockInt = parseInt(stock);
-            const { data } = await updateProduct({ variables: { price: priceFloat, stock: stockInt, updateProductId: props._id }});
-            console.log(data);
+            const { data } = await updateProduct({ variables: { price: priceFloat, stock: stockInt, updateProductId: props._id } });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleDelete = async () => {
+        try {
+            const { data } = await deleteProduct({variables: {deleteProductId: props._id}});
+            if(data) {
+                window.location.reload();
+            };
         } catch (error) {
             console.log(error);
         }
@@ -39,8 +50,9 @@ function ProductList({props}) {
                     <p>Stock</p>
                     <input className="border border-black" type="number" name="stock" value={stock} onChange={handleChange}></input>
                 </div>
-                <div className="bottom-0">
-                    <button className="btn my-3 bg-slate-700 hover:shadow-lg" type="submit">Update Product</button>
+                <div className="mt-4">
+                    <button className="btn my-3 bg-slate-700 shadow-lg mx-3" type="submit">Update</button>
+                    <button className="btn my-3 bg-red-500 shadow-lg hover:bg-red-700 mx-3" onClick={handleDelete}>Delete</button>
                 </div>
             </div>
         </form>
