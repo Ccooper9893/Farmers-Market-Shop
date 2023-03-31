@@ -34,8 +34,8 @@ const loggedIn = Auth.loggedIn();
 {/* mobile menu */}
             <div className="md:hidden" onClick={handleClick}> 
             <button className="mobile-menu-button ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
             </svg>
      
             </button>
@@ -70,10 +70,10 @@ const loggedIn = Auth.loggedIn();
           <div tabIndex={0} className="card card-compact dropdown-content w-52 bg-base-100 shadow" >
 {/* shopping cart card and details */}
             <div className="card-body ">
-              <span className="font-bold text-white text-center rounded-md bg-green-800">{state.cart.length}</span>
-              <span className="font-bold text-white text-center rounded-md bg-green-800" >{state.cart.total}</span>
+              <span className="font-bold text-white text-center rounded-md bg-green-800">9 Items</span>
+              <span className="font-bold text-white text-center rounded-md bg-green-800" >Subtotal: $9,254.00</span>
               <div className="card-actions">
-                <button className="btn btn-accent text-white text-center btn-block bg-green-800">View Cart</button>
+                <button className="btn btn-accent text-white text-center btn-block bg-green-800">View cart</button>
               </div>
             </div>
           </div>

@@ -43,7 +43,6 @@ const Register = () => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
           <div className="card-body">
             {data ? (
               <p>
@@ -51,33 +50,34 @@ const Register = () => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <form className="space-y-2 block flex flex-col items-center justify-center "onSubmit={handleFormSubmit}>
+                <p className="text-white p-2 text-2xl text-center">Register</p>
                 <input
-                  className="form-input"
-                  placeholder="Your username"
+                  className="form-input block input input-accent w-full max-w-xs text-center"
+                  placeholder="Username"
                   name="username"
                   type="text"
                   value={formState.username}
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
-                  placeholder="Your email"
+                  className="form-input block input input-accent w-full max-w-xs text-center"
+                  placeholder="Email"
                   name="email"
                   type="email"
                   value={formState.email}
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
-                  placeholder="******"
+                  className="form-input block input input-accent w-full max-w-xs text-center"
+                  placeholder="Password"
                   name="password"
                   type="password"
                   value={formState.password}
                   onChange={handleChange}
                 />
                 <button
-                  className="btn btn-block btn-info"
+                  className="block btn btn-accent w-full max-w-xs text-center text-white"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
@@ -87,8 +87,10 @@ const Register = () => {
             )}
 
             {error && (
-              <div className="my-3 p-3 bg-danger text-white">
+              <div className="flex flex-col items-center justify-center">
+              <div className="my-3 p-3 bg-red-600 rounded-lg max-w-xs text-center text-white">
                 {error.message}
+              </div>
               </div>
             )}
           </div>

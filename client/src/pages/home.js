@@ -13,7 +13,7 @@ function Home() {
   return (
     <>
       <Hero />
-      <div className="p-24">
+      <div className="p-8 lg:p-24 lg:block hidden text-xs text-center lg:block">
         <Swiper
           // install Swiper modules
           modules={[Navigation, Scrollbar, A11y, Autoplay]}
@@ -23,47 +23,47 @@ function Home() {
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
+       
+          
         >
           <SwiperSlide>
-            <div>
+    
               <SlideMenu
                 backgroundImg={`url(${AboutUs})`}
                 toLink={"/"}
                 text={" About us"}
               />
-            </div>
+   
           </SwiperSlide>
 
           <SwiperSlide>
-            <div>
+          
               <SlideMenu
                 backgroundImg={`url(${Products})`}
                 toLink={"/shop"}
-                text={"Click here to start shopping"}
+                text={"Start shopping"}
               />
-            </div>
+      
           </SwiperSlide>
 
           <SwiperSlide>
-            <div>
+      
               <SlideMenu
                 backgroundImg={`url(${Merchants})`}
                 toLink={"/merchants"}
                 text={"Merchants"}
               />
-            </div>
+       
           </SwiperSlide>
 
           <SwiperSlide>
-            <div>
+    
               <SlideMenu
                 backgroundImg={`url(${Products})`}
                 toLink={"/merchants"}
                 text={"Something else"}
               />
-            </div>
+          
           </SwiperSlide>
         </Swiper>
       </div>
