@@ -7,9 +7,9 @@ function Hero() {
   return (
     <>
       <div
-        className="hero h-96 w-full"
+        className="hero h-80 sm:h-96 w-full"
         style={{
-          backgroundImage: `url(${homePage})` , height: 500,
+          backgroundImage: `url(${homePage})` ,
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
