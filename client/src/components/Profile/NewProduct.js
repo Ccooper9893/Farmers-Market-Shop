@@ -16,8 +16,11 @@ function NewProduct() {
         category: "Meat",
     })
 
+    const [message, setMessage] = useState('');
+
     const handleInputChange = (event) => {
         event.preventDefault();
+        setMessage('');
         const { name, value } = event.target;
         if (name === "image") {
             console.log("image has been changed");
@@ -47,8 +50,18 @@ function NewProduct() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
+        
+        //Form validation
+        const { name, price, stock, productDescription, category } = formState;
+        if(!name || !price || !stock || !productDescription || !category) {
+            setMessage('Please provide the required information!');
+            return;
+        } else {
+            setMessage('Uploading...');
+        };
+
         const data = await uploadImage(event);
+        
         const productData = {
             ...formState,
             image: data.imageUrl,
@@ -57,7 +70,10 @@ function NewProduct() {
           };
         try {
             const { data } = await addProduct({ variables: productData });
-            window.location.reload();
+            if(data) {
+                setMessage('');
+                window.location.reload();
+            }
         } catch (error) {
             console.log(error);
         };
@@ -80,13 +96,13 @@ function NewProduct() {
             {/* Put this part before </body> tag */}
             <input type="checkbox" id="my-modal-4" className="modal-toggle" />
             <label htmlFor="my-modal-4" className="modal cursor-pointer">
-                <label className="modal-box relative bg-green-700" htmlFor="">
+                <label className="modal-box bg-green-500 mb-20" htmlFor="">
                     <form
                         className="flex justify-center flex-col text-center"
                         onSubmit={handleSubmit}
                         encType="multipart/form-data"
                     >
-                        <h2 className=" text-3xl">New Product</h2>
+                        <h2 className=" text-3xl font-bold">New Product</h2>
                         <label className="label">
                             <span className="label-text font-bold">Name:</span>
                         </label>
@@ -151,6 +167,9 @@ function NewProduct() {
                         </label>
                         <input type="file" name="image" className="file-input input-bordered w-full max-w-xs" onChange={handleInputChange} />
                         <button className="btn btn-wide bg-slate-600 mt-8" type="submit">Create</button>
+                        {message && (
+                            <h3 className="font-bold m-3">{message}</h3>
+                        )}
                     </form>
                 </label>
             </label>
