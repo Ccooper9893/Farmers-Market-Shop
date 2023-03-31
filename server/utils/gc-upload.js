@@ -10,8 +10,10 @@ const gc = new Storage({
 const filesBucket = gc.bucket('farmers-market-images');
 
 function uploadFile(file) {
+  
       //Create a promise for error handling
     return new Promise((resolve, reject) => {
+      console.log(file);
         //Unique filename
       const fileName = Date.now() + '-' + file.originalname;
         //References the bucket

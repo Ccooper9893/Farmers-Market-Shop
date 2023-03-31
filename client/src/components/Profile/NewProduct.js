@@ -5,17 +5,13 @@ import { ADD_PRODUCT } from "../../utils/mutations";
 function NewProduct() {
 
     const [addProduct, { error }] = useMutation(ADD_PRODUCT);
-    if(error) {
-        console.log(error);
-    };
     const [formState, setFormState] = useState({
         name: "",
         productDescription: "",
         price: "",
         stock: "",
         category: "Meat",
-    })
-
+    });
     const [message, setMessage] = useState('');
 
     const handleInputChange = (event) => {
@@ -31,22 +27,6 @@ function NewProduct() {
             return;
         }
     };
-
-    async function uploadImage(event) {
-        const formData = new FormData();
-        formData.append("image", event.target.image.files[0]);
-        if (formData) {
-            try {
-                const response = await fetch("/upload", {
-                    method: "POST",
-                    body: formData,
-                });
-                return await response.json();
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -85,6 +65,22 @@ function NewProduct() {
             category: "Meat"
         })
     };
+
+    async function uploadImage(event) {
+        const formData = new FormData();
+        formData.append("image", event.target.image.files[0]);
+        if (formData) {
+            try {
+                const response = await fetch("/upload", {
+                    method: "POST",
+                    body: formData,
+                });
+                return await response.json();
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 
     return (
         <>
