@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
+
 
 
   
@@ -28,8 +28,8 @@ import { useMutation } from "@apollo/client";
         const { data } = await login({
           variables: { ...formState },
         });
-  
-        Auth.login(data.login.token);
+        console.log(data); 
+        Auth.login(data.loginUser.token);
       } catch (e) {
         console.error(e);
       }
@@ -41,22 +41,30 @@ import { useMutation } from "@apollo/client";
       });
     };
 
+    if (Auth.loggedIn()) {
+          return (
+      <p className="py-20 text-white text-center text-lg ">
+        You are already logged In
+      </p>
+          );
+    }
+
   
     return (
       <main className="flex-row justify-center mb-4">
         <div className="col-12 col-lg-10">
           <div className="card">
-            <h4 className="card-header bg-dark text-light p-2">Login</h4>
-            <div className="card-body">
+            <div className="card-body ">
               {data ? (
                 <p>
                   Success! You may now head{' '}
                     update here 
                 </p>
               ) : (
-                <form onSubmit={handleFormSubmit}>
+                <form className="space-y-2 block flex flex-col items-center justify-center "onSubmit={handleFormSubmit}>
+                  <p className="text-white p-2 text-2xl text-center ">Login</p>
                   <input
-                    className="form-input"
+                    className="block input input-accent w-full max-w-xs text-center"
                     placeholder="Your email"
                     name="email"
                     type="email"
@@ -64,28 +72,36 @@ import { useMutation } from "@apollo/client";
                     onChange={handleChange}
                   />
                   <input
-                    className="form-input"
-                    placeholder="******"
+                    className="block input input-accent w-full max-w-xs text-center"
+                    placeholder="Your password"
                     name="password"
                     type="password"
                     value={formState.password}
                     onChange={handleChange}
                   />
                   <button
-                    className="btn btn-block btn-info"
+                    className="block btn btn-accent w-full max-w-xs text-center text-white"
                     style={{ cursor: 'pointer' }}
                     type="submit"
                   >
                     Submit
                   </button>
                 </form>
+
               )}
   
               {error && (
-                <div className="my-3 p-3 bg-danger text-white">
-                  {error.message}
+                <div className="flex flex-col items-center justify-center">
+                <div className="my-3 p-3 bg-red-600 rounded-lg max-w-xs text-center text-white">
+                  {"Invalid login or Password.  Please try again"}
                 </div>
+
+                </div>
+                
               )}
+              <div className="text-white py-6 text-center">
+                    <a href="/register">Would you like to register? </a>
+                  </div>
             </div>
           </div>
         </div>

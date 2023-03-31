@@ -7,6 +7,7 @@ import { setContext } from '@apollo/client/link/context';
 import Home from "./pages/home";
 import Shop from "./pages/shop";
 import Merchants from "./pages/merchants";
+import Profile from "./pages/profile";
 import LoginRegister from "./pages/login";
 import Register from "./pages/register";
 import Footer from "./components/Footer";
@@ -56,6 +57,7 @@ function App() {
             <Route path="/merchants" element={<Merchants />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/register" element={<Register />} />
+            <Route path ="/profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
       <Footer />

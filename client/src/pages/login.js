@@ -16,10 +16,9 @@ function Login() {
   return (
     <>
       <div>
-        Login/Register
         <LoginForm />
       <div className="text-white text-center">
-      <a href="/register">would you like to register? </a>
+
          
       </div>
         

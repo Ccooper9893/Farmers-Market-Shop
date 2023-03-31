@@ -7,16 +7,16 @@ const resolvers = {
     Query: {
         //Get current user account and purchases
         me: async (_, __, context) => {
-            console.log(context);
+
             if (context.user) {
-                return await User.findOne({ email: context.user.email }).populate('purchases').populate('products');
+                return await User.findById(context.user._id).populate({ path: 'products', select: '-__v' }).populate({ path: 'purchases', select: '-__v' });
             };
 
             throw new AuthenticationError('You must be logged in to view content!');
         },
         //Get all merchant accounts and their products
         getMerchants: async (_, __) => {
-            return await User.find({ merchant: true }).populate('products');
+            return await User.find({ merchant: true }).populate({ path: 'products', select: '-__v' });
         },
 
         getProducts: async (_, __) => {
@@ -30,14 +30,14 @@ const resolvers = {
         },
 
         getPurchases: async (_, __, context) => {
-            if(!context.user) {
+            if (!context.user) {
                 throw new AuthenticationError('You must be logged in to view purchases!');
             }
-            return await User.findOne({username: 'customer'}).populate({ path: 'products', select: '-__v' });
+            return await User.findOne({ username: 'customer' }).populate({ path: 'products', select: '-__v' });
             //Uncomment when we have front end set up and comment this ^^
             // return await User.findOne({_id: context.user._id}).populate({ path: 'products', select: '-__v' });
         },
-    }, 
+    },
 
     Mutation: {
         //Create user and sign token
@@ -60,38 +60,53 @@ const resolvers = {
 
             return { token, user };
         },
-        addProduct: async (_, __, context) => {
+        addProduct: async (_, args, context) => {
+            
+            if (!context.user) {
+                throw new AuthenticationError('You must be logged in to use this feature');
+            }
 
-            //Once we build auth front-end and use query_me uncomment this code
-            //-------------------------------
-            // if (!context.user) {
-            // throw new AuthenticationError('You must be logged in to use this feature');
-            // }
-            const newProduct = await Product.create(args)
-            // const updatedUser = await User.findOneAndUpdate(
-            //     { _id: context.user._id },
-            //     { $addToSet: {products: newProduct} },
-            //     { new: true },
-            // ).populate('products');
-            // return updatedUser;
-            //-------------------------------
+            args.merchant = context.user._id;
 
-
-            await User.findOneAndUpdate({ username: 'daleberryfarms' }, { $addToSet: { products: newProduct } });
-
+            const newProduct = await Product.create(args);
+            
+            await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { products: newProduct } },
+                { new: true },
+            ).populate('products');
+            
             return newProduct;
+
         },
         addPurchase: async (_, { products }, context) => {
 
             if (context.user) {
-              const purchase = new Purchase({ products });
-      
-              await User.findByIdAndUpdate(context.user._id, { $push: { ppurchases: purchase } });
-      
-              return purchase;
+                const purchase = await Purchase.create(products);
+
+                await User.findByIdAndUpdate(context.user._id, { $push: { purchases: purchase } });
+
+                return purchase;
             }
-      
+
             throw new AuthenticationError('Not logged in');
+        },
+        updateStock: async (_, { stock, id }, context) => {
+            if(context.user) {
+                return await Product.findByIdAndUpdate(id, {stock: stock}, { new: true, runValidators: true });
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+        updateProduct: async (_, {price, stock, id}, context) => {
+            console.log(price, stock, id);
+            console.log(typeof price);
+            if(context.user) {
+               const newProduct = await Product.findByIdAndUpdate(id, {price: price, stock: stock}, { new: true, runValidators: true});
+               return newProduct;
+            }
+
+            throw new AuthenticationError('You must be logged in to update products.');
         }
 
     }
