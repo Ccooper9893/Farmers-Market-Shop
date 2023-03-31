@@ -1,9 +1,12 @@
 import React from "react";
 import {useState} from 'react';
 import Auth from "../utils/jwt-auth"; 
+import { useCartContext } from "../utils/GlobalState";
+import Cart from "./Cart/index";
 
 
 export default function Nav() {
+  const [state, dispatch] = useCartContext();
 
   const [navActive, setIsNavActive] = useState(false);
 

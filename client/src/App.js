@@ -14,6 +14,8 @@ import Footer from "./components/Footer";
 
 import Nav from "./components/Nav"
 
+import { CartProvider } from "./utils/GlobalState";
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -47,6 +49,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+    <CartProvider>
     <>
       <div className="bg-teal-900 min-h-screen">
       <Nav />
@@ -67,6 +70,7 @@ function App() {
 
           
     </>
+    </CartProvider>
     </ApolloProvider>
   );
 }
