@@ -61,7 +61,7 @@ const resolvers = {
             return { token, user };
         },
         addProduct: async (_, args, context) => {
-            
+
             if (!context.user) {
                 throw new AuthenticationError('You must be logged in to use this feature');
             }
@@ -69,13 +69,13 @@ const resolvers = {
             args.merchant = context.user._id;
 
             const newProduct = await Product.create(args);
-            
+
             await User.findOneAndUpdate(
                 { _id: context.user._id },
                 { $addToSet: { products: newProduct } },
                 { new: true },
             ).populate('products');
-            
+
             return newProduct;
 
         },
@@ -92,18 +92,24 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
         updateStock: async (_, { stock, id }, context) => {
-            if(context.user) {
-                return await Product.findByIdAndUpdate(id, {stock: stock}, { new: true, runValidators: true });
+            if (context.user) {
+                return await Product.findByIdAndUpdate(id, { stock: stock }, { new: true, runValidators: true });
             }
 
             throw new AuthenticationError('Not logged in');
         },
-        updateProduct: async (_, {price, stock, id}, context) => {
-            console.log(price, stock, id);
-            console.log(typeof price);
-            if(context.user) {
-               const newProduct = await Product.findByIdAndUpdate(id, {price: price, stock: stock}, { new: true, runValidators: true});
-               return newProduct;
+        updateProduct: async (_, { price, stock, id }, context) => {
+            if (context.user) {
+                const newProduct = await Product.findByIdAndUpdate(id, { price: price, stock: stock }, { new: true, runValidators: true });
+                return newProduct;
+            }
+
+            throw new AuthenticationError('You must be logged in to update products.');
+        },
+        deleteProduct: async (_, { id }, context) => {
+            if (context.user) {
+                const deletedProduct = await Product.findByIdAndDelete(id);
+                return deletedProduct;
             }
 
             throw new AuthenticationError('You must be logged in to update products.');
