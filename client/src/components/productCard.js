@@ -9,7 +9,7 @@ function ProductCard(products) {
     <div className=" flex flex-row flex-wrap m-24">
     {products.products.map((product) => (
       <div  key={product._id}  className="card w-32 glass text-slate-300 m-3">
-  <figure className="p-2"><img src={ProductExample} alt="car!"/></figure>
+  <figure className="p-2"><img src={product.image} alt="car!"/></figure>
   <div className="card-body p-1 ">
     <p className="card-title text-base justify-center ">{product.name}</p>
     <p>Price: $  {product.price}</p>
