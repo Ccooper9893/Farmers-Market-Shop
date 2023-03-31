@@ -2,56 +2,77 @@ import React, { useState } from "react";
 import NewProduct from "../components/Profile/NewProduct";
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import ProductList from "../components/Profile/ProductList";
+import Product from "../components/Profile/Product";
 import Auth from "../utils/jwt-auth";
+import fabricBg from "../Images/fabricbackground.jpg";
 
 function Profile() {
-  if(!Auth.loggedIn()) {
+  const [userData, setUserData] = useState(null);
+
+  if (!Auth.loggedIn()) {
     window.location.replace('/login');
   };
-  const { loading, data } = useQuery(GET_ME);
+
+  useQuery(GET_ME, {
+    onCompleted: (data) => setUserData(data.me),
+  });
+
+  const handleDeleteProduct = (productId) => {
+    // Filter out the product with the given ID
+    const updatedProducts = userData.products.filter(product => product._id !== productId);
+    setUserData({
+      ...userData,
+      products: updatedProducts,
+    });
+  };
+
   return (
-    <div>
-      {loading ? (
+    <div className="font">
+      {!userData ? (
         <div>Loading...</div>
       ) : (
         <div className="grid grid-cols-8 text-center">
-          <div className="col-span-8 lg:col-span-3">
-            <div className="flex flex-col p-8 m-3 bg-orange-200 py-4">
-              <h2 className="text-3xl font-bold underline" >Account</h2>
-              <ul>
-                <li>Username: {data.me.username}</li>
-                <li>email: {data.me.email}</li>
-                {!data.me.merchant ? null : (
-                  <>
-                    <li>Phone: {data.me.phone_number}</li>
-                    <li className="font-bold text-2xl">{data.me.business_name}</li>
-                    <li>{data.me.business_description}</li>
-                  </>
-                )}
-                <li></li>
-              </ul>
-              <div className="flex justify-center py-4 m-3">
-                <img src={data.me.image} alt={data.me.business_name}></img>
+          <div className="col-span-8 lg:col-span-2 bg-stone-800">
+            <div className="flex flex-col p-8 mx-6 text-white py-4 rounded-lg">
+              <div className="flex flex-col">
+              <h2 className="text-5xl font-iight text-white my-3 border-b pb-2" >ACCOUNT</h2>
+                <img className="rounded-full w-28 m-auto" src="https://storage.googleapis.com/farmers-market-images/1680277238037-farmlogo.webp"></img>
+                <ul className="m-auto">
+                  <li>Username: {userData.username}</li>
+                  <li>email: {userData.email}</li>
+                </ul>
               </div>
+              {!userData.merchant ? null : (
+                <ul className="mt-8">
+                  <li className="text-4xl font-iight text-white my-3 border-b pb-2" >{userData.business_name}</li>
+                  <li><img className="m-auto" src={userData.image} alt={userData.business_name}></img></li>
+                  <li >WHO ARE WE?</li>
+                  <li>{userData.business_description}</li>
+                  <li className="text-sm font-bold">CONTACT: {userData.phone_number}</li>
+
+                </ul>
+
+              )}
+
+
             </div>
 
           </div>
-          <div className="col-span-8 lg:col-span-5">
-            <div className="flex flex-col justify-center m-3 bg-orange-100 py-4">
-              <h2 className="text-3xl font-bold pb-5 underline" >My Purchases</h2>
-              {data.me.purchases.length ? null : (
-                <p>You have made no purchases</p>
-              )}
-            </div>
-            {!data.me.merchant ? null : (
-              <div className="flex flex-col justify-center m-3 bg-orange-100 py-4">
-                <h2 className="text-3xl font-bold pb-5 underline" >My Products</h2>
+          <div className="col-span-8 lg:col-span-6 mx-auto"
+          style = {{ backgroundImage: `url(${fabricBg})`,
+                backgroundSize: '28rem',
+                backgroundRepeat: 'repeat',
+              }}>
+              
+            <h2 className="text-5xl font-iight my-3" >INVENTORY</h2>
+            {!userData.merchant ? null : (
+              <div className="flex flex-col justify-center py-4 rounded-2xl">
+
                 <NewProduct />
-                {data.me.products.length ? (
+                {userData.products.length ? (
                   <div className="flex flex-row flex-wrap">
-                    {data.me.products.map((props) => (
-                      <ProductList props={props} />
+                    {userData.products.map((product) => (
+                      <Product key={product._id} product={product} onDeleteProduct={handleDeleteProduct} />
                     ))}
                   </div>
                 ) :
@@ -61,6 +82,13 @@ function Profile() {
 
               </div>
             )}
+            <div className="flex flex-col justify-center my-20 bg-orange-100 py-4 rounded-2xl">
+              <h2 className="text-3xl font-bold pb-5 underline" >My Purchases</h2>
+              {userData.purchases.length ? null : (
+                <p>You have made no purchases</p>
+              )}
+            </div>
+
           </div>
         </div>
 
