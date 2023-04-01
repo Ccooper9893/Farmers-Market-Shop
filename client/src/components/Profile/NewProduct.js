@@ -26,7 +26,7 @@ function NewProduct({ onAddProduct }) {
                     method: "POST",
                     body: formData,
                 });
-                    return await response.json();
+                return await response.json();
 
             } catch (error) {
                 console.log(error);
@@ -91,26 +91,26 @@ function NewProduct({ onAddProduct }) {
     return (
         <>
             {/* The button to open modal */}
-            <label htmlFor="productModal" className="btn text-lg mx-auto bg-green-800">
+            <label htmlFor="productModal" className="btn text-lg mx-20 bg-green-800">
                 New Product
             </label>
 
             {/* Put this part before </body> tag */}
             <input type="checkbox" id="productModal" className="modal-toggle" />
-            <label htmlFor="productModal" className="modal cursor-pointer bg-opacity-80">
-                <label className="modal-box shadow-sm mb-20 rounded-none" style={{
-                backgroundImage: `url(${oldpaper})`,
-                backgroundSize: '20rem',
-                backgroundRepeat: 'repeat',
-              }}>
-                    <label htmlFor="productModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <label htmlFor="productModal" className="modal cursor-pointer bg-opacity-80 ">
+                <label className="modal-box shadow-sm rounded-lg p-6" style={{
+                    backgroundImage: `url(${oldpaper})`,
+                    backgroundSize: '20rem',
+                    backgroundRepeat: 'repeat',
+                }}>
+                    <label htmlFor="productModal" className="btn btn-sm hover:bg-red-600 btn-circle absolute right-2 top-2">✕</label>
                     <form
                         className="flex flex-col"
                         onSubmit={handleSubmit}
                         encType="multipart/form-data"
                     >
                         <label className="label">
-                            <span className="label-text font-bold text-xl">PRODUCT NAME</span>
+                            <span className="label-text font-bold text-lg">Product Name:</span>
                         </label>
                         <input
                             type="text"
@@ -121,7 +121,7 @@ function NewProduct({ onAddProduct }) {
                             onChange={handleInputChange}
                         />
                         <label className="label">
-                            <span className="label-text font-bold text-xl">DESCRIPTION</span>
+                            <span className="label-text font-bold text-lg">Description:</span>
                         </label>
                         <input
                             type="text"
@@ -132,14 +132,14 @@ function NewProduct({ onAddProduct }) {
                             onChange={handleInputChange}
                         />
                         <div className="mx-2">
-                            <div className="flex flex-row flex-wrap">
-                                <div>
+                            <div className="grid grid-cols-2">
+                                <div className="span-col-1">
                                     <label className="label">
-                                        <span className="label-text font-bold text-xl">PRICE</span>
+                                        <span className="label-text font-bold text-lg">Price:</span>
                                     </label>
                                     <label className="label p-0">
                                         <input
-                                            className="input input-bordered"
+                                            className="input input-bordered w-44"
                                             type="number"
                                             name="price"
                                             placeholder="$ USD"
@@ -148,13 +148,13 @@ function NewProduct({ onAddProduct }) {
                                         />
                                     </label>
                                 </div>
-                                <div>
+                                <div className="span-col-1 mx-1">
                                     <label className="label">
-                                        <span className="label-text font-bold text-xl">STOCK</span>
+                                        <span className="label-text font-bold text-lg">Stock:</span>
                                     </label>
                                     <label className="label p-0">
                                         <input
-                                            className="input input-bordered"
+                                            className="input input-bordered w-44"
                                             type="number"
                                             name="stock"
                                             placeholder="20"
@@ -164,27 +164,34 @@ function NewProduct({ onAddProduct }) {
                                 </div>
                             </div>
                         </div>
-                        <label className="label">
-                            <span className="label-text font-bold text-xl">CATEGORY</span>
-                        </label>
-                        <select className="select w-full max-w-xs" name="category" value={formState.category} onChange={handleInputChange}>
-                            <option disabled selected>Choose a category</option>
-                            <option value="Meat">Meat</option>
-                            <option value="Vegetable">Vegetable</option>
-                            <option value="Fruit">Fruit</option>
-                            <option value="Bread">Bread</option>
-                            <option value="Art">Art</option>
-                            <option value="Livestock">Livestock</option>
-                        </select>
-                        <label className="label">
-                            <span className="label-text font-bold text-xl">UPLOAD PICTURE</span>
-                        </label>
-                        <input type="file" name="image" className="file-input input-bordered w-full" onChange={handleInputChange} />
-                        {loading 
-                            ? (<button className="btn loading bg-green-700 mt-8"></button>)
-                            : <button className="btn bg-green-700 mt-8" type="submit">Create</button>
+                        <div className="grid grid-cols-6 gap-4">
+                            <div className="col-span-2">
+                            <label className="label">
+                                <span className="label-text font-bold text-lg">Category:</span>
+                            </label>
+                            <select className="select w-full max-w-xs" name="category" value={formState.category} onChange={handleInputChange}>
+                                <option disabled selected>Choose a category</option>
+                                <option value="Meat">Meat</option>
+                                <option value="Vegetable">Vegetable</option>
+                                <option value="Fruit">Fruit</option>
+                                <option value="Bread">Bread</option>
+                                <option value="Art">Art</option>
+                                <option value="Livestock">Livestock</option>
+                            </select>
+                            </div>
+                            <div className="col-span-4">
+                            <label className="label">
+                                <span className="label-text font-bold text-lg">Upload Picture:</span>
+                            </label>
+                            <input type="file" name="image" className="file-input input-bordered w-full" onChange={handleInputChange} />
+                            </div>
+                        </div>
+                        <div className="flex justify-center">
+                        {loading
+                            ? (<button className="btn btn-wide loading hover:bg-green-700 mt-8"></button>)
+                            : <button className="btn btn-wide mt-8 bg-green-700" type="submit">Create</button>
                         }
-
+</div>
                         {message && (<h3 className="font-bold m-3">{message}</h3>)}
                     </form>
                 </label>
