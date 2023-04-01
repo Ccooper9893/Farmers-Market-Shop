@@ -8,7 +8,7 @@ import {GET_PRODUCTS} from '../utils/queries';
 function Shop() {
   const { loading, data } = useQuery(GET_PRODUCTS);
   const products = data?.getProducts || [];
- console.log (products)
+//  console.log (products)
 // const [categoryData, setCategoryData] = useState(products)
 // console.log ({categoryData})
 
@@ -19,24 +19,30 @@ function Shop() {
      <input id="my-drawer-2" type="checkbox" className="drawer-toggle"></input>
        <div className="flex flex-col items-center justify-center drawer-content">
         
-         <div className="text-xs text-center ">
-         <ProductCard 
-         // products={products}
-          products={products}
-         />
-         </div> 
+   {loading ? null : (      <div className="text-xs text-center ">
+         {data.getProducts.map((product)=> (
+          <ProductCard props={product}/>
+         ))}
+        
+         </div> ) }
 
    </div> 
    <div class="drawer-side p-2.5 ">
     <label for="my-drawer-2" class="drawer-overlay"></label> 
+
+
+
+
+
+
         {/* TO DO: map through all categories */}
  
-      {products.map((products => (
+      {/* {products.map((products => (
             <ul  className="menu p-8  overflow-y-auto w-60 h-80 rounded-lg text-slate-300 font-bold tracking-wide">
             <li key={products._id}>
               <p>{products.category.name}</p>
             </li> 
-            </ul>)))} 
+            </ul>)))}  */}
 
     {/* <ul className="menu p-8  overflow-y-auto w-60 h-80 rounded-lg text-slate-300 font-bold tracking-wide">
       <li>
