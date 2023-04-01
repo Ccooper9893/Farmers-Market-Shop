@@ -6,6 +6,7 @@ import Product from "../components/Profile/Product";
 import Auth from "../utils/jwt-auth";
 import fabricBg from "../Images/fabricbackground.jpg";
 import woodBg from "../Images/Tileable-Wood-Texture.jpg";
+import lightWoodBg from "../Images/wood.jpg";
 
 function Profile() {
   const [userData, setUserData] = useState(null);
@@ -27,7 +28,7 @@ function Profile() {
     });
   };
 
-  const handleAddProduct = ({addProduct}) => {
+  const handleAddProduct = ({ addProduct }) => {
     const currentProducts = userData.products;
     currentProducts.push(addProduct);
     setUserData({
@@ -63,52 +64,57 @@ function Profile() {
                   <li><img className="m-auto" src={userData.image} alt={userData.business_name}></img></li>
                   <li><p className="my-5">{userData.business_description}</p></li>
                   <li className="text-sm font-bold">CONTACT: {userData.phone_number}</li>
-
                 </ul>
-
               )}
-
-
             </div>
-
           </div>
-          <div className="col-span-8 lg:col-span-6 mx-auto"
+
+          <div className="col-span-8 lg:col-span-6 h-full"
             style={{
               backgroundImage: `url(${fabricBg})`,
               backgroundSize: '28rem',
               backgroundRepeat: 'repeat',
             }}>
 
-            <h2 className="text-6xl text-black shadow-lg h-28 shadow-black font-bold pt-7"
-              style={{
-                backgroundImage: `url(${woodBg})`,
-                backgroundSize: '18rem',
-                backgroundRepeat: 'repeat',
-              }}
-            >
-              INVENTORY
-            </h2>
             {!userData.merchant ? null : (
-              <div className="flex flex-col justify-center py-4 rounded-2xl">
-
-                <NewProduct onAddProduct={handleAddProduct}/>
-                {userData.products.length ? (
-                  <div className="flex flex-row flex-wrap">
-                    {userData.products.map((product) => (
-                      <Product key={product._id} product={product} onDeleteProduct={handleDeleteProduct} />
-                    ))}
-                  </div>
-                ) :
-                  (
-                    <p>You have no products</p>
-                  )}
-
+              <div>
+                <h2 className="text-4xl text-stone-800 shadow-lg h-16 tracking-wide shadow-black font-bold pt-3"
+                  style={{
+                    backgroundImage: `url(${woodBg})`,
+                    backgroundSize: '18rem',
+                    backgroundRepeat: 'repeat',
+                  }}
+                >
+                  INVENTORY
+                </h2>
+                <div className="flex flex-col justify-center py-4 rounded-2xl">
+                  <NewProduct onAddProduct={handleAddProduct} />
+                  {userData.products.length
+                    ? (<div className="flex flex-row flex-wrap">
+                      {userData.products.map((product) => (
+                        <Product key={product._id} product={product} onDeleteProduct={handleDeleteProduct} />
+                      ))}
+                    </div>)
+                    : (<p>You have no products</p>)
+                  }
+                </div>
               </div>
             )}
-            <div className="flex flex-col justify-center my-20 py-4 rounded-2xl">
-              <h2 className="text-3xl font-bold pb-5 underline" >My Purchases</h2>
+            <div className="h-screen" style={{
+              backgroundImage: `url(${lightWoodBg})`,
+              backgroundSize: 'cover',
+            }}>
+              <h2 className="text-4xl text-stone-800 shadow-lg h-16 tracking-wide shadow-black font-bold pt-3"
+                style={{
+                  backgroundImage: `url(${woodBg})`,
+                  backgroundSize: '18rem',
+                  backgroundRepeat: 'repeat',
+                }}
+              >
+                PURCHASES
+              </h2>
               {userData.purchases.length ? null : (
-                <p>You have made no purchases</p>
+                <p className="mt-8 font-bold text-lg">You have made no purchases</p>
               )}
             </div>
 
