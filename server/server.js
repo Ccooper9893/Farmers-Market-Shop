@@ -36,7 +36,6 @@ if (process.env.NODE_ENV === 'production') {
 //Upload images using this route before calling query to create product, use fetch()
 app.post('/upload', upload.single('image'), async (req, res) => {
   try {
-    console.log(req.file)
     const imageUrl = await uploadFile(req.file);
     res.status(200).json({ imageUrl });
   } catch (error) {

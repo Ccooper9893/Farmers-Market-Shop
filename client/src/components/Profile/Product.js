@@ -16,7 +16,6 @@ function Product({ product, onDeleteProduct }) {
 
     const handleUpdate = async (event) => {
         event.preventDefault();
-        console.log(event.target);
         try {
             const priceFloat = parseFloat(price);
             const stockInt = parseInt(stock);
@@ -40,13 +39,14 @@ function Product({ product, onDeleteProduct }) {
     }
 
     const handleChange = (event) => {
+        event.preventDefault();
         const { name, value } = event.target;
         name === 'price' ? setPrice(value) : setStock(value);
         setMessage('');
     };
 
     return (
-        <form className=" w-80 lg:w-72 m-auto my-4 p-4 shadow-sm shadow-gray-700" onSubmit={handleUpdate} style={{
+        <form className=" w-80 lg:w-72 m-auto my-4 p-4 shadow-lg shadow-black" onSubmit={handleUpdate} style={{
             backgroundSize: '15rem',
             backgroundImage: `url(${notePaperbg})`,
             backgroundRepeat: 'repeat',
@@ -54,7 +54,7 @@ function Product({ product, onDeleteProduct }) {
             <h2 className="text-3xl font-bold border-b-black border">{product.name}</h2>
             <div className="m-3">
                 <img class="m-auto w-24 rounded-full mt-5" src={product.image} alt={product.name} />
-                <p className="text-xl">{product.product_description}</p>
+                <p className="text-lg">{product.product_description}</p>
                 <div className="my-2">
                     <p>Price $</p>
                     <input

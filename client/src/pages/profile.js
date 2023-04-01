@@ -5,7 +5,7 @@ import { GET_ME } from '../utils/queries';
 import Product from "../components/Profile/Product";
 import Auth from "../utils/jwt-auth";
 import fabricBg from "../Images/fabricbackground.jpg";
-import woodBg from "../Images/darkwood.png";
+import woodBg from "../Images/Tileable-Wood-Texture.jpg";
 
 function Profile() {
   const [userData, setUserData] = useState(null);
@@ -27,6 +27,15 @@ function Profile() {
     });
   };
 
+  const handleAddProduct = ({addProduct}) => {
+    const currentProducts = userData.products;
+    currentProducts.push(addProduct);
+    setUserData({
+      ...userData,
+      products: currentProducts,
+    });
+  };
+
   return (
     <div className="font">
       {!userData ? (
@@ -34,7 +43,7 @@ function Profile() {
       ) : (
         <div className="grid grid-cols-8 text-center">
           <div className="col-span-8 lg:col-span-2 bg-stone-800">
-            <div className="flex flex-col p-3 mx-3 text-white py-4 rounded-lg">
+            <div className="flex flex-col p-3 mx-3 text-white py-4">
               <div className="flex flex-col">
                 <h2 className="text-4xl font-iight text-white my-3 border-b pb-2" >ACCOUNT</h2>
                 <img
@@ -70,10 +79,10 @@ function Profile() {
               backgroundRepeat: 'repeat',
             }}>
 
-            <h2 className="text-4xl text-orange-100 shadow-lg shadow-black font-light py-3"
+            <h2 className="text-6xl text-black shadow-lg h-28 shadow-black font-bold pt-7"
               style={{
                 backgroundImage: `url(${woodBg})`,
-                backgroundSize: '28rem',
+                backgroundSize: '18rem',
                 backgroundRepeat: 'repeat',
               }}
             >
@@ -82,7 +91,7 @@ function Profile() {
             {!userData.merchant ? null : (
               <div className="flex flex-col justify-center py-4 rounded-2xl">
 
-                <NewProduct />
+                <NewProduct onAddProduct={handleAddProduct}/>
                 {userData.products.length ? (
                   <div className="flex flex-row flex-wrap">
                     {userData.products.map((product) => (
@@ -96,7 +105,7 @@ function Profile() {
 
               </div>
             )}
-            <div className="flex flex-col justify-center my-20 bg-orange-100 py-4 rounded-2xl">
+            <div className="flex flex-col justify-center my-20 py-4 rounded-2xl">
               <h2 className="text-3xl font-bold pb-5 underline" >My Purchases</h2>
               {userData.purchases.length ? null : (
                 <p>You have made no purchases</p>

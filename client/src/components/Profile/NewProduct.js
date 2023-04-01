@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT } from "../../utils/mutations";
+import oldpaper from "../../Images/oldpaper.jpg"
+
 
 function NewProduct({ onAddProduct }) {
 
@@ -24,10 +26,8 @@ function NewProduct({ onAddProduct }) {
                     method: "POST",
                     body: formData,
                 });
-                if (response.ok) {
                     return await response.json();
-                }
-                return false;
+
             } catch (error) {
                 console.log(error);
             }
@@ -71,11 +71,12 @@ function NewProduct({ onAddProduct }) {
         try {
             const { data } = await addProduct({ variables: productData });
             if (data) {
-                setMessage('');
-                window.location.reload();
+                setMessage('Product Added!');
+                setLoading(false);
+                onAddProduct(data);
             }
         } catch (error) {
-            setMessage('Error in adding your product.')
+            console.log(error);
         };
 
         setFormState({
@@ -90,23 +91,26 @@ function NewProduct({ onAddProduct }) {
     return (
         <>
             {/* The button to open modal */}
-            <label htmlFor="productModal" className="btn w-3/5 mx-auto">
+            <label htmlFor="productModal" className="btn text-lg mx-auto bg-green-800">
                 New Product
             </label>
 
             {/* Put this part before </body> tag */}
             <input type="checkbox" id="productModal" className="modal-toggle" />
             <label htmlFor="productModal" className="modal cursor-pointer bg-opacity-80">
-                <label className="modal-box bg-amber-100 shadow-sm mb-20 flex justify-center">
+                <label className="modal-box shadow-sm mb-20 rounded-none" style={{
+                backgroundImage: `url(${oldpaper})`,
+                backgroundSize: '20rem',
+                backgroundRepeat: 'repeat',
+              }}>
                     <label htmlFor="productModal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <form
                         className="flex flex-col"
                         onSubmit={handleSubmit}
                         encType="multipart/form-data"
                     >
-                        <h2 className=" text-3xl font-bold">CREATE PRODUCT</h2>
                         <label className="label">
-                            <span className="label-text font-bold">PRODUCT NAME</span>
+                            <span className="label-text font-bold text-xl">PRODUCT NAME</span>
                         </label>
                         <input
                             type="text"
@@ -117,7 +121,7 @@ function NewProduct({ onAddProduct }) {
                             onChange={handleInputChange}
                         />
                         <label className="label">
-                            <span className="label-text font-bold">DESCRIPTION</span>
+                            <span className="label-text font-bold text-xl">DESCRIPTION</span>
                         </label>
                         <input
                             type="text"
@@ -131,7 +135,7 @@ function NewProduct({ onAddProduct }) {
                             <div className="flex flex-row flex-wrap">
                                 <div>
                                     <label className="label">
-                                        <span className="label-text font-bold">PRICE</span>
+                                        <span className="label-text font-bold text-xl">PRICE</span>
                                     </label>
                                     <label className="label p-0">
                                         <input
@@ -144,9 +148,9 @@ function NewProduct({ onAddProduct }) {
                                         />
                                     </label>
                                 </div>
-                                <div className="mx-2">
+                                <div>
                                     <label className="label">
-                                        <span className="label-text font-bold">STOCK</span>
+                                        <span className="label-text font-bold text-xl">STOCK</span>
                                     </label>
                                     <label className="label p-0">
                                         <input
@@ -161,7 +165,7 @@ function NewProduct({ onAddProduct }) {
                             </div>
                         </div>
                         <label className="label">
-                            <span className="label-text font-bold">CATEGORY</span>
+                            <span className="label-text font-bold text-xl">CATEGORY</span>
                         </label>
                         <select className="select w-full max-w-xs" name="category" value={formState.category} onChange={handleInputChange}>
                             <option disabled selected>Choose a category</option>
@@ -173,12 +177,12 @@ function NewProduct({ onAddProduct }) {
                             <option value="Livestock">Livestock</option>
                         </select>
                         <label className="label">
-                            <span className="label-text font-bold">UPLOAD PICTURE</span>
+                            <span className="label-text font-bold text-xl">UPLOAD PICTURE</span>
                         </label>
                         <input type="file" name="image" className="file-input input-bordered w-full" onChange={handleInputChange} />
                         {loading 
-                            ? (<button className="btn btn-wide loading bg-slate-600 mt-8"></button>)
-                            : <button className="btn btn-wide bg-slate-600 mt-8" type="submit">Create</button>
+                            ? (<button className="btn loading bg-green-700 mt-8"></button>)
+                            : <button className="btn bg-green-700 mt-8" type="submit">Create</button>
                         }
 
                         {message && (<h3 className="font-bold m-3">{message}</h3>)}
