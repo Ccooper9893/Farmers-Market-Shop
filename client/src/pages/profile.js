@@ -2,61 +2,124 @@ import React, { useState } from "react";
 import NewProduct from "../components/Profile/NewProduct";
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import ProductList from "../components/Profile/ProductList";
+import Product from "../components/Profile/Product";
+import Auth from "../utils/jwt-auth";
+import fabricBg from "../Images/fabricbackground.jpg";
+import woodBg from "../Images/Tileable-Wood-Texture.jpg";
+import lightWoodBg from "../Images/wood.jpg";
 
 function Profile() {
-  const { loading, data } = useQuery(GET_ME);
+  const [userData, setUserData] = useState(null);
+
+  if (!Auth.loggedIn()) {
+    window.location.replace('/login');
+  };
+
+  useQuery(GET_ME, {
+    onCompleted: (data) => setUserData(data.me),
+  });
+
+  const handleDeleteProduct = (productId) => {
+    // Filter out the product with the given ID
+    const updatedProducts = userData.products.filter(product => product._id !== productId);
+    setUserData({
+      ...userData,
+      products: updatedProducts,
+    });
+  };
+
+  const handleAddProduct = ({ addProduct }) => {
+    const currentProducts = userData.products;
+    currentProducts.push(addProduct);
+    setUserData({
+      ...userData,
+      products: currentProducts,
+    });
+  };
+
   return (
-    <div>
-      {loading ? (
+    <div className="font">
+      {!userData ? (
         <div>Loading...</div>
       ) : (
-          <div className="grid grid-cols-8 text-center">
-            <div className="col-span-8 lg:col-span-3">
-              <div className="flex flex-col p-8 m-3 bg-orange-200 py-4">
-                <h2 className="text-3xl font-bold underline" >Account</h2>
-                <ul>
-                  <li>Username: {data.me.username}</li>
-                  <li>email: {data.me.email}</li>
-                  {!data.me.merchant ? null : (
-                    <>
-                      <li>Phone: {data.me.phone_number}</li>
-                      <li className="font-bold text-2xl">{data.me.business_name}</li>
-                      <li>{data.me.business_description}</li>
-                    </>
-                  )}
-                  <li></li>
+        <div className="grid grid-cols-8 text-center">
+          <div className="col-span-8 lg:col-span-2 bg-stone-800">
+            <div className="flex flex-col p-3 mx-3 text-white py-4">
+              <div className="flex flex-col">
+                <h2 className="text-4xl font-iight text-white my-3 border-b pb-2" >ACCOUNT</h2>
+                <img
+                  className="rounded-full w-28 m-auto"
+                  src="https://storage.googleapis.com/farmers-market-images/1680277238037-farmlogo.webp"
+                  alt="farm logo"
+                >
+                </img>
+                <ul className="m-auto">
+                  <li>Username: {userData.username}</li>
+                  <li>email: {userData.email}</li>
                 </ul>
-                <div className="flex justify-center py-4 m-3">
-                  <img src={data.me.image} alt={data.me.business_name}></img>
-                </div>
               </div>
-
-            </div>
-            <div className="col-span-8 lg:col-span-5">
-              <div className="flex flex-col justify-center m-3 bg-orange-100 py-4">
-              <h2 className="text-3xl font-bold pb-5 underline" >My Purchases</h2>
-                {data.me.purchases.length ? null : (
-                  <p>You have made no purchases</p>
-                )}
-              </div>
-              <div className="flex flex-col justify-center m-3 bg-orange-100 py-4">
-                <h2 className="text-3xl font-bold pb-5 underline" >My Products</h2>
-                <NewProduct />
-                {data.me.products.length ? (
-                  <div className="flex flex-row flex-wrap">
-                    {data.me.products.map((props) => (
-                      <ProductList props={props}/>
-                    ))}
-                  </div>
-                ) :
-                  (
-                    <p>You have no products</p>
-                  )}
-    
-              </div>
+              {!userData.merchant ? null : (
+                <ul className="mt-8">
+                  <li className="text-4xl font-iight text-white my-3 border-b pb-2" >{userData.business_name}</li>
+                  <li><img className="m-auto" src={userData.image} alt={userData.business_name}></img></li>
+                  <li><p className="my-5">{userData.business_description}</p></li>
+                  <li className="text-sm font-bold">CONTACT: {userData.phone_number}</li>
+                </ul>
+              )}
             </div>
           </div>
+
+          <div className="col-span-8 lg:col-span-6 h-full"
+            style={{
+              backgroundImage: `url(${fabricBg})`,
+              backgroundSize: '28rem',
+              backgroundRepeat: 'repeat',
+            }}>
+
+            {!userData.merchant ? null : (
+              <div>
+                <h2 className="text-4xl text-stone-800 shadow-lg h-16 tracking-wide shadow-black font-bold pt-3"
+                  style={{
+                    backgroundImage: `url(${woodBg})`,
+                    backgroundSize: '18rem',
+                    backgroundRepeat: 'repeat',
+                  }}
+                >
+                  INVENTORY
+                </h2>
+                <div className="flex flex-col justify-center py-4 rounded-2xl">
+                  <NewProduct onAddProduct={handleAddProduct} />
+                  {userData.products.length
+                    ? (<div className="flex flex-row flex-wrap">
+                      {userData.products.map((product) => (
+                        <Product key={product._id} product={product} onDeleteProduct={handleDeleteProduct} />
+                      ))}
+                    </div>)
+                    : (<p>You have no products</p>)
+                  }
+                </div>
+              </div>
+            )}
+            <div className="h-screen" style={{
+              backgroundImage: `url(${lightWoodBg})`,
+              backgroundSize: 'cover',
+            }}>
+              <h2 className="text-4xl text-stone-800 shadow-lg h-16 tracking-wide shadow-black font-bold pt-3"
+                style={{
+                  backgroundImage: `url(${woodBg})`,
+                  backgroundSize: '18rem',
+                  backgroundRepeat: 'repeat',
+                }}
+              >
+                PURCHASES
+              </h2>
+              {userData.purchases.length ? null : (
+                <p className="mt-8 font-bold text-lg">You have made no purchases</p>
+              )}
+            </div>
+
+          </div>
+        </div>
 
       )}
     </div>

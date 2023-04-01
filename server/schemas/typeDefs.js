@@ -53,6 +53,7 @@ const typeDefs = gql`
         addPurchase(products: [ID]!) : Purchase
         updateStock(stock: Int, id: ID!) : Product
         updateProduct(price: Float, stock: Int, id: ID!) : Product
+        deleteProduct(id: ID!) : Product
     }
 `;
 

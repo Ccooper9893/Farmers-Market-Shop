@@ -89,8 +89,8 @@ const Register = () => {
             {error && (
               <div className="flex flex-col items-center justify-center">
               <div className="my-3 p-3 bg-red-600 rounded-lg max-w-xs text-center text-white">
-                {error.message}
-              </div>
+                A unique username, valid email address and password must be provided 
+                </div>
               </div>
             )}
           </div>
@@ -98,6 +98,7 @@ const Register = () => {
       </div>
     </main>
   );
+  
 };
 
 export default Register;
