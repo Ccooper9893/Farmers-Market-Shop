@@ -6,6 +6,7 @@ import Product from "../components/Profile/Product";
 import Auth from "../utils/jwt-auth";
 import fabricBg from "../Images/fabricbackground.jpg";
 import woodBg from "../Images/Tileable-Wood-Texture.jpg";
+import lightWoodBg from "../Images/wood.jpg";
 
 function Profile() {
   const [userData, setUserData] = useState(null);
@@ -68,7 +69,7 @@ function Profile() {
             </div>
           </div>
 
-          <div className="col-span-8 lg:col-span-6"
+          <div className="col-span-8 lg:col-span-6 h-full"
             style={{
               backgroundImage: `url(${fabricBg})`,
               backgroundSize: '28rem',
@@ -99,7 +100,10 @@ function Profile() {
                 </div>
               </div>
             )}
-            <div className="flex flex-col justify-center my-20 py-4 rounded-2xl">
+            <div className="h-screen" style={{
+              backgroundImage: `url(${lightWoodBg})`,
+              backgroundSize: 'cover',
+            }}>
               <h2 className="text-4xl text-stone-800 shadow-lg h-16 tracking-wide shadow-black font-bold pt-3"
                 style={{
                   backgroundImage: `url(${woodBg})`,
