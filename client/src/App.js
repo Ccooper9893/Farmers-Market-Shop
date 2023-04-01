@@ -11,10 +11,11 @@ import Profile from "./pages/profile";
 import LoginRegister from "./pages/login";
 import Register from "./pages/register";
 import Footer from "./components/Footer";
-
+import Checkout from "./pages/checkout";
 import Nav from "./components/Nav"
 
 import { CartProvider } from "./utils/GlobalState";
+
 
 import {
   ApolloClient,
@@ -57,6 +58,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/merchants" element={<Merchants />} />
             <Route path="/login" element={<LoginRegister />} />
             <Route path="/register" element={<Register />} />

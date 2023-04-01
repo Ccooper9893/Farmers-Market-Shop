@@ -5,19 +5,6 @@ import { Link } from "react-router-dom";
 function SlideMenu({ backgroundImg, toLink, text }) {
   return (
     <>
-      {/* <Swiper
-        // install Swiper modules
-        modules={[Navigation, Scrollbar, A11y, Autoplay]}
-        spaceBetween={80}
-        slidesPerView={3}
-        autoplay={{ delay: 5000 }}
-        navigation
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
-      >
-        <SwiperSlide> */}
         <div>
           <div
             className="hero h-50 w-45 bg-opacity-60 rounded-lg "
@@ -35,8 +22,6 @@ function SlideMenu({ backgroundImg, toLink, text }) {
             </div>
           </div>
           </div>
-        {/* </SwiperSlide>
-      </Swiper> */}
     </>
   );
 }

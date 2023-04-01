@@ -49,9 +49,11 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!, merchant: Boolean, business_name: String, business_description: String, phone_number: String, image: String, address: String): Auth
         loginUser(email: String!, password: String!): Auth
         addProduct(name: String, product_description: String, category: String, stock: Int, price: Float, image: String): Product
+        removeProduct(id: ID!): Product
         addPurchase(products: [ID]!) : Purchase
         updateStock(stock: Int, id: ID!) : Product
         updateProduct(price: Float, stock: Int, id: ID!) : Product
+        deleteProduct(id: ID!) : Product
     }
 `;
 

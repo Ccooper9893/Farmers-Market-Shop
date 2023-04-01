@@ -1,4 +1,4 @@
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, UserInputError, ForbiddenError } = require('apollo-server-express');
 const { Market, Product, User, Purchase } = require('../models');
 const { signToken } = require('../utils/jwt-auth');
 
@@ -61,7 +61,7 @@ const resolvers = {
             return { token, user };
         },
         addProduct: async (_, args, context) => {
-            
+
             if (!context.user) {
                 throw new AuthenticationError('You must be logged in to use this feature');
             }
@@ -69,16 +69,37 @@ const resolvers = {
             args.merchant = context.user._id;
 
             const newProduct = await Product.create(args);
-            
+
             await User.findOneAndUpdate(
                 { _id: context.user._id },
                 { $addToSet: { products: newProduct } },
                 { new: true },
             ).populate('products');
-            
+
             return newProduct;
 
         },
+        removeProduct: async (_, { productId }, context) => {
+                if (!context.user) {
+                  throw new AuthenticationError('You must be logged in to use this feature');
+                }
+              
+                const product = await Product.findById(productId);
+              
+                if (!product) {
+                  throw new UserInputError('Product not found');
+                }
+              
+                if (product.merchant.toString() !== context.user._id.toString()) {
+                  throw new ForbiddenError('You do not have permission to delete this product');
+                }
+              
+                await product.remove();
+              
+                await User.findByIdAndUpdate(context.user._id, { $pull: { products: productId } });
+              
+                return product;
+              },
         addPurchase: async (_, { products }, context) => {
 
             if (context.user) {
@@ -92,18 +113,24 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
         updateStock: async (_, { stock, id }, context) => {
-            if(context.user) {
-                return await Product.findByIdAndUpdate(id, {stock: stock}, { new: true, runValidators: true });
+            if (context.user) {
+                return await Product.findByIdAndUpdate(id, { stock: stock }, { new: true, runValidators: true });
             }
 
             throw new AuthenticationError('Not logged in');
         },
-        updateProduct: async (_, {price, stock, id}, context) => {
-            console.log(price, stock, id);
-            console.log(typeof price);
-            if(context.user) {
-               const newProduct = await Product.findByIdAndUpdate(id, {price: price, stock: stock}, { new: true, runValidators: true});
-               return newProduct;
+        updateProduct: async (_, { price, stock, id }, context) => {
+            if (context.user) {
+                const newProduct = await Product.findByIdAndUpdate(id, { price: price, stock: stock }, { new: true, runValidators: true });
+                return newProduct;
+            }
+
+            throw new AuthenticationError('You must be logged in to update products.');
+        },
+        deleteProduct: async (_, { id }, context) => {
+            if (context.user) {
+                const deletedProduct = await Product.findByIdAndDelete(id);
+                return deletedProduct;
             }
 
             throw new AuthenticationError('You must be logged in to update products.');

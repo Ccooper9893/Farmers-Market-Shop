@@ -41,6 +41,23 @@ export const ADD_PRODUCT = gql`
     }
 `;
 
+export const REMOVE_PRODUCT = gql`
+    mutation RemoveProduct($productId: ID!) {
+        removeProduct(id: $productId) {
+            _id
+            name
+            price
+            product_description
+            stock
+            merchant {
+                business_name
+            }
+            category
+            image
+        }
+    }
+`;
+
 export const ADD_PURCHASE = gql`
     mutation AddPurchase($products: [ID]!) {
         addPurchase(products: $products) {
@@ -56,7 +73,6 @@ export const ADD_PURCHASE = gql`
         }
     }
 `;
-
 export const UPDATE_STOCK = gql`
     mutation Mutation($updateStockId: ID!, $stock: Int) {
         updateStock(id: $updateStockId, stock: $stock) {
@@ -73,6 +89,19 @@ export const UPDATE_PRODUCT = gql`
         _id
         category
         image
+        name
+        price
+        product_description
+        stock
+        }
+    }
+`;
+
+export const DELETE_PRODUCT = gql`
+    mutation Mutation($deleteProductId: ID!) {
+        deleteProduct(id: $deleteProductId) {
+        _id
+        category
         name
         price
         product_description
