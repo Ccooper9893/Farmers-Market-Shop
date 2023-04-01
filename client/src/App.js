@@ -2,6 +2,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
+import darkwoodbg from "./Images/darkwood.png";
 
 /// pages to include ///
 import Home from "./pages/home";
@@ -52,7 +53,11 @@ function App() {
     <ApolloProvider client={client}>
     <CartProvider>
     <>
-      <div className="bg-teal-900 min-h-screen">
+      <div className="" style={{
+                  backgroundImage: `url(${darkwoodbg})`,
+                  backgroundSize: '20rem',
+                  backgroundRepeat: 'repeat',
+                }}>
       <Nav />
         <BrowserRouter>
           <Routes>
