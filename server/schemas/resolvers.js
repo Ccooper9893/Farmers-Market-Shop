@@ -1,4 +1,4 @@
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, UserInputError, ForbiddenError } = require('apollo-server-express');
 const { Market, Product, User, Purchase } = require('../models');
 const { signToken } = require('../utils/jwt-auth');
 
@@ -79,6 +79,27 @@ const resolvers = {
             return newProduct;
 
         },
+        removeProduct: async (_, { productId }, context) => {
+                if (!context.user) {
+                  throw new AuthenticationError('You must be logged in to use this feature');
+                }
+              
+                const product = await Product.findById(productId);
+              
+                if (!product) {
+                  throw new UserInputError('Product not found');
+                }
+              
+                if (product.merchant.toString() !== context.user._id.toString()) {
+                  throw new ForbiddenError('You do not have permission to delete this product');
+                }
+              
+                await product.remove();
+              
+                await User.findByIdAndUpdate(context.user._id, { $pull: { products: productId } });
+              
+                return product;
+              },
         addPurchase: async (_, { products }, context) => {
 
             if (context.user) {

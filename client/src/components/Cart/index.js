@@ -1,23 +1,41 @@
-import React, { useEffect } from 'react';
-//import { useLazyQuery } from '@apollo/client';
-//import cartItem from '../CartItem';
-//import authService from '../../utils/jwt-auth';
-//import { useCartContext } from '../../utils/GlobalState';
+// import React, { useEffect } from "react";
+// import { useLazyQuery } from "@apollo/client";
+// import { idbPromise } from "../../utils/helpers"
+// import CartItem from "../Items/CartItem";
+// import Auth from "../../utils/auth";
+// import { useCartContext } from "../../utils/GlobalState";
 
-import { useQuery } from '@apollo/client';
-import { GET_PRODUCTS } from '../../utils/queries';
 
-function Products() {
-  const { loading, error, data } = useQuery(GET_PRODUCTS);
+// function UpdateCart({ cartItems, clearCart, updateQuantity, removeFromCart }) {
+//   const [removeFromCartMutation] = useMutation(REMOVE_PRODUCT);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+//   const removeItem = (itemId) => {
+//     removeFromCartMutation({ variables: { itemId } });
+//     removeFromCart(itemId);
+//   };
 
-  return (
-    <ul>
-      {data.getProducts.map(product => (
-        <li key={product._id}>{product.name}</li>
-      ))}
-    </ul>
-  );
-}
+//   const cartList = cartItems.map((item) => (
+//     <li key={item.id}>
+//       <div>{item.name}</div>
+//       <div>{item.price}</div>
+//       <div>{item.quantity}</div>
+//       <button onClick={() => removeItem(item.id)}>Remove Item</button>
+//       <input
+//         type="number"
+//         min="1"
+//         value={item.quantity}
+//         onChange={(e) => updateQuantity(item.id, e.target.value)}
+//       />
+//     </li>
+//   ));
+
+//   return (
+//     <div>
+//       <ul>{cartList}</ul>
+//       <button onClick={clearCart}>Clear Cart</button>
+//     </div>
+//   );
+// }
+
+// export default UpdateCart;
+

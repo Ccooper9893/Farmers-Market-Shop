@@ -2,11 +2,12 @@ import React from "react";
 import {useState} from 'react';
 import Auth from "../utils/jwt-auth"; 
 import { useCartContext } from "../utils/GlobalState";
-import Cart from "./Cart/index";
+
 
 /// function to add/remove mobile nave when hamburger menu is clicked // 
 export default function Nav() {
   const [state, dispatch] = useCartContext();
+  console.log(state);
 
   const [navActive, setIsNavActive] = useState(false);
   const handleClick = event => {
@@ -17,6 +18,11 @@ export default function Nav() {
 const logout = event => {
   Auth.logout(); 
 }; 
+
+
+// calculate total price of products in the cart
+const [{ cart }] = useCartContext();
+const total = cart.reduce((acc, product) => acc + product.price, 0);
 
 /// checks JWT Auth state for if the user is logged in // 
 const loggedIn = Auth.loggedIn(); 
@@ -64,16 +70,17 @@ const loggedIn = Auth.loggedIn();
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
               </svg>
 {/* shopping cart items number */}
-              <span className="badge badge-sm indicator-item">9</span>
+              <span className="badge badge-sm indicator-item">{state.cart.length}</span>
             </div>
           </label>
           <div tabIndex={0} className="card card-compact dropdown-content w-30 bg-base-100 shadow" >
 {/* shopping cart card and details */}
             <div className="card-body ">
-              <span className="font-bold text-black text-center box-md">9 Items</span>
-              <span className="font-bold text-black text-center box-md" >Subtotal: $9,254.00</span>
+              <span className="font-bold text-white text-center rounded-md bg-green-800">{state.cart.length} items</span>
+              <span className="font-bold text-white text-center rounded-md bg-green-800" >${total.toFixed(2)}</span>
               <div className="card-actions">
-                <button className="btn box-accent text-white text-center btn-block bg-green-800">View cart</button>
+                <a href="/checkout" className="btn btn-accent text-white text-center btn-block bg-green-800">View cart</a>
+
               </div>
             </div>
           </div>
@@ -102,7 +109,7 @@ const loggedIn = Auth.loggedIn();
     </div>
 
     
-  );
+);
 }
 
 // export default Nav;
