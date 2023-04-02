@@ -116,7 +116,7 @@ console.log(selection)
   
       </div>
     </>
-
   );
 }
+
 export default Shop;

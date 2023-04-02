@@ -1,3 +1,4 @@
+
 import React from "react";
 import ProductExample from "../Images/ProductImage.png"
 import { ADD_TO_CART } from "../utils/actions";
@@ -100,4 +101,3 @@ else {
 }
 
 export default ProductCard;
-

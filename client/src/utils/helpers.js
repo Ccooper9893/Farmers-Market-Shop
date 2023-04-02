@@ -1,58 +1,57 @@
-const request = window.indexedDB.open('shop-shop', 1);
-let db, tx, store;
+// function idbPromise(marketName, method, object) {
+//     return new Promise((resolve, reject) => {
+//         const req = window.indexedDB.open('shop-shop', 1);
 
-export const idbPromise = async (storeName, method, object) => {
-  return new Promise((resolve, reject) => {
-    // open a database called 'shop-shop' with version 1 and create an object store called 'cart' with '_id' as the key path
-    const request = window.indexedDB.open('shop-shop', 1);
-    console.log(storeName, method, object);
-    let db, tx, store;
-    request.onupgradeneeded = function() {
-      const db = request.result;
-      db.createObjectStore('cart', { keyPath: '_id' });
-    };
+//         req.onupgradeneeded = function(e) {
+//             const database = e.target.result;
+//             database.createObjectMarket('products', {keyPath: '_id'});
+//             database.createObjectMarket('categories', {keyPath: '_id'});
+//             database.createObjectMarket('cart', {keyPath: '_id'});
+//         };
+//          req.onerror = function(e) {
+//             console.log('Uh oh. There was an error');
+//             reject(e);
+//          };
 
-    request.onerror = function() {
-      console.log('error');
-    };
-
-    request.onsuccess = function() {
-      db = request.result;
-      tx = db.transaction(storeName, 'readwrite');
-      store = tx.objectStore(storeName);
-      console.log(storeName);
-
-      db.onerror = function(e) {
-        console.log('error', e);
-      };
-
+//          req.onsuccess = function(e) {
+//             const database = e.target.result;
+//             const tx = database.transaction(marketName, 'readwrite');
+//             const market = tx.objectMarket(marketName);
         
-      switch (method) {
-        case 'put':
-          store.put(object);
-          resolve(object);
-          break;
-        case 'get':
-          const all = store.getAll();
-          all.onsuccess = function() {
-            resolve(all.result);
-          };
-          break;
-        case 'delete':
-          store.delete(object._id);
-          break;
-        default:
-          console.log('No valid method');
-          break;
-      }
+//         database.onerror = function(e) {
+//             console.log('error', e);
+//             reject(e);
+//         };
 
-    tx.oncomplete = function() {
-      db.close();
-    };
+//         switch (method) {
+//             case 'put':
+//                 market.put(object);
+//                 resolve(object);
+//                 break;
+//             case 'get':
+//                 const getReq = market.get(object._id);
+//                 getReq.onsuccess = function() {
+//                     resolve(getReq.result);
+//                 };
+//                 break;
+//             case 'get':
+//                 const getAllReq = market.getAll();
+//                 getAllReq.onsuccess = function() {
+//                     resolve(getAllReq.result);
+//                 };
+//                 break;
+//             case 'delete':
+//                 market.delete(object._id);
+//                 break;
+//             default:
+//                 console.log('No valid method');
+//                 break;
+//         }
 
-    };
+//         tx.oncomplete = function() {
+//             database.close();
+//         };
 
-
-  });
-};
-
+//     };
+//     });
+// };
