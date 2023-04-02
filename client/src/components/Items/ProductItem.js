@@ -4,7 +4,7 @@
 // import { useCartContext } from "../../utils/GlobalState"; 
 // import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 // import { idbPromise } from "../../utils/helpers";
-// import CartItem from "./CartItem";
+// import Shop from "../../pages/shop"
 
 // function ProductItem(item) {
 //     const [state, dispatch] = useCartContext();
@@ -51,7 +51,8 @@
 //     </div>
 //     <button onClick={addToCart}>Add to cart</button>
 //   </div>
+  
 // );
 // }
 
-//export default ProductItem;
+// export default ProductItem;
