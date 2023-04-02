@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
+import darkwoodbg from "../Images/darkwood.png";
 
 
 
   
   const Login = (props) => {
     const [formState, setFormState] = useState({ email: '', password: '' });
-    const [login, { error, data }] = useMutation(LOGIN_USER);
+    const [login, { loading, error, data }] = useMutation(LOGIN_USER);
   
     // update state based on form input changes
     const handleChange = (event) => {
@@ -41,26 +42,25 @@ import { useMutation } from "@apollo/client";
       });
     };
 
-    if (Auth.loggedIn()) {
-          return (
-      <p className="py-20 text-white text-center text-lg ">
-        You are already logged In
-      </p>
-          );
-    }
+    // if (loading) {
+    //       return (
+    //     <button className="btn btn-square loading"></button>
+    //       );
+    // }
 
   
     return (
-      <main className="flex-row justify-center mb-4">
+
+      <main className="flex-row justify-center mb-4  " style={{
+                  backgroundImage: `url(${darkwoodbg})`,
+                  backgroundSize: '20rem',
+                  backgroundRepeat: 'repeat',
+                }}>
         <div className="col-12 col-lg-10">
           <div className="card">
             <div className="card-body ">
-              {data ? (
-                <p>
-                  Success! You may now head{' '}
-                    update here 
-                </p>
-              ) : (
+              {data ? null
+              : (
                 <form className="space-y-2 block flex flex-col items-center justify-center "onSubmit={handleFormSubmit}>
                   <p className="text-white p-2 text-2xl text-center ">Login</p>
                   <input
@@ -80,7 +80,7 @@ import { useMutation } from "@apollo/client";
                     onChange={handleChange}
                   />
                   <button
-                    className="block btn btn-accent w-full max-w-xs text-center text-white"
+                    className="block btn bg-white hover:bg-white w-full max-w-xs text-center text-black"
                     style={{ cursor: 'pointer' }}
                     type="submit"
                   >

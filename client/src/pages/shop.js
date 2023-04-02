@@ -120,12 +120,3 @@ console.log(selection)
 }
 
 export default Shop;
-
-
-//  {categoryData.map((products) => (
-//                 <ul className="menu rounded-lg font-bold tracking-wide">
-//                   <li key={products.category}>
-//                     <p>{renderCategory(products.category)}</p>
-//                   </li>
-//                 </ul>
-//               ))}    

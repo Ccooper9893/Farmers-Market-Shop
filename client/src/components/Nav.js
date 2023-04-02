@@ -1,50 +1,73 @@
 import React from "react";
 import {useState} from 'react';
-import Auth from "../utils/jwt-auth"; 
+import Auth from "../utils/jwt-auth";
 import { useCartContext } from "../utils/GlobalState";
+import clothbg from "../Images/fabricbackground.jpg";
+import darkwoodbg from "../Images/wood.jpg";
+import logo from "../Images/farmerhouse.png";
 
 
-/// function to add/remove mobile nave when hamburger menu is clicked // 
+
+
+
+
 export default function Nav() {
-  const [state, dispatch] = useCartContext();
-  console.log(state);
+ const [state, dispatch] = useCartContext();
+ console.log(state);
 
-  const [navActive, setIsNavActive] = useState(false);
-  const handleClick = event => {
-      setIsNavActive(current => !current);
-  };
 
-/// function to logout user to be used in the my account dropdown // 
+ const [navActive, setIsNavActive] = useState(false);
+
+
+ const handleClick = event => {
+     setIsNavActive(current => !current);
+ };
+
+
 const logout = event => {
-  Auth.logout(); 
-}; 
+ Auth.logout();
+};
+
+
 
 
 // calculate total price of products in the cart
 const [{ cart }] = useCartContext();
 const total = cart.reduce((acc, product) => acc + product.price, 0);
 
-/// checks JWT Auth state for if the user is logged in // 
-const loggedIn = Auth.loggedIn(); 
+
+/// checks JWT Auth state for if the user is logged in //
+const loggedIn = Auth.loggedIn();
 
 
   return (
-    <div className=''>
+    <div className='w-full flex flex-col'>
       <div >
 {/* Header */}
-        <div className='text-center bg-emerald-700 text-white text-2xl'>Farmers Market </div>
+        <div className=' flex items-center justify-center text-black font-bold text-2xl' style={{
+                  backgroundImage: `url(${clothbg})`,
+                  backgroundSize: '20rem',
+                  backgroundRepeat: 'repeat',
+                }}>
+                  <img className='items-center' src={logo} alt="Logo" />
+                  
+ </div>
 
 {/* flex box container */}
-        <div className=' flex space-x-10 bg-emerald-700 items-center' >
+        <div className=' flex space-x-10  items-center'style={{
+                  backgroundImage: `url(${clothbg})`,
+                  backgroundSize: '20rem',
+                  backgroundRepeat: 'repeat',
+                }} >
 {/* mobile menu */}
             <div className="md:hidden" onClick={handleClick}> 
             <button className="mobile-menu-button ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" className="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="black" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
             </svg>
             </button>
             {/* code to hide this mobile menu then only show when mobile nave state is true */}
-            <div className={navActive ? 'text-white' : 'text-white hidden'}>
+            <div className={navActive ? 'text-black font-bold' : ' hidden'}>
               <ul className="md:hidden">
                 <a className="block py-2 text-sm" href="/">Home</a>
                 <a className="block py-2 text-sm" href="/shop">Shop</a>
@@ -54,7 +77,7 @@ const loggedIn = Auth.loggedIn();
               </div>
             </div>
             {/* hide the non mobile navigation items when the side of the screen is md */}
-            <div className="regular-menu  text-white grow flex">
+            <div className="regular-menu  text-black font-bold grow flex">
                 <ul className=" items-center space-x-10 hidden md:flex ">
                   <a href="/">Home</a>
                   <a href="/shop">Shop</a>
@@ -73,35 +96,43 @@ const loggedIn = Auth.loggedIn();
               <span className="badge badge-sm indicator-item">{state.cart.length}</span>
             </div>
           </label>
-          <div tabIndex={0} className="card card-compact dropdown-content w-30 bg-base-100 shadow" >
+          <div tabIndex={0} style={{
+                  backgroundImage: `url(${darkwoodbg})`,
+                  backgroundSize: '18rem',
+                  backgroundRepeat: 'repeat',
+                }}
+                className="card card-compact border border-black dropdown-content w-40" >
 {/* shopping cart card and details */}
             <div className="card-body ">
-              <span className="font-bold text-white text-center rounded-md bg-green-800">{state.cart.length} items</span>
-              <span className="font-bold text-white text-center rounded-md bg-green-800" >${total.toFixed(2)}</span>
+              <span className=" text-black font-bold text-center rounded-md ">{state.cart.length} items</span>
+              <span className=" text-black font-bold text-center rounded-md " >${total.toFixed(2)}</span>
               <div className="card-actions">
-                <a href="/checkout" className="btn btn-accent text-white text-center btn-block bg-green-800">View cart</a>
+                <a href="/checkout" className="btn font-bold text-center btn-block text-black bg-white hover:bg-white">View cart</a>
 
               </div>
             </div>
           </div>
         </div>
-{/* this is the circle in the far right  */}
-        <div className="dropdown dropdown-content w-30 mr-5">
+{/* this is the My Account in the far right  */}
+        <div className="dropdown dropdown-content  mr-2">
           <label tabIndex={0} className="btn btn-ghost">
-            <div className="w-10 rounded-full mr-5 text-white ">
+            <div className="w-10 mr-3 text-black font-bold">
               My Account
               {/* <img src="/images/SampleProfile.PNG" alt="sample" /> */}
             </div>
           </label>
-          <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 rounded-2xl bg-base-100  w-30 mr-10" >
-            <div className={loggedIn ? '' :'hidden'}>
-            <li className="justify-between bg-green-800 rounded-t-lg text-white"> <a href="/profile"> Profile 
-            {/* <span className="badge">New</span> */}
-            </a></li>
+          <div tabIndex={0} className="w-25  border border-black menu menu-compact dropdown-content mt-1 p-2 rounded-xl mr-10" style={{
+                  backgroundImage: `url(${darkwoodbg})`,
+                  backgroundSize: '18rem',
+                  backgroundRepeat: 'repeat',
+                }} >
+            <div className={loggedIn ? ' w-20 text-center rounded-t-lg  text-black font-bold' :'hidden' }>
+            <button className=""> <a href="/profile"> Profile 
+            </a></button>
             </div>
-            <li className= {loggedIn ? 'hidden' : 'bg-green-800 text-white rounded-lg'}> <a href="/login"> Login </a></li>
-            <li onClick={logout} className= {loggedIn ? 'bg-green-800 text-white rounded-b-lg' : 'hidden'}> <a href="/login"> Logout </a></li>
-          </ul>
+            <button className= {loggedIn ? 'hidden' : ' text-black font-bold rounded-lg '}> <a href="/login"> Login </a></button>
+            <button onClick={logout} className= {loggedIn ? ' text-black font-bold rounded-b-lg  ' : 'hidden'}> <a href="/login"> Logout </a></button>
+          </div>
         </div>
       </div>
         </div>
@@ -109,7 +140,6 @@ const loggedIn = Auth.loggedIn();
     </div>
 
     
+
 );
 }
-
-// export default Nav;

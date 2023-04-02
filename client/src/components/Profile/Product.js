@@ -12,7 +12,7 @@ function Product({ product, onDeleteProduct }) {
     const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
     const [message, setMessage] = useState(''); //Error messaging if product fails to upload
-    const [warning, setWarning] = useState(false); //Are you should you want to delete product?
+    const [warning, setWarning] = useState(false); //Are you sure you want to delete product?
 
     const handleUpdate = async (event) => {
         event.preventDefault();
