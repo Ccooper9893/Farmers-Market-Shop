@@ -53,7 +53,7 @@ const Register = () => {
               <form className="space-y-2 block flex flex-col items-center justify-center "onSubmit={handleFormSubmit}>
                 <p className="text-white p-2 text-2xl text-center">Register</p>
                 <input
-                  className="form-input block input input-accent w-full max-w-xs text-center"
+                  className="form-input block input input-warning w-full max-w-xs text-center"
                   placeholder="Username"
                   name="username"
                   type="text"
@@ -61,7 +61,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input block input input-accent w-full max-w-xs text-center"
+                  className="form-input block input input-warning w-full max-w-xs text-center"
                   placeholder="Email"
                   name="email"
                   type="email"
@@ -69,7 +69,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input block input input-accent w-full max-w-xs text-center"
+                  className="form-input block input input-warning w-full max-w-xs text-center"
                   placeholder="Password"
                   name="password"
                   type="password"
