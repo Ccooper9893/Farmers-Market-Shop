@@ -11,7 +11,7 @@ import Profile from "./pages/profile";
 import LoginRegister from "./pages/login";
 import Register from "./pages/register";
 import Footer from "./components/Footer";
-import Checkout from "./pages/checkout";
+import CartPage from "./pages/cartPage";
 import Nav from "./components/Nav"
 
 
@@ -26,6 +26,7 @@ import {
  ApolloProvider,
  createHttpLink,
 } from '@apollo/client';
+
 
 
 const httpLink = createHttpLink({
@@ -59,15 +60,15 @@ const client = new ApolloClient({
 function App() {
  return (
    <ApolloProvider client={client}>
-   <CartProvider>
-   <>
+   
+ 
      <div className="bg-teal-900 min-h-screen">
      <Nav />
        <BrowserRouter>
          <Routes>
            <Route path="/" element={<Home />} />
            <Route path="/shop" element={<Shop />} />
-           <Route path="/checkout" element={<Checkout />} />
+           <Route path="/shop/cart" element={<CartPage />} />
            <Route path="/merchants" element={<Merchants />} />
            <Route path="/login" element={<LoginRegister />} />
            <Route path="/register" element={<Register />} />
@@ -78,13 +79,6 @@ function App() {
      </div>
 
 
-
-
-
-
-        
-   </>
-   </CartProvider>
    </ApolloProvider>
  );
 }

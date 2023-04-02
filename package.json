@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "concurrently": "^7.6.0",
+    "idb": "^7.1.1",
     "react-shopping-cart": "^1.9.5",
     "redux": "^4.2.1"
   }
