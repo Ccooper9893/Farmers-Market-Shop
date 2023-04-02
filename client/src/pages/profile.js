@@ -29,11 +29,9 @@ function Profile() {
   };
 
   const handleAddProduct = ({ addProduct }) => {
-    const currentProducts = userData.products;
-    currentProducts.push(addProduct);
     setUserData({
       ...userData,
-      products: currentProducts,
+      products: [...userData.products, addProduct],
     });
   };
 
