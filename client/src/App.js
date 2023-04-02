@@ -1,9 +1,7 @@
-
-
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
-import darkwoodbg from "./Images/darkwood.png";
+
 
 
 /// pages to include ///
@@ -14,7 +12,7 @@ import Profile from "./pages/profile";
 import LoginRegister from "./pages/login";
 import Register from "./pages/register";
 import Footer from "./components/Footer";
-import Checkout from "./pages/checkout";
+import CartPage from "./pages/cartPage";
 import Nav from "./components/Nav"
 
 
@@ -53,6 +51,7 @@ const client = new ApolloClient({
  link: authLink.concat(httpLink),
  cache: new InMemoryCache(),
 });
+
 
 
 function App() {

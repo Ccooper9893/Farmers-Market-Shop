@@ -6,7 +6,7 @@ function MerchantPage() {
 
   const { loading, data } = useQuery(GET_MERCHANTS);
 
-  // getMerchants[0].business_name
+ //  getMerchants[0].business_name
   // getMerchants[0].business_description
   // getMerchants[0].image
   return (
