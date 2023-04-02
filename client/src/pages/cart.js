@@ -1,5 +1,3 @@
-
-=======
 // import React, { useState } from "react";
 // import UpdateCart from "../components/Cart/UpdateCart";
 // import Checkout from "../pages/checkout";
@@ -41,4 +39,3 @@
 // }
 
 // export default ParentComponent;
-
