@@ -58,7 +58,7 @@ export const GET_PRODUCTS = gql`
         getProducts {
             _id
             name
-            category
+            category 
             product_description
             price
             stock

@@ -1,8 +1,7 @@
-
-
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
+
 
 
 /// pages to include ///
@@ -55,36 +54,39 @@ const client = new ApolloClient({
 
 
 
-
-
-
 function App() {
- return (
-   <ApolloProvider client={client}>
-   
- 
-     <div className="bg-teal-900 min-h-screen">
-     <Nav />
-       <BrowserRouter>
-         <Routes>
-           <Route path="/" element={<Home />} />
-           <Route path="/shop" element={<Shop />} />
-           <Route path="/shop/cart" element={<CartPage />} />
-           <Route path="/merchants" element={<Merchants />} />
-           <Route path="/login" element={<LoginRegister />} />
-           <Route path="/register" element={<Register />} />
-           <Route path ="/profile" element={<Profile />} />
-         </Routes>
-       </BrowserRouter>
-     <Footer />
-     </div>
+  return (
+    <ApolloProvider client={client}>
+    <CartProvider>
+    <>
+      <div className="h-screen" style={{
+                  backgroundImage: `url(${darkwoodbg})`,
+                  backgroundSize: '25 rem',
+                  backgroundRepeat: 'repeat',
+                }}>
+      <Nav />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/merchants" element={<Merchants />} />
+            <Route path="/login" element={<LoginRegister />} />
+            <Route path="/register" element={<Register />} />
+            <Route path ="/profile" element={<Profile />} />
+          </Routes>
+        </BrowserRouter>
+      <Footer />
+      </div>
 
 
 
+          
+    </>
+    </CartProvider>
+    </ApolloProvider>
+  );
 
-
-   </ApolloProvider>
- );
 }
 
 

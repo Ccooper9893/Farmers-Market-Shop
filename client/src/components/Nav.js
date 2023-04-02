@@ -97,36 +97,45 @@ const loggedIn = Auth.loggedIn();
          </label>
          <div tabIndex={0} className="card card-compact dropdown-content w-52 bg-base-100 shadow" >
 {/* shopping cart card and details */}
-           <div className="card-body ">
-             <span className="font-bold text-white text-center rounded-md bg-green-800">{state.cart.length} items</span>
-             <span className="font-bold text-white text-center rounded-md bg-green-800" >${total.toFixed(2)}</span>
-             <div className="card-actions">
-               <a href="/checkout" className="btn btn-accent text-white text-center btn-block bg-green-800">View cart</a>
-             </div>
-           </div>
-         </div>
-       </div>
-{/* this is the circle in the far right  */}
-       <div className="dropdown dropdown-end">
-         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-           <div className="w-10 rounded-full">
-             <img src="/images/SampleProfile.PNG" alt="sample" />
-           </div>
-         </label>
-         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 bg-base-100 rounded-box w-52" >
-           <li className="justify-between bg-green-800 text-white"> <a href="/"> Profile
-           {/* <span className="badge">New</span> */}
-           </a></li>
-           <li className= {loggedIn ? 'hidden' : 'bg-green-800 text-white rounded-b-2xl'}> <a href="/login"> Login </a></li>
-           <li onClick={logout} className= {loggedIn ? 'bg-green-800 text-white rounded-b-2xl' : 'hidden'}> <a href="/login"> Logout </a></li>
-         </ul>
-       </div>
-     </div>
-       </div>
-     </div>
-   </div>
+
+            <div className="card-body ">
+              <span className=" text-black font-bold text-center rounded-md ">{state.cart.length} items</span>
+              <span className=" text-black font-bold text-center rounded-md " >${total.toFixed(2)}</span>
+              <div className="card-actions">
+                <a href="/checkout" className="btn font-bold text-center btn-block text-black bg-white hover:bg-white">View cart</a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+{/* this is the My Account in the far right  */}
+        <div className="dropdown dropdown-content  mr-2">
+          <label tabIndex={0} className="btn btn-ghost">
+            <div className="w-10 mr-3 text-black font-bold">
+              My Account
+              {/* <img src="/images/SampleProfile.PNG" alt="sample" /> */}
+            </div>
+          </label>
+          <div tabIndex={0} className="w-25  border border-black menu menu-compact dropdown-content mt-1 p-2 rounded-xl mr-10" style={{
+                  backgroundImage: `url(${darkwoodbg})`,
+                  backgroundSize: '18rem',
+                  backgroundRepeat: 'repeat',
+                }} >
+            <div className={loggedIn ? ' w-20 text-center rounded-t-lg  text-black font-bold' :'hidden' }>
+            <button className=""> <a href="/profile"> Profile 
+            </a></button>
+            </div>
+            <button className= {loggedIn ? 'hidden' : ' text-black font-bold rounded-lg '}> <a href="/login"> Login </a></button>
+            <button onClick={logout} className= {loggedIn ? ' text-black font-bold rounded-b-lg  ' : 'hidden'}> <a href="/login"> Logout </a></button>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    
 
 
-  
 );
 }

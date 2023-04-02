@@ -30,8 +30,5 @@ const useCartContext = () => {
    return useContext(CartContext);
 };
 
-// const useCartContext = () => {
-//    return useContext(CartContext);
-// };
 
 export { CartProvider, useCartContext };

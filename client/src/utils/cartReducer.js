@@ -25,7 +25,8 @@ export const reducer = (state, action) => {
            cartOpen: false,
            cart: [],
        };
-      
+       
+
        default:
            return state;
    }
