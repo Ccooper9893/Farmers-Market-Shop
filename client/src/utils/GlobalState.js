@@ -1,34 +1,37 @@
-// import React, { createContext, useContext } from "react";
-// import { useProductReducer } from './cartReducer';
+import React, { createContext, useContext } from "react";
+import { useProductReducer } from './cartReducer';
 
 
-// const CartContext = createContext();
-// const { Provider } = CartContext;
+const CartContext = createContext();
+const { Provider } = CartContext;
 
 
-// const CartProvider = ({ value = [],...props}) => {
-//    const [state, dispatch] = useProductReducer({
-//        products: [],
-//        cart: [],
-//        cartOpen: false,
-//        categories: [],
-//        currentCategory: '',
-//        total: 0,
-//    });
+const CartProvider = ({ value = [],...props}) => {
+   const [state, dispatch] = useProductReducer({
+       products: [],
+       cart: [],
+       cartOpen: false,
+       categories: [],
+       currentCategory: '',
+       total: 0,
+   });
 
 
-//    // useEffect(() => {
-//    //     const total = state.cart.reduce((acc))
-//    // })
+   // useEffect(() => {
+   //     const total = state.cart.reduce((acc))
+   // })
 
 
-//    return <Provider value={[state, dispatch]} {...props} />;
-// };
+   return <Provider value={[state, dispatch]} {...props} />;
+};
 
+
+const useCartContext = () => {
+   return useContext(CartContext);
+};
 
 // const useCartContext = () => {
 //    return useContext(CartContext);
 // };
 
-
-// export { CartProvider, useCartContext };
+export { CartProvider, useCartContext };
