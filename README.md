@@ -10,7 +10,6 @@
   - [Resources](#resources)
   - [Credits](#credits)
   - [License](#license)
-  - [Questions](#questions)
   - [Screenshots](#screenshots)
 
 ## *Description*
