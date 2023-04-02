@@ -1,34 +1,43 @@
 import React from "react";
 import {useState} from 'react';
-import Auth from "../utils/jwt-auth"; 
+import Auth from "../utils/jwt-auth";
 import { useCartContext } from "../utils/GlobalState";
 import clothbg from "../Images/fabricbackground.jpg";
 import darkwoodbg from "../Images/wood.jpg";
 import logo from "../Images/farmerhouse.png";
 
 
-/// function to add/remove mobile nave when hamburger menu is clicked // 
+
+
+
+
 export default function Nav() {
-  const [state, dispatch] = useCartContext();
-  console.log(state);
+ const [state, dispatch] = useCartContext();
+ console.log(state);
 
-  const [navActive, setIsNavActive] = useState(false);
-  const handleClick = event => {
-      setIsNavActive(current => !current);
-  };
 
-/// function to logout user to be used in the my account dropdown // 
+ const [navActive, setIsNavActive] = useState(false);
+
+
+ const handleClick = event => {
+     setIsNavActive(current => !current);
+ };
+
+
 const logout = event => {
-  Auth.logout(); 
-}; 
+ Auth.logout();
+};
+
+
 
 
 // calculate total price of products in the cart
 const [{ cart }] = useCartContext();
 const total = cart.reduce((acc, product) => acc + product.price, 0);
 
-/// checks JWT Auth state for if the user is logged in // 
-const loggedIn = Auth.loggedIn(); 
+
+/// checks JWT Auth state for if the user is logged in //
+const loggedIn = Auth.loggedIn();
 
 
   return (
@@ -131,7 +140,6 @@ const loggedIn = Auth.loggedIn();
     </div>
 
     
+
 );
 }
-
-// export default Nav;
