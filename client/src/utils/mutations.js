@@ -41,23 +41,6 @@ export const ADD_PRODUCT = gql`
     }
 `;
 
-export const REMOVE_PRODUCT = gql`
-    mutation RemoveProduct($productId: ID!) {
-        removeProduct(id: $productId) {
-            _id
-            name
-            price
-            product_description
-            stock
-            merchant {
-                business_name
-            }
-            category
-            image
-        }
-    }
-`;
-
 export const ADD_PURCHASE = gql`
     mutation AddPurchase($products: [ID]!) {
         addPurchase(products: $products) {
