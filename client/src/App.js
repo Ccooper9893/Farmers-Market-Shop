@@ -55,18 +55,14 @@ const client = new ApolloClient({
 });
 
 
-
-
-
-
 function App() {
   return (
     <ApolloProvider client={client}>
     <CartProvider>
     <>
-      <div className="" style={{
+      <div className="h-screen" style={{
                   backgroundImage: `url(${darkwoodbg})`,
-                  backgroundSize: '20rem',
+                  backgroundSize: '25 rem',
                   backgroundRepeat: 'repeat',
                 }}>
       <Nav />

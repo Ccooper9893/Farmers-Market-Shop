@@ -14,8 +14,9 @@ import SlideMenu from "..//components/slideMenu";
 function Home() {
   return (
     <>
-      <Hero />
+
       <div>
+            <Hero />
       <div className="p-16 block text-xl text-center">
         <Swiper
           // install Swiper modules // 
