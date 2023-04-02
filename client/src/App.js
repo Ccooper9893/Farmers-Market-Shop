@@ -3,6 +3,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
+import darkwoodbg from "./Images/darkwood.png";
 
 
 /// pages to include ///
@@ -59,36 +60,38 @@ const client = new ApolloClient({
 
 
 function App() {
- return (
-   <ApolloProvider client={client}>
-   <CartProvider>
-   <>
-     <div className="bg-teal-900 min-h-screen">
-     <Nav />
-       <BrowserRouter>
-         <Routes>
-           <Route path="/" element={<Home />} />
-           <Route path="/shop" element={<Shop />} />
-           <Route path="/checkout" element={<Checkout />} />
-           <Route path="/merchants" element={<Merchants />} />
-           <Route path="/login" element={<LoginRegister />} />
-           <Route path="/register" element={<Register />} />
-           <Route path ="/profile" element={<Profile />} />
-         </Routes>
-       </BrowserRouter>
-     <Footer />
-     </div>
+  return (
+    <ApolloProvider client={client}>
+    <CartProvider>
+    <>
+      <div className="" style={{
+                  backgroundImage: `url(${darkwoodbg})`,
+                  backgroundSize: '20rem',
+                  backgroundRepeat: 'repeat',
+                }}>
+      <Nav />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/merchants" element={<Merchants />} />
+            <Route path="/login" element={<LoginRegister />} />
+            <Route path="/register" element={<Register />} />
+            <Route path ="/profile" element={<Profile />} />
+          </Routes>
+        </BrowserRouter>
+      <Footer />
+      </div>
 
 
 
+          
+    </>
+    </CartProvider>
+    </ApolloProvider>
+  );
 
-
-
-        
-   </>
-   </CartProvider>
-   </ApolloProvider>
- );
 }
 
 

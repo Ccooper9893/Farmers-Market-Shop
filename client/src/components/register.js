@@ -77,7 +77,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
                 <button
-                  className="block btn btn-accent w-full max-w-xs text-center text-white"
+                  className="block btn bg-white hover:bg-white w-full max-w-xs text-center text-black"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >

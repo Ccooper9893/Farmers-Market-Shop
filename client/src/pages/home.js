@@ -2,10 +2,11 @@ import React from "react";
 import Hero from "../components/Hero";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar, A11y, Autoplay } from "swiper";
-import Products from "../Images/VegetableImage1.png";
-import Merchants from "../Images/Merchant1.png";
-import Products2 from "../Images/shop.jpg"; 
-import Merchants2 from "../Images/merchant.jpg"; 
+import Products from "../Images/product1.JPG";
+import Products2 from "../Images/product2.JPG"; 
+import Merchants from "../Images/merchant1.JPG";
+import Merchants2 from "../Images/merchant2.JPG"; 
+
 import "swiper/css";
 import "swiper/css/autoplay";
 import SlideMenu from "..//components/slideMenu";
