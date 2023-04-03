@@ -2,7 +2,7 @@ const { Storage } = require('@google-cloud/storage');
 
 //Configuring Google Cloud Storage
 const gc = new Storage({
-  keyFilename: './utils/bucketkey.json',
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
   projectId: 'farmers-market-381904',
 });
 
