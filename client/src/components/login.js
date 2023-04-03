@@ -24,12 +24,10 @@ import darkwoodbg from "../Images/darkwood.png";
     // submit form
     const handleFormSubmit = async (event) => {
       event.preventDefault();
-      console.log(formState);
       try {
         const { data } = await login({
           variables: { ...formState },
         });
-        console.log(data); 
         Auth.login(data.loginUser.token);
       } catch (e) {
         console.error(e);

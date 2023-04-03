@@ -1,35 +1,30 @@
 import ProductCard from "../components/productCard";
 import { useQuery } from "@apollo/client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { GET_PRODUCTS } from "../utils/queries";
 import fabricBg from "../Images/fabricbackground.jpg";
 import woodBg from "../Images/Tileable-Wood-Texture.jpg";
-import lightWoodBg from "../Images/wood.jpg";
-import CategoryMenu from "../components/Category";
-import { GET_CATEGORY } from "../utils/queries";
-import Product from "../components/Profile/Product";
+
+//render all products or only by category if category selected
 function Shop() {
   const [categoryData, setCategoryData] = useState(null);
   const [productFilter, setProductFilter] = useState(null);
 
-
-
   useQuery(GET_PRODUCTS, {
     onCompleted: (data) => {
-      setCategoryData(data.getProducts)
-      setProductFilter(data.getProducts)
-    }
+      setCategoryData(data.getProducts);
+      setProductFilter(data.getProducts);
+    },
   });
 
- const renderProduct = (event) =>{
-const selection =  event.target.id
-console.log(selection)
-    // Filter out the product with the given ID
-    const updatedProducts = categoryData.filter(product => product.category === selection);
-    setProductFilter(
-     updatedProducts
+  const renderProduct = (event) => {
+    const selection = event.target.id;
+    // Filter out the product with the given category
+    const updatedProducts = categoryData.filter(
+      (product) => product.category === selection
     );
-}
+    setProductFilter(updatedProducts);
+  };
   return (
     <>
       <div className="grid grid-cols-8 text-center">
@@ -39,34 +34,46 @@ console.log(selection)
               <h2 className="text-4xl font-iight text-white my-3 border-b pb-2">
                 Categories
               </h2>
-        
+
               {!categoryData ? null : (
                 <ul className="menu rounded-lg font-bold tracking-wide ">
-                  <li  >
-                    <button id="Meat" onClick={renderProduct}>Meat</button>    
+                  <li>
+                    <button id="Meat" onClick={renderProduct}>
+                      Meat
+                    </button>
                   </li>
-                  <li  >
-                    <button id="Dairy" onClick={renderProduct}>Dairy</button>    
+                  <li>
+                    <button id="Dairy" onClick={renderProduct}>
+                      Dairy
+                    </button>
                   </li>
-                  <li  >
-                    <button id="Livestock" onClick={renderProduct}>Livestock</button>    
+                  <li>
+                    <button id="Livestock" onClick={renderProduct}>
+                      Livestock
+                    </button>
                   </li>
-                  <li  >
-                    <button id="Fruit" onClick={renderProduct}>Fruit</button>    
+                  <li>
+                    <button id="Fruit" onClick={renderProduct}>
+                      Fruit
+                    </button>
                   </li>
-                  <li  >
-                    <button id="Vegetable" onClick={renderProduct}>Vegetable</button>    
+                  <li>
+                    <button id="Vegetable" onClick={renderProduct}>
+                      Vegetable
+                    </button>
                   </li>
-                  <li  >
-                    <button id="Bread" onClick={renderProduct}>Bread</button>    
+                  <li>
+                    <button id="Bread" onClick={renderProduct}>
+                      Bread
+                    </button>
                   </li>
-                  <li  >
-                    <button id="Art" onClick={renderProduct}>Art</button>    
+                  <li>
+                    <button id="Art" onClick={renderProduct}>
+                      Art
+                    </button>
                   </li>
                 </ul>
-                )}
-
-         
+              )}
             </div>
           </div>
         </div>
@@ -101,19 +108,21 @@ console.log(selection)
                   <div className=" drawer-content">
                     <div className="flex flex-row flex-wrap justify-center text-xs text-center ">
                       {productFilter.map((product) => (
-                        <ProductCard props={product} />
+                        <ProductCard key={product._id} props={product} />
                       ))}
                     </div>
                   </div>
-                  <div class="drawer-side p-2.5 ">
-                    <label for="my-drawer-2" class="drawer-overlay"></label>
+                  <div className="drawer-side p-2.5 ">
+                    <label
+                      htmlFor="my-drawer-2"
+                      className="drawer-overlay"
+                    ></label>
                   </div>
                 </div>
               </div>
             </div>
-            )}
+          )}
         </div>
-  
       </div>
     </>
   );

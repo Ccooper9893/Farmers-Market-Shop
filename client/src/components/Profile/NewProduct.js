@@ -29,7 +29,7 @@ function NewProduct({ onAddProduct }) {
                 return await response.json();
 
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         }
     };
@@ -61,6 +61,7 @@ function NewProduct({ onAddProduct }) {
             stock: parseInt(formState.stock)
         };
 
+        
         //Grabbing imageUrl and appending to productData if valid
         const data = await uploadImage(event);
         if (data) {
@@ -76,7 +77,7 @@ function NewProduct({ onAddProduct }) {
                 onAddProduct(data);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         };
 
         setFormState({
@@ -88,6 +89,7 @@ function NewProduct({ onAddProduct }) {
         });
     };
 
+  
     return (
         <>
             {/* The button to open modal */}
@@ -170,7 +172,7 @@ function NewProduct({ onAddProduct }) {
                                 <span className="label-text font-bold text-lg">Category:</span>
                             </label>
                             <select className="select w-full max-w-xs" name="category" value={formState.category} onChange={handleInputChange}>
-                                <option disabled selected>Choose a category</option>
+        
                                 <option value="Meat">Meat</option>
                                 <option value="Vegetable">Vegetable</option>
                                 <option value="Fruit">Fruit</option>

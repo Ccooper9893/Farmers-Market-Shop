@@ -53,7 +53,7 @@ else {
         }}>
             <h2 className="text-3xl font-bold border-b-black border">{props.name}</h2>
             <div className="m-3 row-span-6">
-                <img class="m-auto w-24 rounded-full mt-5" src={props.image} alt={props.name} />
+                <img className="m-auto w-24 rounded-full mt-5" src={props.image} alt={props.name} />
                 <p className="text-lg">{props.product_description}</p>
                 <div className="my-2">
                     <p>Price ${props.price}</p>

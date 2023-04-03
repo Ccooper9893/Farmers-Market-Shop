@@ -64,7 +64,7 @@ function App() {
     <ApolloProvider client={client}>
     <CartProvider>
     <>
-      <div className="" style={{
+      <div className="h-screen" style={{
                   backgroundImage: `url(${darkwoodbg})`,
                   backgroundSize: '20rem',
                   backgroundRepeat: 'repeat',

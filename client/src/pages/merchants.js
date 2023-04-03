@@ -6,9 +6,7 @@ function MerchantPage() {
 
   const { loading, data } = useQuery(GET_MERCHANTS);
 
-  // getMerchants[0].business_name
-  // getMerchants[0].business_description
-  // getMerchants[0].image
+//display merchant cards with passed date returned from GET_MERCHANTS query
   return (
     <div className="flex flex-row flex-wrap justify-center">
       {data ? (

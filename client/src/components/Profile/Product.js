@@ -24,7 +24,7 @@ function Product({ product, onDeleteProduct }) {
                 setMessage('Successfully updated!');
             };
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -46,14 +46,14 @@ function Product({ product, onDeleteProduct }) {
     };
 
     return (
-        <form className="w-80 lg:w-72 m-auto my-4 grid grid-rows-8 shadow-lg shadow-black" onSubmit={handleUpdate} style={{
+        <form className="w-80 lg:w-72 m-auto my-4  mx-4 grid grid-rows-8 shadow-lg shadow-black" onSubmit={handleUpdate} style={{
             backgroundSize: '15rem',
             backgroundImage: `url(${notePaperbg})`,
             backgroundRepeat: 'repeat',
         }}>
             <h2 className="text-3xl font-bold border-b-black border">{product.name}</h2>
             <div className="m-3 row-span-6">
-                <img class="m-auto w-24 rounded-full mt-5" src={product.image} alt={product.name} />
+                <img className="m-auto w-24 rounded-full mt-5" src={product.image} alt={product.name} />
                 <p className="text-lg">{product.product_description}</p>
                 <div className="my-2">
                     <p>Price $</p>
