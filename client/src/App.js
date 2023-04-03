@@ -55,10 +55,6 @@ const client = new ApolloClient({
 });
 
 
-
-
-
-
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -66,7 +62,7 @@ function App() {
     <>
       <div className="h-screen" style={{
                   backgroundImage: `url(${darkwoodbg})`,
-                  backgroundSize: '20rem',
+                  backgroundSize: '25 rem',
                   backgroundRepeat: 'repeat',
                 }}>
       <Nav />
@@ -83,10 +79,7 @@ function App() {
         </BrowserRouter>
       <Footer />
       </div>
-
-
-
-          
+         
     </>
     </CartProvider>
     </ApolloProvider>

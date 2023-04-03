@@ -7,7 +7,7 @@ function Hero() {
   return (
     <>
       <div
-        className="hero h-80 sm:h-96 w-full"
+        className="hero h-78 sm:h-96 w-full"
         style={{
           backgroundImage: `url(${homePage})` ,
         }}

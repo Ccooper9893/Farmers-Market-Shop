@@ -4,7 +4,7 @@ import clothbg from "../Images/fabricbackground.jpg";
 function Footer() {
   return (
     <>
-      <footer className="footer items-center p-2 text-neutral-content fixed bottom-0 " style={{
+      <footer className="footer items-center p-2 text-neutral-content fixed bottom-0 z-10 " style={{
                   backgroundImage: `url(${clothbg})`,
                   backgroundSize: '20rem',
                   backgroundRepeat: 'repeat',

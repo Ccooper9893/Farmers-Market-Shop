@@ -40,13 +40,6 @@ import darkwoodbg from "../Images/darkwood.png";
       });
     };
 
-    // if (loading) {
-    //       return (
-    //     <button className="btn btn-square loading"></button>
-    //       );
-    // }
-
-  
     return (
 
       <main className="flex-row justify-center mb-4  " style={{
@@ -62,7 +55,7 @@ import darkwoodbg from "../Images/darkwood.png";
                 <form className="space-y-2 block flex flex-col items-center justify-center "onSubmit={handleFormSubmit}>
                   <p className="text-white p-2 text-2xl text-center ">Login</p>
                   <input
-                    className="block input input-accent w-full max-w-xs text-center"
+                    className="block input input-warning w-full max-w-xs text-center"
                     placeholder="Your email"
                     name="email"
                     type="email"
@@ -70,7 +63,7 @@ import darkwoodbg from "../Images/darkwood.png";
                     onChange={handleChange}
                   />
                   <input
-                    className="block input input-accent w-full max-w-xs text-center"
+                    className="block input input-warning w-full max-w-xs text-center"
                     placeholder="Your password"
                     name="password"
                     type="password"

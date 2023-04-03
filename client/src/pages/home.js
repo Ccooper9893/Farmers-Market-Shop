@@ -6,6 +6,7 @@ import Products from "../Images/product1.JPG";
 import Products2 from "../Images/product2.JPG"; 
 import Merchants from "../Images/merchant1.JPG";
 import Merchants2 from "../Images/merchant2.JPG"; 
+import darkwoodbg from "../Images/darkwood.png";
 
 import "swiper/css";
 import "swiper/css/autoplay";
@@ -14,8 +15,13 @@ import SlideMenu from "..//components/slideMenu";
 function Home() {
   return (
     <>
-      <Hero />
-      <div>
+
+      <div style={{
+      backgroundImage: `url(${darkwoodbg})`,
+      backgroundSize: '25 rem',
+      backgroundRepeat: 'repeat',
+    }}>
+            <Hero />
       <div className="p-16 block text-xl text-center">
         <Swiper
           // install Swiper modules // 
