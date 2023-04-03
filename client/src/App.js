@@ -79,10 +79,7 @@ function App() {
         </BrowserRouter>
       <Footer />
       </div>
-
-
-
-          
+         
     </>
     </CartProvider>
     </ApolloProvider>
