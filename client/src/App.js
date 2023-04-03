@@ -54,7 +54,7 @@ const client = new ApolloClient({
  cache: new InMemoryCache(),
 });
 
-
+// this is where the app functionality is // 
 function App() {
   return (
     <ApolloProvider client={client}>
