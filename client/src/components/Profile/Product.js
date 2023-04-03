@@ -46,7 +46,7 @@ function Product({ product, onDeleteProduct }) {
     };
 
     return (
-        <form className="w-80 lg:w-72 m-auto my-4  mx-4 grid grid-rows-8 shadow-lg shadow-black" onSubmit={handleUpdate} style={{
+        <form className="w-80 lg:w-72 m-auto my-4 grid grid-rows-8 shadow-lg shadow-black" onSubmit={handleUpdate} style={{
             backgroundSize: '15rem',
             backgroundImage: `url(${notePaperbg})`,
             backgroundRepeat: 'repeat',
