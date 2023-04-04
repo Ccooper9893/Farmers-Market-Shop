@@ -1,42 +1,60 @@
-import React from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import { GET_PRODUCTS } from '../utils/queries';
-import { REMOVE_FROM_CART } from '../utils/actions';
-//import CartItem from "../components/CartItem/index";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import Cart from "../components/Cart";
+import { useCartContext } from "../utils/GlobalState";
+import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY, ADD_TO_CART, UPDATE_PRODUCTS } from "../utils/actions";
+import { GET_PRODUCTS } from "../utils/queries";
+import { idbPromise } from "../utils/helpers";
+import { useQuery } from "@apollo/client";
+import notePaperbg from "../Images/notepaper.webp";
+
 
 
 function Checkout() {
- const { loading, error, data } = useQuery(GET_PRODUCTS);
- //const [removeFromCart] = useMutation(REMOVE_FROM_CART);
+  const [state] = useCartContext();
 
+  const { cart } = state;
 
- if (loading) return <p>Loading</p>;
- if (error) return <p>Error</p>;
+console.log(state);
+console.log(cart);
 
+  return (
+    
+<div className=" flex flex-row flex-wrap m-2 my-3">
+{ cart.length ? ( <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
+  {cart.map((product) => (
+    <div  key={product._id} className="w-80 lg:w-72 m-auto my-4 grid grid-rows-8 shadow-lg shadow-black min-h-96" style={{
+      backgroundSize: '15rem',
+      backgroundImage: `url(${notePaperbg})`,
+      backgroundRepeat: 'repeat',
+  }}>
+      <h2 className="text-3xl font-bold border-b-black border">{product.name}</h2>
+      <div className="m-3 row-span-6">
+          <img className="m-auto w-24 rounded-full mt-5" src={product.image} alt={product.name} />
+          <p className="text-lg">{product.product_description}</p>
+          <div className="my-2">
+              <p>Price ${product.price}</p>
+              <p>product price</p>
+          </div>
+          <div>
+              <p>Stock</p>
+              <p>product stock</p>
+          </div>
+      </div>
+      <div className="row-span-2">
+          <button className="btn m-3 shadow-lg  bg-slate-700 " type="button">Add to Cart</button>
+      </div>
+  </div>
 
-//  const handleRemoveFromCart = (itemId) => {
-//    removeFromCart({ variables: { itemId } });
-//  };
+))}
+  
+</div>
+): (
+  <h2>Cart is empty</h2>
+)} 
 
-
- return (
-   <div className='flex flex-wrap justify-center'>
-   {data.getProducts.map((product) => (
-     <div key={product._id} className='card m-4 shadow-lg rounded-lg overflow-hidden'>
-     <img src={product.image} alt={product.name} className='w-full h-56 object-cover' />
-     <div className='p-4'>
-       <h2 className='text-xl font-semibold mb-2'>{product.name}</h2>
-       <p className='text-white mb-4'>${product.price.toFixed(2)}</p>
-       <div className='flex justify-center'>
-       <button className='bg-gray-800 text-white py-2 px-4 rounded'>Remove</button>
-         {/* <button className='bg-gray-800 text-white py-2 px-4 rounded' onClick={() => handleRemoveFromCart(product._id)}>Remove</button> */}
-       </div>
-     </div>
-     </div>
- ))}
-   </div>
+</div>
  );
 }
-
 
 export default Checkout;

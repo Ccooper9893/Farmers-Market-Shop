@@ -5,7 +5,7 @@ import { useProductReducer } from './cartReducer';
 const CartContext = createContext();
 const { Provider } = CartContext;
 
-
+// pass down initial state as a prop
 const CartProvider = ({ value = [],...props}) => {
    const [state, dispatch] = useProductReducer({
        products: [],
@@ -15,12 +15,6 @@ const CartProvider = ({ value = [],...props}) => {
        currentCategory: '',
        total: 0,
    });
-
-
-   // useEffect(() => {
-   //     const total = state.cart.reduce((acc))
-   // })
-
 
    return <Provider value={[state, dispatch]} {...props} />;
 };

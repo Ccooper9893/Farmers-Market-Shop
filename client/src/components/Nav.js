@@ -5,9 +5,10 @@ import { useCartContext } from "../utils/GlobalState";
 import clothbg from "../Images/fabricbackground.jpg";
 import darkwoodbg from "../Images/wood.jpg";
 import logo from "../Images/farmerhouse.png";
+import { Link } from "react-router-dom";
 
 export default function Nav() {
-  const [state, dispatch] = useCartContext();
+  const [state] = useCartContext();
 
   const [navActive, setIsNavActive] = useState(false);
 
@@ -71,36 +72,57 @@ export default function Nav() {
             {/* code to hide this mobile menu then only show when mobile nave state is true */}
             <div className={navActive ? "text-black font-bold" : " hidden"}>
               <ul className="md:hidden">
-                <a className="block py-2 text-sm" href="/">
-                  Home
-                </a>
-                <a className="block py-2 text-sm" href="/shop">
-                  Shop
-                </a>
-                <a className="block py-2 text-sm" href="/merchants">
-                  Meet our Merchants
-                </a>
-                <a
-                  className={loggedIn ? "hidden" : " block py-2 text-sm"}
-                  href="/login"
-                >
-                  Login/Register
-                </a>
+                <li className="block py-2 text-sm">
+                <Link to="/">Home
+                </Link>
+                </li>
+
+                <li className="block py-2 text-sm">
+                <Link to="/shop">Shop
+                </Link>
+                </li>
+
+                <li className="block py-2 text-sm">
+                <Link to="/merchants">Meet our Merchants
+                </Link>
+                </li>
+
+                <li  className={loggedIn ? "hidden" : " block py-2 text-sm"}>
+                <Link to="/login">Login/Register
+                </Link>
+                </li>
+            
               </ul>
             </div>
           </div>
           {/* hide the non mobile navigation items when the side of the screen is md */}
-          <div className="regular-menu  text-black font-bold grow flex">
-            <ul className=" items-center space-x-10 hidden md:flex ">
-              <a href="/">Home</a>
-              <a href="/shop">Shop</a>
-              <a href="/merchants">Meet our Merchants</a>
-              <a className={loggedIn ? "hidden" : ""} href="/login">
-                Login/Register
-              </a>
-            </ul>
-          </div>
+          <div className={navActive ? "text-black font-bold" : " hidden"}>
+          <ul className="md:hidden">
+            <li className="block py-2 text-sm">
+            <Link to="/">Home
+            </Link>
+            </li>
+
+            <li className="block py-2 text-sm">
+            <Link to="/shop">Shop
+            </Link>
+            </li>
+
+            <li className="block py-2 text-sm">
+            <Link to="/merchants">Meet our Merchants
+            </Link>
+            </li>
+
+            <li  className={loggedIn ? "hidden" : " block py-2 text-sm"}>
+            <Link to="/login">Login/Register
+            </Link>
+            </li>
+        
+          </ul>
+        </div>
+        
           <div className="flex-none">
+
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost ">
                 <div className="indicator">
@@ -142,64 +164,19 @@ export default function Nav() {
                     ${total.toFixed(2)}
                   </span>
                   <div className="card-actions">
-                    <a
-                      href="/checkout"
-                      className="btn font-bold text-center btn-block text-black bg-white hover:bg-white"
-                    >
-                      View cart
-                    </a>
+                  <div className="btn font-bold text-center btn-block text-black bg-white hover:bg-white">
+                    <Link to="/checkout">View Cart
+                    </Link>
+                  </div>
                   </div>
                 </div>
               </div>
             </div>
+            
             {/* this is the My Account in the far right  */}
-            <div className="dropdown dropdown-content  mr-2">
-              <label tabIndex={0} className="btn btn-ghost">
-                <div className="w-10 mr-3 text-black font-bold">
-                  My Account
-                  {/* <img src="/images/SampleProfile.PNG" alt="sample" /> */}
-                </div>
-              </label>
-              <div
-                tabIndex={0}
-                className="w-25  border border-black menu menu-compact dropdown-content mt-1 p-2 rounded-xl mr-10"
-                style={{
-                  backgroundImage: `url(${darkwoodbg})`,
-                  backgroundSize: "18rem",
-                  backgroundRepeat: "repeat",
-                }}
-              >
-                <div
-                  className={
-                    loggedIn
-                      ? " w-20 text-center rounded-t-lg  text-black font-bold"
-                      : "hidden"
-                  }
-                >
-                  <button className="">
-                    {" "}
-                    <a href="/profile"> Profile</a>
-                  </button>
-                </div>
-                <button
-                  className={
-                    loggedIn ? "hidden" : " text-black font-bold rounded-lg "
-                  }
-                >
-                  {" "}
-                  <a href="/login"> Login </a>
-                </button>
-                <button
-                  onClick={logout}
-                  className={
-                    loggedIn ? " text-black font-bold rounded-b-lg  " : "hidden"
-                  }
-                >
-                  {" "}
-                  <a href="/login"> Logout </a>
-                </button>
-              </div>
-            </div>
+
+           
+          
           </div>
         </div>
       </div>

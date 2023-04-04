@@ -1,9 +1,8 @@
-
-
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
 import darkwoodbg from "./Images/darkwood.png";
+import { CartProvider } from "./utils/GlobalState";
 
 
 /// pages to include ///
@@ -18,7 +17,6 @@ import Checkout from "./pages/checkout";
 import Nav from "./components/Nav"
 
 
-import { CartProvider } from "./utils/GlobalState";
 
 
 
@@ -29,6 +27,7 @@ import {
  ApolloProvider,
  createHttpLink,
 } from '@apollo/client';
+
 
 
 const httpLink = createHttpLink({
@@ -58,15 +57,16 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+   
+    <BrowserRouter>
     <CartProvider>
-    <>
       <div className="h-screen" style={{
                   backgroundImage: `url(${darkwoodbg})`,
                   backgroundSize: '25 rem',
                   backgroundRepeat: 'repeat',
                 }}>
       <Nav />
-        <BrowserRouter>
+        
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
@@ -76,12 +76,13 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path ="/profile" element={<Profile />} />
           </Routes>
-        </BrowserRouter>
+
+       
       <Footer />
       </div>
-         
-    </>
-    </CartProvider>
+      </CartProvider>    
+      </BrowserRouter>
+    
     </ApolloProvider>
   );
 
