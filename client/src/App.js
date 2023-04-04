@@ -72,6 +72,7 @@ function App() {
                 <Route path="/login" element={<LoginRegister />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
               </Routes>
 
               <Footer />
