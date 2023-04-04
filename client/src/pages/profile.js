@@ -115,7 +115,6 @@ function Profile() {
                 <p className="mt-8 font-bold text-lg">You have made no purchases</p>
               )}
             </div>
-
           </div>
         </div>
 

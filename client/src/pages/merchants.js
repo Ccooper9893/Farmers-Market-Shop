@@ -10,7 +10,7 @@ function MerchantPage() {
 
 //display merchant cards with passed date returned from GET_MERCHANTS query
   return (
-    <div className="flex flex-row flex-wrap justify-center" style={{
+    <div className="flex flex-row flex-wrap justify-center pb-10" style={{
       backgroundImage: `url(${darkwoodbg})`,
       backgroundSize: '25 rem',
       backgroundRepeat: 'repeat',
