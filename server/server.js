@@ -33,6 +33,10 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
   }
 
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+
 //Upload images using this route before calling query to create product, use fetch()
 app.post('/upload', upload.single('image'), async (req, res) => {
   try {
