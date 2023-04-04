@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NewProduct from "../components/Profile/NewProduct";
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
@@ -10,7 +10,7 @@ import lightWoodBg from "../Images/wood.jpg";
 
 function Profile() {
   const [userData, setUserData] = useState(null);
-
+  
   if (!Auth.loggedIn()) {
     window.location.replace('/login');
   };
@@ -26,6 +26,7 @@ function Profile() {
       ...userData,
       products: updatedProducts,
     });
+    window.location.reload();
   };
 
   const handleAddProduct = ({ addProduct }) => {
@@ -33,6 +34,7 @@ function Profile() {
       ...userData,
       products: [...userData.products, addProduct],
     });
+    window.location.reload();
   };
 
   return (
