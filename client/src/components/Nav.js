@@ -172,15 +172,9 @@ export default function Nav() {
                 }}
               >
                 <div
-                  className={
-                    loggedIn
-                      ? " w-20 text-center rounded-t-lg  text-black font-bold"
-                      : "hidden"
-                  }
-                >
+                  className={loggedIn ? " w-20 text-center rounded-t-lg  text-black font-bold": "hidden" } >
                   <button className="">
-                    {" "}
-                    <a href="/profile"> Profile</a>
+                    <Link to="/profile"> Profile</Link>
                   </button>
                 </div>
                 <button
@@ -188,8 +182,7 @@ export default function Nav() {
                     loggedIn ? "hidden" : " text-black font-bold rounded-lg "
                   }
                 >
-                  {" "}
-                  <a href="/login"> Login </a>
+                  <Link to="/login"> Login </Link>
                 </button>
                 <button
                   onClick={logout}
@@ -197,8 +190,7 @@ export default function Nav() {
                     loggedIn ? " text-black font-bold rounded-b-lg  " : "hidden"
                   }
                 >
-                  {" "}
-                  <a href="/login"> Logout </a>
+                  <Link href="/login"> Logout </Link>
                 </button>
               </div>
             </div>
