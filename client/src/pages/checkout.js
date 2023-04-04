@@ -1,60 +1,99 @@
 import React from "react";
-
 import { useCartContext } from "../utils/GlobalState";
-
-import notePaperbg from "../Images/notepaper.webp";
-
+import { Link } from "react-router-dom";
+import {
+  REMOVE_FROM_CART,
+  CLEAR_CART,
+} from "../utils/actions";
 function Checkout() {
-  const [state] = useCartContext();
+  const [state, dispatch] = useCartContext();
   const { cart } = state;
-//returned all products that are added to the cart
+  const removeFromCart = async (id) => {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      _id: id,
+    });
+  };
+  const clearCart = () => {
+    dispatch({
+      type: CLEAR_CART,
+    });
+  };
   return (
-    <div className=" flex flex-col justify-center center-items px-4 rounded-2xl">
-      {cart.length ? (
-        <div className="flex flex-row flex-wrap gap-5 justify-center items-center">
-          {cart.map((product) => (
-            <div
-              key={product._id}
-              className="w-80 lg:w-72 m-auto my-4 grid grid-rows-8 shadow-lg shadow-black min-h-96"
-              style={{
-                backgroundSize: "15rem",
-                backgroundImage: `url(${notePaperbg})`,
-                backgroundRepeat: "repeat",
-              }}
-            >
-              <h2 className="text-3xl font-bold border-b-black border">
-                {product.name}
-              </h2>
-              <div className="m-3 row-span-6">
-                <img
-                  className="m-auto w-24 rounded-full mt-5"
-                  src={product.image}
-                  alt={product.name}
-                />
-                <p className="text-lg">{product.product_description}</p>
-                <div className="my-2">
-                  <p>Price ${product.price}</p>
-                  <p>product price</p>
-                </div>
-                <div>
-                  <p>Stock</p>
-                  <p>product stock</p>
-                </div>
-              </div>
-              <div className="row-span-2">
-                <button
-                  className="btn m-3 shadow-lg  bg-slate-700 "
-                  type="button"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <h2>Cart is empty</h2>
-      )}
+    <div className="overflow-x-auto w-full">
+      <div colSpan="4" className="text-center text-white py-4">
+        {cart.length === 1 && (
+          <p>
+            <span className="font-bold text-xl">1</span>ITEM IN YOUR CART
+          </p>
+        )}
+        {cart.length > 1 && (
+          <p>
+            <span className="font-bold text-xl">{cart.length}</span> ITEMS IN
+            YOUR CART
+          </p>
+        )}
+        Total: $ (
+        {cart.reduce((total, item) => total + item.price, 0).toFixed(2)})
+      </div>
+      <div colSpan="4" className="text-center text-white font-bold py-4">
+        <Link to="/shop">
+          <button className="btn btn-ghost ml-4" onClick={() => clearCart()}>
+            Continue Shopping
+          </button>
+        </Link>
+      </div>
+      <table className="table mx-auto">
+        {/* head */}
+        <thead></thead>
+        <tbody>
+          {cart.length ? (
+            cart.map((product) => (
+              <tr key={product._id}>
+                <td className="bg-white opacity-75">
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img src={product.image} alt={product.name} />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-stone-800 bg-white">
+                        {product.name}
+                      </div>
+                      <div className="text-sm  text-stone-800 opacity-75">
+                        {product.product_description}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td className=" text-stone-800 bg-white opacity-75">
+                  <button
+                    className="btn btn-outline btn-error btn-xs"
+                    onClick={() => removeFromCart(product._id)}
+                  >
+                    Remove from Cart
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td
+                colSpan="4"
+                className="text-center  text-stone-800 bg-white opacity-75"
+              >
+                Your cart is empty...
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+      <div colSpan="4" className="text-center text-white font-bold py-4">
+        <button className="btn btn-ghost ml-4" onClick={() => clearCart()}>
+          Clear Cart
+        </button>
+      </div>
     </div>
   );
 }
