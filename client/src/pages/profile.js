@@ -10,14 +10,13 @@ import lightWoodBg from "../Images/wood.jpg";
 
 function Profile() {
   const [userData, setUserData] = useState(null);
-  
+  const {loading, data} = useQuery(GET_ME);
+  if(!loading) {
+    setUserData(data.me);
+  };
   if (!Auth.loggedIn()) {
     window.location.replace('/login');
   };
-
-  useQuery(GET_ME, {
-    onCompleted: (data) => setUserData(data.me),
-  });
 
   const handleDeleteProduct = (productId) => {
     // Filter out the product with the given ID
@@ -26,7 +25,6 @@ function Profile() {
       ...userData,
       products: updatedProducts,
     });
-    window.location.reload();
   };
 
   const handleAddProduct = ({ addProduct }) => {
@@ -34,7 +32,6 @@ function Profile() {
       ...userData,
       products: [...userData.products, addProduct],
     });
-    window.location.reload();
   };
 
   return (
