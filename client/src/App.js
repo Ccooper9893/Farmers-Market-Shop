@@ -1,11 +1,8 @@
-
-
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
 import darkwoodbg from "./Images/darkwood.png";
-
-
+import { CartProvider } from "./utils/GlobalState";
 /// pages to include ///
 import Home from "./pages/home";
 import Shop from "./pages/shop";
@@ -16,26 +13,15 @@ import Register from "./pages/register";
 import Footer from "./components/Footer";
 import Checkout from "./pages/checkout";
 import Nav from "./components/Nav"
-
-
-import { CartProvider } from "./utils/GlobalState";
-
-
-
-
 import {
  ApolloClient,
  InMemoryCache,
  ApolloProvider,
  createHttpLink,
 } from '@apollo/client';
-
-
 const httpLink = createHttpLink({
  uri: '/graphql',
 });
-
-
 const authLink = setContext((_, { headers }) => {
  // get the authentication token from local storage if it exists
  const token = localStorage.getItem('id_token');
@@ -47,26 +33,21 @@ const authLink = setContext((_, { headers }) => {
    },
  };
 });
-
-
 const client = new ApolloClient({
  link: authLink.concat(httpLink),
  cache: new InMemoryCache(),
 });
-
-
 function App() {
   return (
     <ApolloProvider client={client}>
+    <BrowserRouter>
     <CartProvider>
-    <>
       <div className="h-screen" style={{
                   backgroundImage: `url(${darkwoodbg})`,
                   backgroundSize: '25 rem',
                   backgroundRepeat: 'repeat',
                 }}>
       <Nav />
-        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
@@ -76,16 +57,11 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path ="/profile" element={<Profile />} />
           </Routes>
-        </BrowserRouter>
       <Footer />
       </div>
-         
-    </>
-    </CartProvider>
+      </CartProvider>
+      </BrowserRouter>
     </ApolloProvider>
   );
-
 }
-
-
 export default App;

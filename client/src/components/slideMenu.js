@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 //slide cards
 function SlideMenu({ backgroundImg, toLink, text }) {
   return (
     <>
         <div>
           <div
-            className="hero h-50 w-45 bg-opacity-60 rounded-lg "
+            className="hero my-3 h-50 lg:w-45 bg-opacity-60 rounded-lg "
             style={{
               backgroundImage: backgroundImg,
             }}
@@ -25,5 +24,4 @@ function SlideMenu({ backgroundImg, toLink, text }) {
     </>
   );
 }
-
 export default SlideMenu;
