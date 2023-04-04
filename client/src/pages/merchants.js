@@ -1,21 +1,25 @@
 import React from "react";
-import Hero from "../components/Hero";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Scrollbar, A11y, Autoplay } from "swiper";
-import AboutUs from "../Images/aboutUs.png";
-import Products from "../Images/VegetableImage1.png";
-import Merchants from "../Images/Merchant1.png";
-import "swiper/css";
-import "swiper/css/autoplay";
-import SlideMenu from "..//components/slideMenu";
+import { useQuery } from "@apollo/client";
+import { GET_MERCHANTS } from "../utils/queries";
+import Merchant from "../components/Merchant";
+import darkwoodbg from "../Images/darkwood.png";
 
 function MerchantPage() {
+
+  const { loading, data } = useQuery(GET_MERCHANTS);
+
+//display merchant cards with passed date returned from GET_MERCHANTS query
   return (
-    <>
-  <Hero />
- 
-    </>
+    <div className="flex flex-row flex-wrap justify-center" style={{
+      backgroundImage: `url(${darkwoodbg})`,
+      backgroundSize: '25 rem',
+      backgroundRepeat: 'repeat',
+    }}>
+      {data ? (
+        <Merchant props={data} />
+      ) : null}
+      {loading ? <h1>Loading...</h1> : null}
+    </div>
   );
 }
-
 export default MerchantPage;

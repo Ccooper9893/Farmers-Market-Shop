@@ -10,7 +10,7 @@ const uploadFile = require('./utils/gc-upload');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-const AuthMiddleware = require('./utils/jwt-auth');
+const {authMiddleware} = require('./utils/jwt-auth');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -21,7 +21,7 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: AuthMiddleware
+  context: authMiddleware
 });
 
 //Allow front-end to pass nested objects/arrays in requests
@@ -34,12 +34,12 @@ if (process.env.NODE_ENV === 'production') {
   }
 
 //Upload images using this route before calling query to create product, use fetch()
-app.post('/upload', upload.single('file'), async (req, res) => {
+app.post('/upload', upload.single('image'), async (req, res) => {
   try {
     const imageUrl = await uploadFile(req.file);
-    res.json({ imageUrl });
+    res.status(200).json({ imageUrl });
   } catch (error) {
-    res.json({message: 'Error in uploading image.'});
+    res.status(400).json(error);
   };
 });
 

@@ -2,36 +2,35 @@ import { gql } from '@apollo/client';
 
 
 export const GET_ME = gql`
-    query Query {
-        me {
-            _id
-            username
-            email
-            image
-            purchases {
-                _id
-                date
-                products {
-                _id
-                category
-                name
-                price
-                }
-            }
-            merchant
-            business_name
-            business_description
-            phone_number
-            products {
-                _id
-                category
-                name
-                price
-                product_description
-                stock
-            }
+query Query {
+    me {
+      _id
+      username
+      email
+      phone_number
+      merchant
+      business_name
+      business_description
+      image
+      products {
+        _id
+        name
+        product_description
+        category
+        price
+        stock
+        image
+      }
+      purchases {
+        _id
+        date
+        products {
+          name
+          price
         }
+      }
     }
+  }
 `;
 
 export const GET_MERCHANTS = gql`
@@ -59,10 +58,11 @@ export const GET_PRODUCTS = gql`
         getProducts {
             _id
             name
-            category
+            category 
             product_description
             price
             stock
+            image
             merchant {
                 _id
                 business_name
@@ -80,6 +80,7 @@ export const GET_CATEGORY = gql`
             price
             product_description
             stock
+            image
         }
     }
 `;

@@ -25,18 +25,18 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_PRODUCT = gql`
-    String, $category: String, $stock: Int, $price: Float) {
-        addProduct(name: $name, product_description: $productDescription, category: $category, stock: $stock, price: $price) {
-            category
-            _id
-            merchant {
-                _id
-                business_name
-            }
-            name
-            price
-            product_description
-            stock
+    mutation Mutation($name: String, $productDescription: String, $category: String, $stock: Int, $price: Float, $image: String) {
+        addProduct(name: $name, product_description: $productDescription, category: $category, stock: $stock, price: $price, image: $image) {
+        _id
+        name
+        price
+        product_description
+        stock
+        merchant {
+            business_name
+        }
+        category
+        image
         }
     }
 `;
@@ -53,6 +53,42 @@ export const ADD_PURCHASE = gql`
                 category
                 
             }
+        }
+    }
+`;
+export const UPDATE_STOCK = gql`
+    mutation Mutation($updateStockId: ID!, $stock: Int) {
+        updateStock(id: $updateStockId, stock: $stock) {
+        category
+        stock
+        name
+        }
+    }
+`
+
+export const UPDATE_PRODUCT = gql`
+    mutation Mutation($updateProductId: ID!, $stock: Int, $price: Float) {
+        updateProduct(id: $updateProductId, stock: $stock, price: $price) {
+        _id
+        category
+        image
+        name
+        price
+        product_description
+        stock
+        }
+    }
+`;
+
+export const DELETE_PRODUCT = gql`
+    mutation Mutation($deleteProductId: ID!) {
+        deleteProduct(id: $deleteProductId) {
+        _id
+        category
+        name
+        price
+        product_description
+        stock
         }
     }
 `;

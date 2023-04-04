@@ -42,6 +42,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Product',
     }],
+    purchases: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Purchase',
+    }],
     image: {
         type: String,
         required: function() {
