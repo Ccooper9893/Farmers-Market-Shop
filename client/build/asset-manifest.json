@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0ea993ac.css",
+    "main.js": "/static/js/main.244553ae.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/merchant2.JPG": "/static/media/merchant2.a86ed6fdacc541b1d30e.JPG",
+    "static/media/merchant1.JPG": "/static/media/merchant1.7987b6aa74b0390871fb.JPG",
+    "static/media/product2.JPG": "/static/media/product2.49e747cf3761b2f9cce1.JPG",
+    "static/media/product1.JPG": "/static/media/product1.4136a2277f66abd90fe4.JPG",
+    "static/media/Home-page.png": "/static/media/Home-page.44b12ce13af84934c9ec.png",
+    "static/media/fabricbackground.jpg": "/static/media/fabricbackground.a951dc63477e074fc010.jpg",
+    "static/media/Tileable-Wood-Texture.jpg": "/static/media/Tileable-Wood-Texture.c9fd8dacff7cdc567f67.jpg",
+    "static/media/oldpaper.jpg": "/static/media/oldpaper.15689efd859ef14df24d.jpg",
+    "static/media/wood.jpg": "/static/media/wood.c570ead14be610458f12.jpg",
+    "static/media/darkwood.png": "/static/media/darkwood.907231bb0d5907366634.png",
+    "static/media/notepaper.webp": "/static/media/notepaper.88ef96e25792a4f8de9b.webp",
+    "index.html": "/index.html",
+    "main.0ea993ac.css.map": "/static/css/main.0ea993ac.css.map",
+    "main.244553ae.js.map": "/static/js/main.244553ae.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0ea993ac.css",
+    "static/js/main.244553ae.js"
+  ]
+}
