@@ -1,0 +1,20 @@
+{
+  "name": "farmers-market",
+  "version": "1.0.0",
+  "description": "Farmer Market website",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "react-shopping-cart": "^1.9.5",
+    "redux": "^4.2.1"
+  }
+}
