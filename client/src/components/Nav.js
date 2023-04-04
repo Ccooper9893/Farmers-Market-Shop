@@ -190,7 +190,7 @@ export default function Nav() {
                     loggedIn ? " text-black font-bold rounded-b-lg  " : "hidden"
                   }
                 >
-                  <Link href="/login"> Logout </Link>
+                  <Link to="/login"> Logout </Link>
                 </button>
               </div>
             </div>
