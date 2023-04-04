@@ -1,6 +1,10 @@
 import React from "react";
+import { useCartContext } from "../../utils/GlobalState";
+
 
 function Cart({ items }) {
+  const [state, dispatch] =  useCartContext();
+  console.log(state)
   return (
     <div>
       <h2>Your cart</h2>
@@ -12,12 +16,12 @@ function Cart({ items }) {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
+          {/* {items.map((item) => (
             <tr key={item._id}>
               <td>{item.name}</td>
               <td>{item.price}</td>
             </tr>
-          ))}
+          ))} */}
         </tbody>
       </table>
     </div>
