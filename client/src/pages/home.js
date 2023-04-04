@@ -22,7 +22,7 @@ function Home() {
       backgroundRepeat: 'repeat',
     }}>
             <Hero />
-      <div className="p-16 block text-xl text-center">
+      <div className="p-16 hidden md:block text-xl text-center">
         <Swiper
           // install Swiper modules // 
           modules={[Navigation, Scrollbar, A11y, Autoplay]}
@@ -91,8 +91,30 @@ function Home() {
 
         </Swiper>
       </div>
-      </div>
 
+      <div className="p-16 py-3 p-3 block text-xl text-center md:hidden">
+      <SlideMenu
+                backgroundImg={`url(${Products})`}
+                toLink={"/shop"}
+                text={"Start shopping"}
+              />
+                 <SlideMenu
+                backgroundImg={`url(${Merchants})`}
+                toLink={"/merchants"}
+                text={"Merchants"}
+              />
+                      <SlideMenu
+            backgroundImg={`url(${Products2})`}
+            toLink={"/shop"}
+            text={"Start shopping"}
+          />
+       <SlideMenu
+            backgroundImg={`url(${Merchants2})`}
+            toLink={"/merchants"}
+            text={"Merchants"}
+          />
+      </div>
+</div>
    
       
   
