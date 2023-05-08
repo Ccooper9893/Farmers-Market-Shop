@@ -1,6 +1,11 @@
 import React from "react";
+
 import "./App.css";
+//import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { setContext } from "@apollo/client/link/context";
+
+import Navbar from "./components/Navbar/Navbar";
 
 import {
   ApolloClient,
@@ -33,7 +38,9 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <h1>Hello</h1>
+      <Router>
+        <Navbar />
+      </Router>
     </ApolloProvider>
   );
 }
