@@ -1,18 +1,19 @@
 import React from "react";
-
 import "./App.css";
-//import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { setContext } from "@apollo/client/link/context";
-
-import Navbar from "./components/Navbar/Navbar";
-
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
+
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/Home";
+import Shop from "./pages/Shop";
+import Merchants from "./pages/Merchants";
+import Events from "./pages/Events";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -39,7 +40,14 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Navbar />
+        <Navbar>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/merchants" element={<Merchants />} />
+            <Route path="/events" element={<Events />} />
+          </Routes>
+        </Navbar>
       </Router>
     </ApolloProvider>
   );
