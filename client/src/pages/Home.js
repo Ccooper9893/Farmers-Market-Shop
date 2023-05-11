@@ -1,8 +1,10 @@
 import React from "react";
-
+import farmerBg from "../images/f1.jpg";
 function Home() {
     return (
-        <h1>Home</h1>
+        <div>
+            <img src={farmerBg}></img>
+        </div>
     )
 };
 
