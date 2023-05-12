@@ -8,17 +8,17 @@ function Navbar({ children }) {
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
                 {/* <!-- Navbar --> */}
-                <div className="w-full navbar py-4 lg:py-14 bg-green-700">
+                <div className="w-full navbar fixed z-50 py-4 bg-green-900">
                     <div className="navbar-start">
                         <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" stroke="white" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current ml-4"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" stroke="white" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </label>
                     </div>
                     <div className="navbar-center">
-                        <img src={logo} alt="Farmer's Market brand"></img>
+                        <img src={logo} className="w-48 lg:w-64" alt="Farmer's Market brand"></img>
                     </div>
                     <div className="navbar-end">
-                        <label htmlFor="my-modal-3" className="btn btn-ghost btn-circle m-1">
+                        <label htmlFor="my-modal-3" className="btn btn-ghost btn-circle mr-4">
                             <div className="indicator">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="white"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                                 <span className="badge badge-sm indicator-item">8</span>
@@ -36,11 +36,13 @@ function Navbar({ children }) {
                     </div>
                 </div>
                 {/* <!-- Page content here --> */}
+                <div className="mt-20 lg:mt-24">
                 {children}
+                </div>
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-40 lg:w-72 bg-base-100">
+                <ul className="menu p-4 w-40 lg:w-72 bg-base-100 text-lg text-black">
                     {/* <!-- Sidebar content here --> */}
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/shop">Shop</Link></li>
