@@ -2,7 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://market-shop.herokuapp.com",
   "dependencies": {
     "@apollo/client": "^3.7.10",
     "@testing-library/jest-dom": "^5.16.5",
@@ -18,7 +17,7 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start --allowed-hosts=localhost",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

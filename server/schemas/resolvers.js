@@ -46,6 +46,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
+
         loginUser: async (_, { email, password }) => {
             const user = await User.findOne({ email });
             if (!user) {
@@ -60,6 +61,7 @@ const resolvers = {
 
             return { token, user };
         },
+
         addProduct: async (_, args, context) => {
 
             if (!context.user) {
@@ -79,6 +81,7 @@ const resolvers = {
             return newProduct;
 
         },
+
         removeProduct: async (_, { productId }, context) => {
                 if (!context.user) {
                   throw new AuthenticationError('You must be logged in to use this feature');
@@ -100,6 +103,7 @@ const resolvers = {
               
                 return product;
               },
+
         addPurchase: async (_, { products }, context) => {
 
             if (context.user) {
@@ -112,6 +116,7 @@ const resolvers = {
 
             throw new AuthenticationError('Not logged in');
         },
+
         updateStock: async (_, { stock, id }, context) => {
             if (context.user) {
                 return await Product.findByIdAndUpdate(id, { stock: stock }, { new: true, runValidators: true });
@@ -119,6 +124,7 @@ const resolvers = {
 
             throw new AuthenticationError('Not logged in');
         },
+
         updateProduct: async (_, { price, stock, id }, context) => {
             if (context.user) {
                 const newProduct = await Product.findByIdAndUpdate(id, { price: price, stock: stock }, { new: true, runValidators: true });
@@ -127,6 +133,7 @@ const resolvers = {
 
             throw new AuthenticationError('You must be logged in to update products.');
         },
+        
         deleteProduct: async (_, { id }, context) => {
             if (context.user) {
                 const deletedProduct = await Product.findByIdAndDelete(id);

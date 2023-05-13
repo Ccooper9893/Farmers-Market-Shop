@@ -10,6 +10,7 @@ import {
 } from "@apollo/client";
 
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Merchants from "./pages/Merchants";
@@ -46,7 +47,9 @@ function App() {
             <Route path="/shop" element={<Shop />} />
             <Route path="/merchants" element={<Merchants />} />
             <Route path="/events" element={<Events />} />
+            {/* <Route path="/product/:id" element={<Product />} /> */}
           </Routes>
+          <Footer />
         </Navbar>
       </Router>
     </ApolloProvider>

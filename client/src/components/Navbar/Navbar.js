@@ -15,7 +15,7 @@ function Navbar({ children }) {
                         </label>
                     </div>
                     <div className="navbar-center">
-                        <img src={logo} className="w-48 lg:w-64" alt="Farmer's Market brand"></img>
+                        <Link to="/"><img src={logo} className="w-48 lg:w-64" alt="Farmer's Market brand"></img></Link>
                     </div>
                     <div className="navbar-end">
                         <label htmlFor="my-modal-3" className="btn btn-ghost btn-circle mr-4">
@@ -37,6 +37,7 @@ function Navbar({ children }) {
                 </div>
                 {/* <!-- Page content here --> */}
                 <div className="mt-20 lg:mt-24">
+                <h6 className="w-full pt-4 pb-2 text-center text-md bg-stone-800">Our Farmer's Market is open Monday through Friday from 11AM to 5PM</h6>
                 {children}
                 </div>
             </div>
@@ -48,6 +49,7 @@ function Navbar({ children }) {
                     <li><Link to="/shop">Shop</Link></li>
                     <li><Link to="/merchants">Merchants</Link></li>
                     <li><Link to="/events">Events</Link></li>
+                    <li><Link to="/about">About</Link></li>
                 </ul>
             </div>
         </div>
