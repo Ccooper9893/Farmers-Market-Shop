@@ -5,39 +5,22 @@ import ProductCard from "../components/Product/ProductCard";
 
 function Shop() {
 
-    const [categoryData, setCategoryData] = useState(null);
-    const [productFilter, setProductFilter] = useState(null);
+    const [products, setProducts] = useState([]);
 
     useQuery(GET_PRODUCTS, {
         onCompleted: (data) => {
-            setCategoryData(data.getProducts);
-            setProductFilter(data.getProducts);
+            console.log(data.getProducts);
+            setProducts(data.getProducts);
         },
     });
 
     return (
-        <div className="flex justify-center flex-wrap p-10 gap-8">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+        <div className="flex justify-around flex-wrap p-4 lg:p-10 gap-2 lg:gap-8 lg:mx-44">
+            {products.map((product) => {
+                return (
+                    <ProductCard product={product} key={product._id}/>
+                )
+            })}
         </div>
     )
 };
