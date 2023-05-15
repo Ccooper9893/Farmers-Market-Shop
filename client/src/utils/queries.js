@@ -71,6 +71,24 @@ export const GET_PRODUCTS = gql`
     }
 `;
 
+export const GET_PRODUCT = gql`
+    query GetProducts($getProductId: ID!) {
+        getProduct(id: $getProductId) {
+        _id
+        image
+        name
+        price
+        merchant {
+            _id
+            business_name
+        }
+        product_description
+        stock
+        category
+        }
+    }
+  `;
+
 export const GET_CATEGORY = gql`
     query GetCategory($category: String!) {
         getCategory(category: $category) {

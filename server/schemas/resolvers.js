@@ -37,6 +37,9 @@ const resolvers = {
             //Uncomment when we have front end set up and comment this ^^
             // return await User.findOne({_id: context.user._id}).populate({ path: 'products', select: '-__v' });
         },
+        getProduct: async(_, {id}) => {
+            return await Product.findById(id);
+        }
     },
 
     Mutation: {
