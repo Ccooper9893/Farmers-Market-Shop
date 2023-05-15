@@ -38,7 +38,7 @@ const resolvers = {
             // return await User.findOne({_id: context.user._id}).populate({ path: 'products', select: '-__v' });
         },
         getProduct: async(_, {id}) => {
-            return await Product.findById(id);
+            return await Product.findById(id).populate({ path: 'merchant', select: '-__v' });
         }
     },
 

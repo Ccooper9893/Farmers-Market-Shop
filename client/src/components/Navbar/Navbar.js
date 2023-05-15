@@ -37,7 +37,7 @@ function Navbar({ children }) {
                 </div>
                 {/* <!-- Page content here --> */}
                 <div className="mt-20 lg:mt-24">
-                <h6 className="w-full pt-4 pb-2 text-center text-md bg-stone-800">Our Farmer's Market is open Monday through Friday from 11AM to 5PM</h6>
+                <h6 className="w-full pt-4 pb-2 text-center text-md prataFont bg-stone-800">Our Farmer's Market is open Monday through Friday from 11AM to 5PM</h6>
                 {children}
                 </div>
             </div>

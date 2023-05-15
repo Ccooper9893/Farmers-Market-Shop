@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: 'Prata', serif;
-}
-
 body {
   background-color: rgb(255, 253, 244);
 }
+
+.prataFont {
+  font-family: 'Prata', serif;
+}
+
+.secFont {
+  font-family: sans-serif;
+  color: black
+}
+

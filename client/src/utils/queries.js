@@ -93,12 +93,16 @@ export const GET_CATEGORY = gql`
     query GetCategory($category: String!) {
         getCategory(category: $category) {
             _id
-            category
             name
-            price
+            category 
             product_description
+            price
             stock
             image
+            merchant {
+                _id
+                business_name
+            }
         }
     }
 `;
