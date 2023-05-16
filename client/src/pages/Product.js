@@ -1,33 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from 'react-router-dom';
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCT } from "../utils/queries";
 import { GET_CATEGORY } from "../utils/queries";
 import { Link } from "react-router-dom";
+import { useStoreContext } from "../utils/GlobalState";
+import { ADD_TO_CART } from "../utils/actions";
 import ProductCard from "../components/Product/ProductCard";
 
 function Product() {
-    const { id } = useParams();
 
+    const { id } = useParams();
+    const [state, dispatch] = useStoreContext();
+    const [quantity, setQuantity] = useState(1);
+
+    const increment = () => {
+        setQuantity(quantity + 1);
+    }
+
+    const decrement = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    };
+
+    //Grabbing product details
     const { data: productData } = useQuery(GET_PRODUCT, {
         variables: { getProductId: id }
     });
+    const { getProduct } = productData || {};
 
+    //Grabbing products in same category
     const { data: categoryData } = useQuery(GET_CATEGORY, {
         variables: { category: productData?.getProduct?.category }
     });
-
-    console.log(productData);
-    console.log(categoryData);
-
-    const { getProduct } = productData || {};
     const { getCategory } = categoryData || {};
 
+    //Removing same product from product category array
     let filteredCategory = getCategory;
-
     if (getCategory) {
         filteredCategory = getCategory.filter((product) => product._id !== getProduct._id);
     }
+
+    const addToCart = () => {
+        
+        dispatch({
+            type: ADD_TO_CART,
+            product: { getProduct, quantity }
+        });
+        console.log(state)
+    };
 
     return (
         <>
@@ -48,8 +70,18 @@ function Product() {
                             <h1 className="text-black text-2xl">{getProduct.name}</h1>
                             <p>{getProduct.product_description}</p>
                             <h2 className="text-2xl">${getProduct.price}</h2>
-                            <button className="bg-green-900 text-white hover:bg-green-800 p-2 text-md mt-4">Add to cart</button>
-                            <h3>{getProduct.stock} in stock</h3>
+                            <div className="flex flex-row items-center mt-8">
+                                <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 p-1 rounded-l" onClick={decrement}>
+                                    &lt;
+                                </button>
+                                <h3 className="bg-white border border-black px-4 py-1 text-center">
+                                    {quantity}
+                                </h3>
+                                <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 p-1 rounded-r" onClick={increment}>
+                                    &gt;
+                                </button>
+                            </div>
+                            <button className="bg-green-900 text-white hover:bg-green-700 p-1 text-md mt-2 " onClick={addToCart}>Add to cart</button>
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,7 @@ import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Merchants from "./pages/Merchants";
 import Events from "./pages/Events";
+import { StoreProvider } from './utils/GlobalState';
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -42,6 +43,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+        <StoreProvider>
           <Navbar>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -52,6 +54,7 @@ function App() {
             </Routes>
             <Footer />
           </Navbar>
+        </StoreProvider>
       </Router>
     </ApolloProvider>
   );
