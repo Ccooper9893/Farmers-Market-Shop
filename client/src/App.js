@@ -42,16 +42,16 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Navbar>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/merchants" element={<Merchants />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/product/:id" element={<Product />} />
-          </Routes>
-          <Footer />
-        </Navbar>
+          <Navbar>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/merchants" element={<Merchants />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/product/:id" element={<Product />} />
+            </Routes>
+            <Footer />
+          </Navbar>
       </Router>
     </ApolloProvider>
   );
