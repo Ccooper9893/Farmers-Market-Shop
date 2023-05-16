@@ -38,7 +38,7 @@ function Product() {
 
     //Removing same product from product category array
     let filteredCategory = getCategory;
-    if (getCategory) {
+    if (getProduct && getCategory) {
         filteredCategory = getCategory.filter((product) => product._id !== getProduct._id);
     }
 

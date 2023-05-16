@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/farmerhouseWhiteCropped.png";
 import { useStoreContext } from "../../utils/GlobalState";
+import Auth from "../../utils/jwt-auth";
 
 function Navbar({ children }) {
     const [state] = useStoreContext();
-
+    const loggedIn = Auth.loggedIn();
     return (
         <div className="drawer">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -28,7 +29,6 @@ function Navbar({ children }) {
                             </div>
                         </label>
 
-                        {/* Put this part before </body> tag */}
                         <input type="checkbox" id="my-modal-3" className="modal-toggle" />
                         <div className="modal">
                             <div className="modal-box relative">
@@ -46,9 +46,9 @@ function Navbar({ children }) {
                 </div>
                 {/* <!-- Page content here --> */}
                 <div className="mt-20 lg:mt-24">
-                <h6 className="w-full pt-4 pb-2 text-center text-md prataFont bg-stone-800">Our Farmer's Market is open Monday through Friday from 11AM to 5PM</h6>
-                
-                {children}
+                    <h6 className="w-full pt-4 pb-2 text-center text-md prataFont bg-stone-800">Our Farmer's Market is open Monday through Friday from 11AM to 5PM</h6>
+
+                    {children}
                 </div>
             </div>
             <div className="drawer-side">
@@ -60,6 +60,8 @@ function Navbar({ children }) {
                     <li><Link to="/merchants">Merchants</Link></li>
                     <li><Link to="/events">Events</Link></li>
                     <li><Link to="/about">About</Link></li>
+                    {loggedIn ? <li><Link to="/account">Account</Link></li> : <li><Link to="/login">Login</Link></li>}
+
                 </ul>
             </div>
         </div>

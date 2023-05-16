@@ -16,6 +16,9 @@ import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Merchants from "./pages/Merchants";
 import Events from "./pages/Events";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Account from "./pages/Account";
 import { StoreProvider } from './utils/GlobalState';
 
 const httpLink = createHttpLink({
@@ -51,6 +54,9 @@ function App() {
               <Route path="/merchants" element={<Merchants />} />
               <Route path="/events" element={<Events />} />
               <Route path="/product/:id" element={<Product />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/account" element={<Account />} />
             </Routes>
             <Footer />
           </Navbar>

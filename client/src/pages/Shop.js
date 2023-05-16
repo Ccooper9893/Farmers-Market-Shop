@@ -56,11 +56,11 @@ function Shop() {
     }
 
     return (
-        <div className="mx-4 lg:mx-52 mt-8">
+        <div className="mx-4 lg:mx-52 mt-8 min-h-screen">
             <p className="text-black text-center text-lg lg:text-xl border-b border-black pb-4 font-serif">Our farm-fresh produce is grown without the use of harmful pesticides or chemicals, so you can enjoy the freshest and healthiest fruits and vegetables possible. Plus, by supporting our local farmers, you're helping to create a more sustainable food system and a stronger community.</p>
             <div className="flex justify-center gap-10 mt-6">
                 <div className="dropdown dropdown-center">
-                    <label tabIndex={0} className="bg-green-900 text-white hover:bg-green-800 p-2 text-xl">Filter</label>
+                    <button tabIndex={0} className="bg-green-900 text-white hover:bg-green-800 p-2 text-xl w-28">Filter by</button>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow text-black bg-white w-52">
                         <li><button id="All" onClick={filterByCategory}>All</button></li>
                         <li><button id="Meat" onClick={filterByCategory}>Meat</button></li>
@@ -73,7 +73,7 @@ function Shop() {
                     </ul>
                 </div>
                 <div className="dropdown dropdown-center">
-                    <label tabIndex={0} className="bg-green-900 text-white hover:bg-green-800 p-2 text-xl">Sort by</label>
+                    <button tabIndex={0} className="bg-green-900 text-white hover:bg-green-800 p-2 text-xl w-28">Sort by</button>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow text-black bg-white w-52">
                         <li><button id="AZ" onClick={sortProducts}>Alphabetically, A-Z</button></li>
                         <li><button id="ZA" onClick={sortProducts}>Alphabetically, Z-A</button></li>
