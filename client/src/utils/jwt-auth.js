@@ -1,41 +1,37 @@
 import decode from 'jwt-decode';
 
 class AuthService {
-    //Decode json web token to grab user data
-    getProfile() {
-        return decodeURI(this.getToken());
-    }
+  getProfile() {
+    return decode(this.getToken());
+  }
 
-    //Grab token from local storage
-    getToken() {
-        return localStorage.getItem('id_token');
-    }
+  loggedIn() {
+    const token = this.getToken();
+    return token && !this.isTokenExpired(token) ? true : false;
+  }
 
-    loggedIn() {
-        const token = this.getToken();
-        //Check if token is expired and valid
-        return !!token && !this.isTokenExpired(token); //If token is not expired and is valid, return true
+  isTokenExpired(token) {
+    const decoded = decode(token);
+    if (decoded.exp < Date.now() / 1000) {
+      localStorage.removeItem('id_token');
+      return true;
     }
+    return false;
+  }
 
-    isTokenExpired(token) {
-        try {
-            const decodedToken = decode(token);
-            return decodedToken.exp < Date.now() / 1000;
-        } catch (error) {
-            return false;
-        }
-    }
+  getToken() {
+    return localStorage.getItem('id_token');
+  }
 
-    login(tokenId) {
-        localStorage.setItem('id_token');
-        window.location.assign('/');
-    }
+  login(idToken) {
+    localStorage.setItem('id_token', idToken);
+    window.location.assign('/');
+  }
 
-    logout() {
-        localStorage.removeItem('id_token');
-        window.location.assign('/');
-    }
+  logout() {
+    localStorage.removeItem('id_token');
+    window.location.reload();
+  }
 }
 
-const authService = new AuthService();
-export default authService;
+export default new AuthService();
