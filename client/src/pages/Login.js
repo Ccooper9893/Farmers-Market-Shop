@@ -28,7 +28,7 @@ function Login() {
             const { data } = await login({
                 variables: { ...formState },
             });
-            console.log(data);
+            
             Auth.login(data.loginUser.token);
             setFormState({
                 email: '',
