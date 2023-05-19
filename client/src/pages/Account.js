@@ -26,27 +26,21 @@ function Account() {
                     <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content">
                         <div className="grid grid-cols-8 text-center secFont">
-                            <div className="col-span-8 lg:col-span-2 bg-stone-800">
+                            <div className="col-span-8 lg:col-span-2 bg-stone-700">
                                 <div className="flex flex-col p-3 mx-3 text-white py-4">
                                     <div className="flex flex-col">
-                                        <h2 className="text-4xl font-iight text-white my-3 border-b pb-2" >ACCOUNT</h2>
-                                        <img
-                                            className="rounded-full w-28 m-auto"
-                                            src="https://storage.googleapis.com/farmers-market-images/1680277238037-farmlogo.webp"
-                                            alt="farm logo"
-                                        >
-                                        </img>
+                                        <h2 className="text-3xl text-white border-b mb-3">Account</h2>
                                         <ul className="m-auto">
-                                            <li>Username: {userData.username}</li>
-                                            <li>email: {userData.email}</li>
+                                            <li>Email: {userData.email}</li>
                                         </ul>
                                     </div>
                                     {!userData.merchant ? null : (
                                         <ul className="mt-8">
-                                            <li className="text-4xl font-iight text-white my-3 border-b pb-2" >{userData.business_name}</li>
-                                            <li><img className="m-auto" src={userData.image} alt={userData.business_name}></img></li>
+                                            <li className="text-2xl text-white my-3 mx-10 border-b" >{userData.business_name}</li>
+                                            <li className="text-sm">Phone: {userData.phone_number}</li>
+                                            <li className="text-sm">Address:{userData.address}</li>
                                             <li><p className="my-5">{userData.business_description}</p></li>
-                                            <li className="text-sm font-bold">CONTACT: {userData.phone_number}</li>
+                                            <li><img className="m-auto" src={userData.image} alt={userData.business_name}></img></li>
                                         </ul>
                                     )}
                                 </div>
@@ -54,7 +48,7 @@ function Account() {
                             <div className="col-span-8 lg:col-span-6 h-full">
                                 {!userData.merchant ? null : (
                                     <div>
-                                        <h2 className="text-2xl border-b border-black mx-10 pt-3">
+                                        <h2 className="text-2xl border-b border-black mx-20 pt-3">
                                             INVENTORY
                                         </h2>
                                         <div className="mt-4">
@@ -73,11 +67,11 @@ function Account() {
                                     </div>
                                 )}
                                 <div className="h-screen">
-                                    <h2 className="text-2xl border-b border-black mx-10 pt-3">
+                                    <h2 className="text-2xl border-b border-black mx-20 pt-3">
                                         PURCHASES
                                     </h2>
                                     {userData.purchases.length ? null : (
-                                        <p className="mt-8 font-bold text-lg">You have made no purchases</p>
+                                        <p>You have made no purchases</p>
                                     )}
                                 </div>
 

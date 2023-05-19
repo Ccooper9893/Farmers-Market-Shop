@@ -56,7 +56,9 @@ function Shop() {
     }
 
     return (
-        <div className="mx-4 lg:mx-52 mt-8 min-h-screen">
+        <>
+        {products ? (
+            <div className="mx-4 lg:mx-52 mt-8 min-h-screen">
             <p className="text-black text-center text-lg lg:text-xl border-b border-black pb-4 font-serif">Our farm-fresh produce is grown without the use of harmful pesticides or chemicals, so you can enjoy the freshest and healthiest fruits and vegetables possible. Plus, by supporting our local farmers, you're helping to create a more sustainable food system and a stronger community.</p>
             <div className="flex justify-center gap-10 mt-6">
                 <div className="dropdown dropdown-center">
@@ -90,6 +92,10 @@ function Shop() {
                 })}
             </div>
         </div>
+        ) : (
+            null
+        )}
+        </>
     )
 };
 
