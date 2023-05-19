@@ -1,12 +1,11 @@
 import { gql } from '@apollo/client';
 
 export const ADD_USER = gql`
-    mutation Mutation($username: String!, $email: String!, $password: String!, $merchant: Boolean, $businessName: String, $businessDescription: String, $phoneNumber: String, $image: String, $address: String) {
-        addUser(username: $username, email: $email, password: $password, merchant: $merchant, business_name: $businessName, business_description: $businessDescription, phone_number: $phoneNumber, image: $image, address: $address) {
+    mutation Mutation($email: String!, $password: String!, $merchant: Boolean, $businessName: String, $businessDescription: String, $phoneNumber: String, $image: String, $address: String) {
+        addUser(email: $email, password: $password, merchant: $merchant, business_name: $businessName, business_description: $businessDescription, phone_number: $phoneNumber, image: $image, address: $address) {
             token
             user {
                 _id
-                username
             }
         }
     }
@@ -18,7 +17,6 @@ export const LOGIN_USER = gql`
             token
             user {
                 _id
-                username
             }
         }
     }
@@ -56,6 +54,7 @@ export const ADD_PURCHASE = gql`
         }
     }
 `;
+
 export const UPDATE_STOCK = gql`
     mutation Mutation($updateStockId: ID!, $stock: Int) {
         updateStock(id: $updateStockId, stock: $stock) {

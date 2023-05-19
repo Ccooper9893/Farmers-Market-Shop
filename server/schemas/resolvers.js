@@ -53,11 +53,11 @@ const resolvers = {
         loginUser: async (_, { email, password }) => {
             const user = await User.findOne({ email });
             if (!user) {
-                throw new AuthenticationError('Incorrect credentials. Please enter a valid username and password');
+                throw new AuthenticationError('Incorrect credentials. Please enter a valid email and/or password');
             }
             const validatePW = await user.isCorrectPassword(password);
             if (!validatePW) {
-                throw new AuthenticationError('Incorrect credentials. Please enter a valid username and password');
+                throw new AuthenticationError('Incorrect credentials. Please enter a valid email and/or password');
             }
 
             const token = signToken(user);

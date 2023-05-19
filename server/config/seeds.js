@@ -166,7 +166,6 @@ db.once('open', async () => {
             price: 12.00,
             image: 'https://www.bowlofdelicious.com/wp-content/uploads/2019/08/Healthy-Banana-Bread-3.jpg'
         },
-
         {
             name: 'Paintings',
             product_description: 'Variety of landscape paintings that feature the beauties of our town.',
@@ -230,7 +229,6 @@ db.once('open', async () => {
 
     const merchant1 = await User.create(
         {
-            username: 'horseranch',
             password: 'password123',
             email: 'horseranch@email.com',
             purchases: [],
@@ -246,7 +244,6 @@ db.once('open', async () => {
 
     const merchant2 = await User.create(
         {
-            username: 'dansfarm',
             password: 'password123',
             email: 'dansfarm@email.com',
             purchases: [],
@@ -262,7 +259,6 @@ db.once('open', async () => {
 
     const merchant3 = await User.create(
         {
-            username: 'heathersbakery',
             password: 'password123',
             email: 'heather@email.com',
             purchases: [],
@@ -278,7 +274,6 @@ db.once('open', async () => {
 
     const merchant4 = await User.create(
         {
-            username: 'henry',
             password: 'password123',
             email: 'henry@email.com',
             purchases: [],
@@ -302,7 +297,6 @@ db.once('open', async () => {
 
     const customer = await User.create(
         {
-            username: 'customer',
             password: 'password123',
             email: 'customer@email.com',
             purchases: purchaseIds,

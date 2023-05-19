@@ -5,7 +5,6 @@ export const GET_ME = gql`
 query Query {
     me {
       _id
-      username
       email
       phone_number
       merchant
