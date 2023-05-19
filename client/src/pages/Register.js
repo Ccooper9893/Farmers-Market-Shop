@@ -16,7 +16,6 @@ function Register() {
         merchant: false,
         businessName: "",
         businessDescription: "",
-        image: "/image",
         phoneNumber: "",
         address: "",
     });
@@ -35,9 +34,9 @@ function Register() {
                 ...prevState,
                 businessName: "",
                 businessDescription: "",
-                image: "/image",
                 phoneNumber: "",
                 address: "",
+                image: "",
             }))
         }
     }, [checked]);
@@ -48,18 +47,18 @@ function Register() {
             ...formState,
             [name]: value,
         });
-        console.log(formState);
-        setErrorMessage("");
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
 
         //Grabbing imageUrl and appending to productData if valid
         const data = await uploadImage(event);
         if (data) {
-            formState.image = data.imageUrl;
+            setFormState({
+                ...formState,
+                image: data.imageUrl
+            })
         };
 
         try {
@@ -76,23 +75,6 @@ function Register() {
             console.log(error)
         }
     };
-    /* 
-        const merchant4 = await User.create(
-        {
-            username: 'henry',
-            password: 'password123',
-            email: 'henry@email.com',
-            purchases: [],
-            merchant: true,
-            business_name: 'Henry\'s Woodshop',
-            business_description: 'We specialize in creating beautiful and functional wooden items by hand. From spoons and spatulas to cutting boards and bowls, our products are carefully crafted from the finest quality wood to provide you with a truly unique and lasting piece.',
-            products: [products[20]._id, products[21]._id, products[22]._id],
-            image: 'https://static.wixstatic.com/media/600c50_1bc3aab780de4d80a1c9ecefaa89f6af~mv2.jpg/v1/crop/x_0,y_420,w_4163,h_2621/fill/w_566,h_358,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/00.jpg',
-            phone_number: '7503859245',
-            address: '4 Rope Ln, State, Country, zip',
-        },
-    );
-    */
 
     async function uploadImage(event) {
         const formData = new FormData();
