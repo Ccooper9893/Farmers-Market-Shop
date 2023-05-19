@@ -51,29 +51,6 @@ function Register() {
         setErrorMessage("");
     };
 
-    // //Image upload function
-    // async function uploadImage(event) {
-
-    //     if (!event.target.image.files[0]) {
-    //         return false;
-    //     }
-
-    //     const formData = new FormData();
-    //     formData.append("image", event.target.image.files[0]);
-
-    //     try {
-    //         const response = await fetch("/upload", {
-    //             method: "POST",
-    //             body: formData,
-    //         });
-    //         return await response.json();
-
-    //     } catch (error) {
-    //         console.error(error);
-    //         return false;
-    //     };
-    // };
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         const { email, password, businessName, businessDescription, phoneNumber, address } = formState;

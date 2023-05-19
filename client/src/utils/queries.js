@@ -19,6 +19,10 @@ query Query {
         price
         stock
         image
+        merchant {
+            _id
+            business_name
+        }
       }
       purchases {
         _id
