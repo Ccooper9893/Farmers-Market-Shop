@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Auth from "../utils/jwt-auth";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
-
+import uploadImage from "../utils/uploadImage";
 function Register() {
 
     const [addUser, { loading, error, data }] = useMutation(ADD_USER);
@@ -28,6 +28,7 @@ function Register() {
         setFormState((prevState) => ({
             ...prevState,
             merchant: checked,
+            image: "https://storage.googleapis.com/farmers-market-images/1684473321782-farmlogo.webp"
         }));
         if (!checked) {
             setFormState((prevState) => ({
@@ -50,28 +51,28 @@ function Register() {
         setErrorMessage("");
     };
 
-    //Image upload function
-    async function uploadImage(event) {
+    // //Image upload function
+    // async function uploadImage(event) {
 
-        if(!event.target.image.files[0]) {
-            return false;
-        }
+    //     if (!event.target.image.files[0]) {
+    //         return false;
+    //     }
 
-        const formData = new FormData();
-        formData.append("image", event.target.image.files[0]);
+    //     const formData = new FormData();
+    //     formData.append("image", event.target.image.files[0]);
 
-            try {
-                const response = await fetch("/upload", {
-                    method: "POST",
-                    body: formData,
-                });
-                return await response.json();
+    //     try {
+    //         const response = await fetch("/upload", {
+    //             method: "POST",
+    //             body: formData,
+    //         });
+    //         return await response.json();
 
-            } catch (error) {
-                console.error(error);
-                return false;
-            };
-    };
+    //     } catch (error) {
+    //         console.error(error);
+    //         return false;
+    //     };
+    // };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -86,31 +87,24 @@ function Register() {
             return;
         }
 
-        //Setting image if user is signing up as merchant
-        if (checked) {
-            const data = await uploadImage(event);
-            if (data) {
-                setFormState(prevState => ({
-                    ...prevState,
-                    image: data.imageUrl,
-                }));
-            } else {
-                setFormState(prevState => ({
-                    ...prevState,
-                    image: "https://storage.googleapis.com/farmers-market-images/1684473321782-farmlogo.webp",
-                  }));
-            };
-        };
-
         //Creating the new account
         try {
-            if(formState.image || !checked) {
-                const { data } = await addUser({
-                    variables: { ...formState },
-                });
-    
-                Auth.login(data.addUser.token);
-            }
+            //Uploading image if user is signing up as merchant
+            if (checked) {
+                const data = await uploadImage(event);
+                if (data) {
+                    setFormState(prevState => ({
+                        ...prevState,
+                        image: data.imageUrl,
+                    }));
+                }
+            };
+
+            const { data } = await addUser({
+                variables: { ...formState },
+            });
+
+            Auth.login(data.addUser.token);
 
         } catch (error) {
             console.log(error);
