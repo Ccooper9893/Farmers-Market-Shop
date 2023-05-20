@@ -4,6 +4,8 @@ import { useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import Auth from "../utils/jwt-auth";
 import ProductCard from "../components/Product/ProductCard";
+import NewProduct from "../components/NewProduct/NewProduct";
+
 function Account() {
     const [userData, setUserData] = useState(null);
 
@@ -14,9 +16,7 @@ function Account() {
     useQuery(GET_ME, {
         onCompleted: (data) => setUserData(data.me),
     });
-    if (userData) {
-        console.log(userData);
-    }
+
     return (
         <div>
             {!userData ? (
@@ -81,7 +81,7 @@ function Account() {
                     <div className="drawer-side">
                         <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
                         <div className="p-4 w-80 bg-base-100">
-                            <h1>New Product</h1>
+                            <NewProduct/>
                         </div>
                     </div>
                 </div>
