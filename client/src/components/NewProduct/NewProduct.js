@@ -3,7 +3,7 @@ import uploadImage from "../../utils/uploadImage";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT } from "../../utils/mutations";
 
-function NewProduct() {
+function NewProduct({onAddProduct}) {
 
     const [addProduct] = useMutation(ADD_PRODUCT);
     const [formState, setFormState] = useState({
@@ -55,7 +55,7 @@ function NewProduct() {
             if (data) {
                 setMessage('Product Added!');
                 setLoading(false);
-                window.location.reload();
+                onAddProduct(data.addProduct)
             }
         } catch (error) {
             console.error(error);

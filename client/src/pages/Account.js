@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import Auth from "../utils/jwt-auth";
@@ -7,15 +7,27 @@ import ProductCard from "../components/Product/ProductCard";
 import NewProduct from "../components/NewProduct/NewProduct";
 
 function Account() {
+    const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
+    const [productData, setProductData] = useState([]);
+    const loggedIn = Auth.loggedIn();
 
-    if (!Auth.loggedIn()) {
-        window.location.replace('/login');
-    };
+    useEffect(() => {
+        if (!loggedIn) {
+          navigate("/login");
+        }
+      }, [loggedIn]);
 
     useQuery(GET_ME, {
-        onCompleted: (data) => setUserData(data.me),
+        onCompleted: (data) => {
+            setUserData(data.me);
+            setProductData(data.me.products);
+        },
     });
+
+    const addProduct = (newProduct) => {
+        setProductData([...productData, newProduct])
+    };
 
     return (
         <div>
@@ -55,9 +67,9 @@ function Account() {
                                         <label htmlFor="my-drawer-4" className="drawer-button bg-green-900 text-white hover:bg-green-800 px-3 py-2 w-32">New Product</label>
                                         </div>
                                         <div className="flex flex-col justify-center py-4 rounded-2xl">
-                                            {userData.products.length
+                                            {productData
                                                 ? (<div className="flex flex-row flex-wrap justify-center gap-8">
-                                                    {userData.products.map((product) => (
+                                                    {productData.map((product) => (
                                                         <ProductCard key={product._id} product={product} />
                                                     ))}
                                                 </div>)
@@ -78,10 +90,11 @@ function Account() {
                             </div>
                         </div>
                     </div>
+                    {/* New Product Drawer */}
                     <div className="drawer-side">
                         <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
                         <div className="p-4 w-80 bg-base-100">
-                            <NewProduct/>
+                            <NewProduct onAddProduct={addProduct}/>
                         </div>
                     </div>
                 </div>
