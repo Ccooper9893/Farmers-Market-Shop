@@ -7,6 +7,7 @@ const typeDefs = gql`
         merchant: Boolean
         business_name: String
         business_description: String
+        address: String
         products: [Product]
         image: String
         phone_number: String

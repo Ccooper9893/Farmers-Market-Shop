@@ -15,13 +15,15 @@ function Product() {
     const [quantity, setQuantity] = useState(1);
 
     const increment = () => {
-        setQuantity(quantity + 1);
-    }
+        if(quantity < getProduct.stock) {
+            setQuantity(quantity + 1);
+        };
+    };
 
     const decrement = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
-        }
+        };
     };
 
     //Grabbing product details
@@ -43,7 +45,6 @@ function Product() {
     }
 
     const addToCart = () => {
-        
         dispatch({
             type: ADD_TO_CART,
             product: { getProduct, quantity }
@@ -70,6 +71,7 @@ function Product() {
                             <h1 className="text-black text-2xl">{getProduct.name}</h1>
                             <p>{getProduct.product_description}</p>
                             <h2 className="text-2xl">${getProduct.price}</h2>
+                            <h4 className="mt-2">{getProduct.stock} left in stock!</h4>
                             <div className="flex flex-row items-center mt-8">
                                 <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 p-1 rounded-l" onClick={decrement}>
                                     &lt;
@@ -81,7 +83,11 @@ function Product() {
                                     &gt;
                                 </button>
                             </div>
-                            <button className="bg-green-900 text-white hover:bg-green-700 p-1 text-md mt-2 " onClick={addToCart}>Add to cart</button>
+                            {!getProduct.stock ? (
+                                <button className="bg-green-900 text-white hover:bg-green-700 p-1 text-md mt-2 ">Out of Stock</button>
+                            ) : (
+                                <button className="bg-green-900 text-white hover:bg-green-700 p-1 text-md mt-2 " onClick={addToCart}>Add to cart</button>
+                            )}
                         </div>
                     </div>
                 </div>

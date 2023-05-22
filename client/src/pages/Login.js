@@ -5,7 +5,7 @@ import { LOGIN_USER } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 function Login() {
-    const [login, { loading, error, data }] = useMutation(LOGIN_USER);
+    const [login, { error }] = useMutation(LOGIN_USER);
     const [errorMessage, setErrorMessage] = useState("");
     const [formState, setFormState] = useState({
         email: "",
@@ -42,7 +42,7 @@ function Login() {
     return (
         <div className="flex flex-col items-center secFont mt-24 h-full">
             <form className="flex flex-col items-center gap-4 p-6 w-96" onSubmit={handleFormSubmit}>
-                <h1 className="text-3xl border-b border-green-800 w-full text-center">Login</h1>
+                <h1 className="text-3xl border-b border-green-800 w-full text-center pb-2">Login</h1>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text text-black">EMAIL</span>

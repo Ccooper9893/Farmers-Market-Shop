@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../images/farmerhouseWhiteCropped.png";
 import { useStoreContext } from "../../utils/GlobalState";
@@ -7,9 +7,14 @@ import Auth from "../../utils/jwt-auth";
 function Navbar({ children }) {
     const [state] = useStoreContext();
     const loggedIn = Auth.loggedIn();
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const closeDrawer = () => {
+      setDrawerOpen(false);
+    };
+
     return (
         <div className="drawer">
-            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" checked={drawerOpen} onChange={() => setDrawerOpen(!drawerOpen)}/>
             <div className="drawer-content flex flex-col">
                 {/* <!-- Navbar --> */}
                 <div className="w-full navbar fixed z-50 py-4 bg-green-900">
@@ -55,12 +60,12 @@ function Navbar({ children }) {
                 <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-40 lg:w-72 bg-base-100 text-lg text-black">
                     {/* <!-- Sidebar content here --> */}
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/shop">Shop</Link></li>
-                    <li><Link to="/merchants">Merchants</Link></li>
-                    <li><Link to="/events">Events</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    {loggedIn ? <li><Link to="/account">Account</Link></li> : <li><Link to="/login">Login</Link></li>}
+                    <li><Link to="/" onClick={closeDrawer}>Home</Link></li>
+                    <li><Link to="/shop" onClick={closeDrawer}>Shop</Link></li>
+                    <li><Link to="/merchants" onClick={closeDrawer}>Merchants</Link></li>
+                    {/* <li><Link to="/events" onClick={closeDrawer}>Events</Link></li> */}
+                    {/* <li><Link to="/about" onClick={closeDrawer}>About</Link></li> */}
+                    {loggedIn ? <li><Link to="/account" onClick={closeDrawer}>Account</Link></li> : <li><Link to="/login" onClick={closeDrawer}>Login</Link></li>}
 
                 </ul>
             </div>

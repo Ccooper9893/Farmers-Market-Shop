@@ -178,7 +178,7 @@ db.once('open', async () => {
             name: 'Carved Spoons',
             product_description: 'Beautiful hand carved wood spoons made with mahogany',
             category: 'Art',
-            stock: 30,
+            stock: 0,
             price: 3.00,
             image: 'https://images.squarespace-cdn.com/content/v1/5613faf8e4b051c1fb534ae3/1614096998767-GSJNDK29W1BO1FA1S64D/IMG_4581.jpg?format=1000w'
         },

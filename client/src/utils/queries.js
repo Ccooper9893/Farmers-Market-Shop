@@ -10,6 +10,7 @@ query Query {
       merchant
       business_name
       business_description
+      address
       image
       products {
         _id
