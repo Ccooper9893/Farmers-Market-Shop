@@ -50,7 +50,7 @@ function Account() {
                     <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content">
                         <div className="grid grid-cols-8 text-center secFont">
-                            <div className="col-span-8 lg:col-span-2 border-b border-black lg:border-r">
+                            <div className="col-span-8 lg:col-span-2 border-black lg:border-r">
                                 <div className="flex flex-col p-3 mx-3 py-4">
                                     <div className="flex flex-col">
                                         <button onClick={handleLogout}><img className="h-6 w-6 mx-auto mb-2" src={logoutIcon} alt="Logout button"></img></button>
