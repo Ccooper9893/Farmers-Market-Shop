@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Auth from "../utils/jwt-auth";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import uploadImage from "../utils/uploadImage";
+
 function Register() {
 
     const [addUser] = useMutation(ADD_USER);

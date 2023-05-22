@@ -57,6 +57,33 @@ export const GET_MERCHANTS = gql`
     }
 `;
 
+export const GET_MERCHANT = gql`
+    query Query($getMerchantId: ID!) {
+        getMerchant(id: $getMerchantId) {
+        _id
+        address
+        business_description
+        email
+        business_name
+        image
+        merchant
+        phone_number
+        products {
+            _id
+            category
+            name
+            price
+            product_description
+            merchant {
+            business_name
+            }
+            stock
+            image
+        }
+        }
+    }
+`
+
 export const GET_PRODUCTS = gql`
     query GetProducts {
         getProducts {

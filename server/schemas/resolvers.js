@@ -19,6 +19,10 @@ const resolvers = {
             return await User.find({ merchant: true }).populate({ path: 'products', select: '-__v' });
         },
 
+        getMerchant: async (_, {id}) => {
+            return await User.findById(id).populate({ path: 'products', select: '-__v', populate: {path:'merchant', select:'-__v'} });
+        },
+
         getProducts: async (_, __) => {
             return await Product.find().populate({ path: 'merchant', select: '-__v' });
 

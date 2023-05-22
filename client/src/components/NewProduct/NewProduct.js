@@ -42,7 +42,6 @@ function NewProduct({onAddProduct}) {
             stock: parseInt(formState.stock)
         };
 
-
         //Grabbing imageUrl and appending to productData if valid
         const data = await uploadImage(event);
         if (data) {
@@ -58,6 +57,7 @@ function NewProduct({onAddProduct}) {
                 onAddProduct(data.addProduct)
             }
         } catch (error) {
+            setMessage('There has been an error!')
             console.error(error);
         };
 

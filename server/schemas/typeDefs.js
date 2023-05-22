@@ -43,6 +43,7 @@ const typeDefs = gql`
         getCategory(category: String!): [Product]
         getMerchants: [User]
         getProduct(id: ID!): Product
+        getMerchant(id: ID!): User
 
     }
 

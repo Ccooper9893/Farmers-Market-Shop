@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_MERCHANTS } from "../utils/queries";
 
@@ -20,7 +21,9 @@ function Merchants() {
                     {merchants.map((merchant) => (
                         <div className="text-center secFont" key={merchant._id}>
                             <h1 className="text-2xl">{merchant.business_name}</h1>
-                            <img className="w-96 h-60 object-cover border border-black" src={merchant.image} alt={merchant.business_name}></img>
+                            <Link to={`/merchant/${merchant._id}`}>
+                                <img className="w-96 h-60 object-cover border border-black" src={merchant.image} alt={merchant.business_name}></img>
+                            </Link>
                         </div>
                     ))}
                 </div>
