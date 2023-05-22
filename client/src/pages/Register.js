@@ -6,9 +6,10 @@ import { ADD_USER } from "../utils/mutations";
 import uploadImage from "../utils/uploadImage";
 function Register() {
 
-    const [addUser, { loading, error, data }] = useMutation(ADD_USER);
+    const [addUser] = useMutation(ADD_USER);
     const [checked, setChecked] = useState(false); //Sign up as merchant?
     const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const [formState, setFormState] = useState({
         email: "",
         password: "",
@@ -53,34 +54,38 @@ function Register() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
         const { email, password, businessName, businessDescription, phoneNumber, address } = formState;
 
         //Checking for required input
         if (checked && (!email || !password || !businessName || !businessDescription || !phoneNumber || !address)) {
             setErrorMessage("Please provide required information!");
+            setLoading(false);
             return;
         } else if (!checked && (!email || !password)) {
             setErrorMessage("Please provide required information!");
+            setLoading(false);
             return;
         }
+        const userData = {
+            ...formState,
+        };
+        //Uploading image if user is signing up as merchant
+        if (checked) {
+            const data = await uploadImage(event);
+            if (data) {
+                userData.image = data.imageUrl
+            }
+        };
 
         //Creating the new account
         try {
-            //Uploading image if user is signing up as merchant
-            if (checked) {
-                const data = await uploadImage(event);
-                if (data) {
-                    setFormState(prevState => ({
-                        ...prevState,
-                        image: data.imageUrl,
-                    }));
-                }
-            };
-
+            console.log(userData);
             const { data } = await addUser({
-                variables: { ...formState },
+                variables: { ...userData },
             });
 
+            setLoading(false);
             Auth.login(data.addUser.token);
 
         } catch (error) {
@@ -185,7 +190,12 @@ function Register() {
                         <input type="checkbox" className="checkbox checkbox-secondary" onClick={handleCheck} />
                     </label>
                 </div>
-                <button className="bg-green-900 text-white hover:bg-green-800 px-3 py-2 w-32" type="submit">Sign Up</button>
+                {loading ? (
+                <button className="bg-green-900 text-white hover:bg-green-800 px-3 py-2 w-32" type="submit">Processing...</button>
+                ): (
+                    <button className="bg-green-900 text-white hover:bg-green-800 px-3 py-2 w-32" type="submit">Sign Up</button>
+                )}
+
                 {errorMessage && <h2 className="text-red-600">{errorMessage}</h2>}
             </form>
         </div>
