@@ -75,7 +75,7 @@ function Account() {
                             <div className="col-span-8 lg:col-span-6 h-full">
                                 {!userData.merchant ? null : (
                                     <div>
-                                        <h2 className="text-2xl border-b border-black mx-20 pt-3">
+                                        <h2 className="text-2xl border-b mx-20 pt-3">
                                             INVENTORY
                                         </h2>
                                         <div className="mt-4">
@@ -94,7 +94,7 @@ function Account() {
                                     </div>
                                 )}
                                 <div className="h-screen">
-                                    <h2 className="text-2xl border-b border-black mx-20 pt-3">
+                                    <h2 className="text-2xl border-b mx-20 pt-3">
                                         PURCHASES
                                     </h2>
                                     {userData.purchases.length ? null : (

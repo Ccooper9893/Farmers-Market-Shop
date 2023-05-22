@@ -67,7 +67,7 @@ function Product() {
                             <img className="w-96 h-96 object-cover" src={getProduct.image} alt={getProduct.name}></img>
                         </div>
                         <div className=" w-56 my-auto">
-                            <small><Link to={`/merchant/${getProduct.merchant._id}`}>{getProduct.merchant.business_name}</Link></small>
+                            <small><Link className="hover:underline" to={`/merchant/${getProduct.merchant._id}`}>{getProduct.merchant.business_name}</Link></small>
                             <h1 className="text-black text-2xl">{getProduct.name}</h1>
                             <p>{getProduct.product_description}</p>
                             <h2 className="text-2xl">${getProduct.price}</h2>
