@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3ea84033.css",
+    "main.js": "/static/js/main.e039cfe0.js",
+    "static/media/f1.webp": "/static/media/f1.90bb2897e210b2a4cf66.webp",
+    "static/media/farmerhouseWhiteCropped.png": "/static/media/farmerhouseWhiteCropped.2b92641247d796fcfde6.png",
+    "static/media/certifiedSafe.webp": "/static/media/certifiedSafe.de08e4d0d2b818ec91d2.webp",
+    "static/media/madeWithLove.webp": "/static/media/madeWithLove.c479253f935015efd677.webp",
+    "static/media/farmfresh.webp": "/static/media/farmfresh.c64ce3da6bdebcbf944c.webp",
+    "static/media/certifiedLocal.webp": "/static/media/certifiedLocal.35058ac3f7ab6da7007e.webp",
+    "static/media/trashcanIcon.webp": "/static/media/trashcanIcon.3fb033c746d2df787edc.webp",
+    "static/media/logouticonOpt.webp": "/static/media/logouticonOpt.5909716b861134ab7c11.webp",
+    "index.html": "/index.html",
+    "main.3ea84033.css.map": "/static/css/main.3ea84033.css.map",
+    "main.e039cfe0.js.map": "/static/js/main.e039cfe0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3ea84033.css",
+    "static/js/main.e039cfe0.js"
+  ]
+}

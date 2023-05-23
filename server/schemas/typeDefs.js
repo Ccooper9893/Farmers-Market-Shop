@@ -28,7 +28,7 @@ const typeDefs = gql`
     type Purchase {
         _id: ID!
         products: [Product]
-        date: String
+        purchaseDate: String
     }
 
     type Auth {

@@ -26,7 +26,9 @@ function Account() {
                 navigate("/login");
             };
             setUserData(data.me);
-            setProductData(data.me.products);
+            if(data.me.merchant) {
+                setProductData(data.me.products);
+            }
         },
     });
 
@@ -44,6 +46,7 @@ function Account() {
             {!userData ? (
                 <div className="min-h-screen">
                     Loading...
+                    {userData}
                 </div>
             ) : (
                 <div className="drawer drawer-end">
@@ -101,7 +104,6 @@ function Account() {
                                         <p>You have made no purchases</p>
                                     )}
                                 </div>
-
                             </div>
                         </div>
                     </div>

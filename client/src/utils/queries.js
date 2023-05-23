@@ -27,7 +27,7 @@ query Query {
       }
       purchases {
         _id
-        date
+        purchaseDate
         products {
           name
           price
@@ -142,7 +142,7 @@ export const GET_PURCHASES = gql`
     query GetPurchases {
         getPurchases {
             _id
-            date
+            purchaseDate
             products {
                 _id
                 category
@@ -155,5 +155,12 @@ export const GET_PURCHASES = gql`
             }
         }
     }
+`;
 
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($products: [ID]!) {
+    checkout(products: $products) {
+      session
+    }
+  }
 `;

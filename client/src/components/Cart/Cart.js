@@ -14,12 +14,6 @@ function Cart() {
         });
     };
 
-    const clearCart = () => {
-        dispatch({
-            type: CLEAR_CART,
-        });
-    };
-
     return (
         <div className="flex flex-col justify-center text-center secFont">
             <h3 className="text-2xl border-b">Shopping Cart</h3>

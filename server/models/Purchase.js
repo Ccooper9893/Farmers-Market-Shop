@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const purchaseSchema = new Schema({
-    date: {
+    purchaseDate: {
         type: Date,
         required: true,
         default: Date.now,
