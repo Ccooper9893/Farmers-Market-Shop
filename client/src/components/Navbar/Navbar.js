@@ -3,18 +3,19 @@ import { Link } from "react-router-dom";
 import logo from "../../images/farmerhouseWhiteCropped.png";
 import { useStoreContext } from "../../utils/GlobalState";
 import Auth from "../../utils/jwt-auth";
+import Cart from "../Cart/Cart";
 
 function Navbar({ children }) {
     const [state] = useStoreContext();
     const loggedIn = Auth.loggedIn();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const closeDrawer = () => {
-      setDrawerOpen(false);
+        setDrawerOpen(false);
     };
 
     return (
         <div className="drawer">
-            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" checked={drawerOpen} onChange={() => setDrawerOpen(!drawerOpen)}/>
+            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" checked={drawerOpen} onChange={() => setDrawerOpen(!drawerOpen)} />
             <div className="drawer-content flex flex-col">
                 {/* <!-- Navbar --> */}
                 <div className="w-full navbar fixed z-50 py-4 bg-green-900">
@@ -36,15 +37,9 @@ function Navbar({ children }) {
 
                         <input type="checkbox" id="my-modal-3" className="modal-toggle" />
                         <div className="modal">
-                            <div className="modal-box relative">
+                            <div className="modal-box relative h-96">
                                 <label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                {state.cart.map((product) => {
-                                    return (
-                                        <div>
-                                            <h4><span>{product.quantity} X </span>{product.getProduct.name}</h4>
-                                        </div>
-                                    )
-                                })}
+                            <Cart />
                             </div>
                         </div>
                     </div>

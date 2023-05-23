@@ -49,7 +49,6 @@ function Product() {
             type: ADD_TO_CART,
             product: { getProduct, quantity }
         });
-        console.log(state)
     };
 
     return (

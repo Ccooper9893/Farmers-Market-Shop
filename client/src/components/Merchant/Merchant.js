@@ -16,7 +16,7 @@ function Merchant() {
     const { getMerchant } = merchantData || {};
 
     return (
-        <div className="min-h-screen w-full">
+        <div className="w-full">
             {getMerchant ? (
                 <>
                     <div className="flex flex-row flex-wrap text-center justify-center my-6">
