@@ -211,22 +211,6 @@ db.once('open', async () => {
 
     await User.deleteMany();
 
-    // const merchant = await User.create(
-    //     {
-    //         username: 'marketfresh',
-    //         password: 'password123',
-    //         email: 'marketfresh@email.com',
-    //         purchases: [],
-    //         merchant: true,
-    //         business_name: 'Market fresh',
-    //         business_description: 'Fresh Market is a vibrant farm market that offers a wide variety of fresh, locally-grown produce and artisanal products. Our market showcases the best of what local farmers have to offer, including a colorful selection of seasonal fruits and vegetables, as well as honey, eggs, dairy products, and other locally-made goods. We prioritize sustainability and ethical farming practices, and are proud to support small-scale agriculture. Our friendly and knowledgeable staff are always on hand to provide expert advice and assistance, and we strive to create a warm and welcoming atmosphere for all of our customers. Whether you\'re a home cook, a foodie, or just someone who loves fresh, healthy food, Fresh Market is the perfect place to discover the best of local agriculture.',
-    //         products: productIds,
-    //         image: 'https://media.istockphoto.com/id/1083286598/photo/keeping-a-close-watch-on-his-crops.jpg?s=612x612&w=0&k=20&c=V6RjPh6icgkxduEig163IMtevL39SxDJJdvJkGmR2NE=',
-    //         phone_number: '75609091112',
-    //         address: '45 Farmview Ln, State, Country, zip',
-    //     },
-    // );
-
     const merchant1 = await User.create(
         {
             password: 'password123',
