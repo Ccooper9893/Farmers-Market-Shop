@@ -90,7 +90,7 @@ function Register() {
 
         } catch (error) {
             console.log(error);
-            setErrorMessage("There has been an error!");
+            setErrorMessage("Account already exists!");
         }
     };
 

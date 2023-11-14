@@ -18,7 +18,7 @@ function Navbar({ children }) {
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" checked={drawerOpen} onChange={() => setDrawerOpen(!drawerOpen)} />
             <div className="drawer-content flex flex-col">
                 {/* <!-- Navbar --> */}
-                <div className="w-full navbar fixed z-50 py-4 bg-green-900">
+                <div className="w-full navbar fixed z-50 py-4 bg-green-900 fixed">
                     <div className="navbar-start">
                         <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current ml-4"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" stroke="white" d="M4 6h16M4 12h16M4 18h16"></path></svg>
