@@ -3,11 +3,11 @@ const { Storage } = require('@google-cloud/storage');
 //Configuring Google Cloud Storage
 const gc = new Storage({
   keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
-  projectId: 'farmers-market-shop',
+  projectId: 'farmers-market-381904',
 });
 
 //Grabbing farmer's market bucket from bloud storage
-const filesBucket = gc.bucket('farmers-bucket');
+const filesBucket = gc.bucket('farmers-market-images');
 
 function uploadFile(file) {
 
