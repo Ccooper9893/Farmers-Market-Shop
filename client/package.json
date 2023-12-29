@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://farmers-market-71ebd110dbde.herokuapp.com/",
+  "proxy": "https://farmers-market-47450d2fa3f3.herokuapp.com/",
   "dependencies": {
     "@apollo/client": "^3.7.10",
     "@stripe/stripe-js": "^1.53.0",
