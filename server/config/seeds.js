@@ -84,7 +84,7 @@ db.once('open', async () => {
             category: 'Fruit',
             stock: 30,
             price: 7.34,
-            image: 'https://cdn.shopify.com/s/files/1/0061/1391/9089/products/grannysmith-apple-B2.jpg?v=1658533149'
+            image: 'https://www.groworganic.com/cdn/shop/files/grannysmith-apple-B2.jpg?v=1693503659'
         },
         {
             name: 'Strawberries',
