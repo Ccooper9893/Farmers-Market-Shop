@@ -32,19 +32,19 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
   }
 
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-  });
-
 //Upload images using this route before calling query to create product, use fetch()
 app.post('/upload', upload.single('image'), async (req, res) => {
+  console.log('Upload path called.');
   try {
     const imageUrl = await uploadFile(req.file);
     res.status(200).json({ imageUrl });
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
   };
+});
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 const startApolloServer = async (typeDefs, resolvers) => {
